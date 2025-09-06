@@ -1,10 +1,2 @@
 # macOS system files
 .DS_Store
-
-# Node
-node_modules/
-
-# Python
-__pycache__/
-*.pyc
-.DS_[Ss]tore
