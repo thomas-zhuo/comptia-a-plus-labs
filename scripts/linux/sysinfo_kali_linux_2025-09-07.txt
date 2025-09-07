@@ -1,0 +1,36 @@
+Collecting Linux/macOS sysinfo…
+Host: kali
+Uptime:  10:33:41 up 12:28,  2 users,  load average: 0.91, 0.96, 0.99
+IP(s):
+172.16.111.129
+
+Disk usage:
+Filesystem      Size  Used Avail Use% Mounted on
+udev            1.9G     0  1.9G   0% /dev
+tmpfs           392M  1.2M  391M   1% /run
+/dev/nvme0n1p2   24G   12G   11G  54% /
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+efivarfs        256K   31K  226K  12% /sys/firmware/efi/efivars
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-udev-load-credentials.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-sysctl.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-tmpfiles-setup-dev-early.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-tmpfiles-setup-dev.service
+tmpfs           2.0G  572K  2.0G   1% /tmp
+/dev/nvme0n1p1  512M  168K  512M   1% /boot/efi
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-tmpfiles-setup.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           392M  120K  392M   1% /run/user/1000
+
+Top processes (top 10 by listing order):
+    PID COMMAND         %CPU %MEM
+      1 systemd          0.0  0.3
+      2 kthreadd         0.0  0.0
+      3 pool_workqueue_  0.0  0.0
+      4 kworker/R-rcu_g  0.0  0.0
+      5 kworker/R-rcu_p  0.0  0.0
+      6 kworker/R-slub_  0.0  0.0
+      7 kworker/R-netns  0.0  0.0
+     10 kworker/0:0H-ev  0.0  0.0
+     11 kworker/u4:0-ef  0.0  0.0
