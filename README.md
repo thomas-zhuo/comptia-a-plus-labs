@@ -52,12 +52,13 @@ Future labs will be added to this portfolio, including:
 
 ## Repository Structure
 
+```text
 comptia-a-plus-labs/
 ├─ README.md
 ├─ scripts/
-│ └─ linux/
-│ ├─ sysinfo.sh
-│ ├─ sysinfo_macos_2025-09-03.txt
-│ └─ sysinfo_linux_2025-09-03.txt
+│  └─ linux/
+│     ├─ sysinfo.sh
+│     ├─ sysinfo_macos_2025-09-03.txt
+│     └─ sysinfo_linux_2025-09-03.txt
 └─ docs/
-└─ CHANGELOG.md
+   └─ CHANGELOG.md
