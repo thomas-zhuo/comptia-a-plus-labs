@@ -9,3 +9,11 @@ This repo showcases hands-on CompTIA A+ skills. First project: a Bash script tha
 ```bash
 chmod +x scripts/linux/sysinfo.sh
 ./scripts/linux/sysinfo.sh
+```
+
+
+## How to save output to file
+
+```bash
+./scripts/linux/sysinfo.sh | tee scripts/linux/sysinfo_$(date +%F).txt
+```
