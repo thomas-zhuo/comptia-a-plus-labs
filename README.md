@@ -4,18 +4,36 @@ This repo showcases hands-on CompTIA A+ skills. First project: a Bash script tha
 
 ## Projects
 - **Linux sysinfo script** (`scripts/linux/sysinfo.sh`) — prints host, uptime, IP(s), disk usage, and top processes. Sample output included.
+- **Windows system health script** (`scripts/windows/system_health_check.ps1`) — collects OS details, uptime, IP config, disk usage, and top processes. Sample output included.
 
 ## How to run
+
+### Linux / MacOC
+
 ```bash
 chmod +x scripts/linux/sysinfo.sh
 ./scripts/linux/sysinfo.sh
 ```
 
+### Windows (PowerShell)
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\scripts\windows\system_health_check.ps1
+```
 
 ## How to save output to file
 
+### Linux / MacOS
+
 ```bash
 ./scripts/linux/sysinfo.sh | tee scripts/linux/sysinfo_$(date +%F).txt
+```
+
+### Windows (PowerShell)
+
+```powershell
+.\scripts\windows\system_health_check.ps1 | Out-File scripts\windows\system_health_$(Get-Date -Format 'yyyy-MM-dd').txt
 ```
 
 ## Sample Output
@@ -58,7 +76,7 @@ comptia-a-plus-labs/
 ├─ scripts/
 │  └─ linux/
 │     ├─ sysinfo.sh
-│     ├─ sysinfo_macos_2025-09-03.txt
-│     └─ sysinfo_linux_2025-09-03.txt
+│     ├─ sysinfo_macos_2025-09-07.txt
+│     └─ sysinfo_linux_2025-09-07.txt
 └─ docs/
    └─ CHANGELOG.md
