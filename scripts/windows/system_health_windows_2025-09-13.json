@@ -1,0 +1,95 @@
+﻿{
+    "Hostname":  "DESKTOP-JMTKEHJ",
+    "OS":  "Microsoft Windows 11 Pro",
+    "UptimeHours":  15.51,
+    "IPConfig":  {
+                     "InterfaceAlias":  "Ethernet",
+                     "IPv4Address":  [
+                                         {
+                                             "CimClass":  "root/StandardCimv2:MSFT_NetIPAddress",
+                                             "CimInstanceProperties":  "Caption Description ElementName InstanceID CommunicationStatus DetailedStatus HealthState InstallDate Name = \";A?8;@8;;;8;?B55@55;55;\" OperatingStatus OperationalStatus PrimaryStatus Status StatusDescriptions AvailableRequestedStates EnabledDefault = 2 EnabledState OtherEnabledState RequestedState = 12 TimeOfLastStateChange TransitioningToState = 12 CreationClassName = \"\" SystemCreationClassName = \"\" SystemName = \"\" NameFormat OtherTypeDescription ProtocolIFType = 4096 ProtocolType Address AddressOrigin = 0 AddressType IPv4Address = \"172.16.111.128\" IPv6Address IPVersionSupport PrefixLength = 24 SubnetMask AddressFamily = 2 AddressState = 4 InterfaceAlias = \"Ethernet\" InterfaceIndex = 6 IPAddress = \"172.16.111.128\" PreferredLifetime = 00:22:32 PrefixOrigin = 3 SkipAsSource = False Store = 1 SuffixOrigin = 3 Type = 1 ValidLifetime = 00:22:32",
+                                             "CimSystemProperties":  "Microsoft.Management.Infrastructure.CimSystemProperties"
+                                         }
+                                     ],
+                     "DNSServer":  [
+                                       {
+                                           "CimClass":  "root/StandardCimv2:MSFT_DNSClientServerAddress",
+                                           "CimInstanceProperties":  "Caption Description ElementName = \"Ethernet\" InstanceID CommunicationStatus DetailedStatus HealthState InstallDate Name = \"6\" OperatingStatus OperationalStatus PrimaryStatus Status StatusDescriptions AvailableRequestedStates EnabledDefault = 2 EnabledState = 5 OtherEnabledState RequestedState = 12 TimeOfLastStateChange TransitioningToState = 12 CreationClassName = \"\" SystemCreationClassName = \"\" SystemName = \"23\" AccessContext = 0 AccessInfo InfoFormat OtherAccessContext OtherInfoFormatDescription AddressFamily = 23 InterfaceAlias = \"Ethernet\" InterfaceIndex = 6 ServerAddresses = ...",
+                                           "CimSystemProperties":  "Microsoft.Management.Infrastructure.CimSystemProperties"
+                                       },
+                                       {
+                                           "CimClass":  "root/StandardCimv2:MSFT_DNSClientServerAddress",
+                                           "CimInstanceProperties":  "Caption Description ElementName = \"Ethernet\" InstanceID CommunicationStatus DetailedStatus HealthState InstallDate Name = \"6\" OperatingStatus OperationalStatus PrimaryStatus Status StatusDescriptions AvailableRequestedStates EnabledDefault = 2 EnabledState = 5 OtherEnabledState RequestedState = 12 TimeOfLastStateChange TransitioningToState = 12 CreationClassName = \"\" SystemCreationClassName = \"\" SystemName = \"2\" AccessContext = 0 AccessInfo InfoFormat OtherAccessContext OtherInfoFormatDescription AddressFamily = 2 InterfaceAlias = \"Ethernet\" InterfaceIndex = 6 ServerAddresses = ...",
+                                           "CimSystemProperties":  "Microsoft.Management.Infrastructure.CimSystemProperties"
+                                       }
+                                   ]
+                 },
+    "Disks":  [
+                  {
+                      "DriveLetter":  null,
+                      "FileSystem":  "NTFS",
+                      "Free(GB)":  0.11,
+                      "Total(GB)":  0.69
+                  },
+                  {
+                      "DriveLetter":  null,
+                      "FileSystem":  "FAT32",
+                      "Free(GB)":  0.16,
+                      "Total(GB)":  0.19
+                  },
+                  {
+                      "DriveLetter":  "D",
+                      "FileSystem":  "",
+                      "Free(GB)":  0,
+                      "Total(GB)":  0
+                  },
+                  {
+                      "DriveLetter":  "C",
+                      "FileSystem":  "NTFS",
+                      "Free(GB)":  26.49,
+                      "Total(GB)":  62.99
+                  }
+              ],
+    "TopProcesses":  [
+                         {
+                             "Name":  "System",
+                             "CPU":  1526.046875
+                         },
+                         {
+                             "Name":  "MsMpEng",
+                             "CPU":  762.03125
+                         },
+                         {
+                             "Name":  "svchost",
+                             "CPU":  201.734375
+                         },
+                         {
+                             "Name":  "explorer",
+                             "CPU":  181.59375
+                         },
+                         {
+                             "Name":  "svchost",
+                             "CPU":  126.015625
+                         },
+                         {
+                             "Name":  "SearchIndexer",
+                             "CPU":  124.0625
+                         },
+                         {
+                             "Name":  "svchost",
+                             "CPU":  114.25
+                         },
+                         {
+                             "Name":  "WindowsTerminal",
+                             "CPU":  106.140625
+                         },
+                         {
+                             "Name":  "svchost",
+                             "CPU":  100.78125
+                         },
+                         {
+                             "Name":  "svchost",
+                             "CPU":  89.171875
+                         }
+                     ]
+}
