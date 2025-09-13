@@ -8,7 +8,7 @@ This repo showcases hands-on CompTIA A+ skills. First project: a Bash script tha
 
 ## How to run
 
-### Linux / macOC
+### Linux/macOS
 
 ```bash
 chmod +x scripts/linux/sysinfo.sh
@@ -24,7 +24,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ## How to save output to file
 
-### Linux / macOS
+### Linux/macOS
 
 ```bash
 ./scripts/linux/sysinfo.sh | tee scripts/linux/sysinfo_$(date +%F).txt
@@ -41,7 +41,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 Sample runs of the scripts are saved with date-stamped filenames that also indicate the operating system used.  
 
-- **Linux/ macOS outputs** are saved in [`scripts/linux/`](scripts/linux/), for example:  
+- **Linux/macOS outputs** are saved in [`scripts/linux/`](scripts/linux/), for example:  
   - `sysinfo_macos_2025-09-07.txt`  
   - `sysinfo_kali_linux_2025-09-07.txt`
 
