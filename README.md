@@ -8,7 +8,7 @@ This repo showcases hands-on CompTIA A+ skills. First project: a Bash script tha
 
 ## How to run
 
-### Linux / MacOC
+### Linux / macOC
 
 ```bash
 chmod +x scripts/linux/sysinfo.sh
@@ -24,7 +24,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ## How to save output to file
 
-### Linux / MacOS
+### Linux / macOS
 
 ```bash
 ./scripts/linux/sysinfo.sh | tee scripts/linux/sysinfo_$(date +%F).txt
@@ -38,16 +38,19 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ## Sample Output
 
-Sample runs of the script are saved in [`scripts/linux/`](scripts/linux/) with date-stamped filenames that also indicate the operating system used, for example:
 
-- `sysinfo_MacOS_2025-09-07.txt`
-- `sysinfo_Kali_Linux_2025-09-07.txt`
+Sample runs of the scripts are saved with date-stamped filenames that also indicate the operating system used.  
+
+- **Linux/ macOS outputs** are saved in [`scripts/linux/`](scripts/linux/), for example:  
+  - `sysinfo_macos_2025-09-07.txt`  
+  - `sysinfo_kali_linux_2025-09-07.txt`
+
+- **Windows outputs** are saved in [`scripts/windows/`](scripts/windows/), for example:  
+  - `system_health_windows_2025-09-07.txt`
 
 These files demonstrate the expected output: hostname, uptime, IP addresses, disk usage, and top processes.  
 
-Having both macOS and Linux runs highlights cross-platform troubleshooting.
-
----
+Having Linux, macOS, and Windows runs highlights cross-platform troubleshooting.
 
 ## Why This Matters
 
@@ -57,7 +60,6 @@ This script shows the ability to:
 - Capture machine state into timestamped logs
 - Work across both Linux and macOS environments
 
----
 
 ## Next Steps
 Future labs will be added to this portfolio, including:
@@ -66,7 +68,6 @@ Future labs will be added to this portfolio, including:
 - **Hardware playbooks** (e.g., SSD upgrades)
 - **Troubleshooting case studies** following the CompTIA A+ 7-step method
 
----
 
 ## Repository Structure
 
@@ -78,5 +79,8 @@ comptia-a-plus-labs/
 │     ├─ sysinfo.sh
 │     ├─ sysinfo_macos_2025-09-07.txt
 │     └─ sysinfo_linux_2025-09-07.txt
+└─ windows/
+│     ├─ system_health_check.ps1
+│     └─ system_health_windows_2025-09-13.txt
 └─ docs/
    └─ CHANGELOG.md
