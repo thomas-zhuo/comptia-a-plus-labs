@@ -1,10 +1,17 @@
 # CHANGELOG
 
-## 2025-09-13
+## 2025-09-13 - 2025-09-14
+- Added Network Diagnostics scripts:
+  - `scripts/linux/network_diagnostics.sh`
+  - `scripts/windows/network_diagnostics.ps1`
+- Added sample output files:
+  - `scripts/linux/network_diag_linux_2025-09-13.txt`
+  - `scripts/linux/network_diag_macos_2025-09-14.txt`
+  - `scripts/windows/network_diag_windows_2025-09-14.txt`
 - Added Windows system health script (`scripts/windows/system_health_check.ps1`)
 - Added sample Windows output file:
-  - `scripts/windows/system_health_windows_2025-09-13.txt`
-- Updated README with Windows project details and instructions
+ - `scripts/windows/system_health_windows_2025-09-14.txt`
+- Updated README with Windows and Network Diagnostics project details and run instructions
 
 ## 2025-09-07
 - Fixed Linux sysinfo script for macOS compatibility
