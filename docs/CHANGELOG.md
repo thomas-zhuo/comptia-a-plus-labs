@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## 2025-09-13 - 2025-09-14
+- Added Windows system health script (`scripts/windows/system_health_check.ps1`)
+- Added sample Windows output file:
+  - `scripts/windows/system_health_windows_2025-09-14.txt`
 - Added Network Diagnostics scripts:
   - `scripts/linux/network_diagnostics.sh`
   - `scripts/windows/network_diagnostics.ps1`
@@ -8,10 +11,13 @@
   - `scripts/linux/network_diag_linux_2025-09-13.txt`
   - `scripts/linux/network_diag_macos_2025-09-14.txt`
   - `scripts/windows/network_diag_windows_2025-09-14.txt`
-- Added Windows system health script (`scripts/windows/system_health_check.ps1`)
-- Added sample Windows output file:
- - `scripts/windows/system_health_windows_2025-09-14.txt`
-- Updated README with Windows and Network Diagnostics project details and run instructions
+- Added Disk & Storage Health scripts:
+  - `scripts/linux/disk_health.sh`
+  - `scripts/windows/disk_health.ps1`
+- Added sample output files:
+  - `scripts/linux/disk_health_linux_2025-09-14.txt`
+  - `scripts/windows/disk_health_windows_2025-09-14.txt`
+- Updated README with Windows, Network Diagnostics, and Disk & Storage Health project details and run instructions
 
 ## 2025-09-07
 - Fixed Linux sysinfo script for macOS compatibility
@@ -21,16 +27,4 @@
 
 ## 2025-08-31
 - Initial commit of Linux sysinfo script (`scripts/linux/sysinfo.sh`)
-- Added basic README with project description and run instructions
-
-
-## 2025-09-07
-- Fixed script compatibility issues for macOS
-- Added sample output files:
-  - `sysinfo_macos_2025-09-07.txt`
-  - `sysinfo_linux_2025-09-07.txt`
-- Updated README with instructions for saving output to file
-
-## 2025-08-31
-- Initial commit of Linux/macOS sysinfo script (`scripts/linux/sysinfo.sh`)
 - Added basic README with project description and run instructions
