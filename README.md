@@ -127,7 +127,7 @@ comptia-a-plus-labs/
 │  │  ├─ disk_health_macOS_2025-09-14.txt
 │  │  ├─ disk_health_Kali_Linux_2025-09-14.txt
 │  │  ├─ event_logs.sh
-│  │  └─ event_logs_macOS_2025-09-14.txt
+│  │  ├─ event_logs_macOS_2025-09-14.txt
 │  │  └─ event_logs_Kali_Linux_2025-09-14.txt
 │  └─ windows/
 │     ├─ system_health_check.ps1
