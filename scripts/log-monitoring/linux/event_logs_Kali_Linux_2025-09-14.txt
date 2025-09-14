@@ -1,0 +1,110 @@
+Event Log Collector Report
+Host : kali
+OS   : Linux 6.8.11-arm64 aarch64
+Date : Sun Sep 14 17:23:04 +08 2025
+
+==== Recent Journal Entries (last 50) ====
+Sep 14 17:22:27 kali dbus-daemon[1233]: [session uid=1000 pid=1233] Successfully activated service 'org.xfce.Xfconf'
+Sep 14 17:22:35 kali systemd[1]: Stopping user@124.service - User Manager for UID 124...
+Sep 14 17:22:35 kali systemd[2557088]: Activating special unit exit.target...
+Sep 14 17:22:35 kali systemd[2557088]: Stopped target default.target - Main User Target.
+Sep 14 17:22:35 kali systemd[2557088]: Stopping at-spi-dbus-bus.service - Accessibility services bus...
+Sep 14 17:22:35 kali systemd[2557088]: Stopping dbus.service - D-Bus User Message Bus...
+Sep 14 17:22:35 kali systemd[2557088]: Stopping filter-chain.service - PipeWire filter chain daemon...
+Sep 14 17:22:35 kali systemd[2557088]: Stopping gvfs-daemon.service - Virtual filesystem service...
+Sep 14 17:22:35 kali systemd[2557088]: Stopping pipewire-pulse.service - PipeWire PulseAudio...
+Sep 14 17:22:35 kali systemd[2557088]: Stopped pipewire-pulse.service - PipeWire PulseAudio.
+Sep 14 17:22:35 kali wireplumber[2557123]: m-dbus-connection: <WpDBusConnection:0xaaaad51d25a0> DBus connection closed: Underlying GIOStream returned 0 bytes on an async read
+Sep 14 17:22:35 kali systemd[2557088]: Stopped dbus.service - D-Bus User Message Bus.
+Sep 14 17:22:35 kali wireplumber[2557123]: m-dbus-connection: <WpDBusConnection:0xaaaad51d25a0> Trying to reconnect after core sync
+Sep 14 17:22:35 kali systemd[2557088]: Stopped at-spi-dbus-bus.service - Accessibility services bus.
+Sep 14 17:22:35 kali systemd[2557088]: Stopping wireplumber.service - Multimedia Service Session Manager...
+Sep 14 17:22:35 kali wireplumber[2557123]: wireplumber: stopped by signal: Terminated
+Sep 14 17:22:35 kali wireplumber[2557123]: wireplumber: disconnected from pipewire
+Sep 14 17:22:35 kali systemd[2557088]: Stopped filter-chain.service - PipeWire filter chain daemon.
+Sep 14 17:22:35 kali systemd[1]: run-user-124-gvfs.mount: Deactivated successfully.
+Sep 14 17:22:35 kali systemd[2557088]: Stopped wireplumber.service - Multimedia Service Session Manager.
+Sep 14 17:22:35 kali systemd[2557088]: Stopping pipewire.service - PipeWire Multimedia Service...
+Sep 14 17:22:35 kali systemd[2557088]: Stopped pipewire.service - PipeWire Multimedia Service.
+Sep 14 17:22:35 kali systemd[2557088]: Stopped gvfs-daemon.service - Virtual filesystem service.
+Sep 14 17:22:35 kali systemd[2557088]: Removed slice session.slice - User Core Session Slice.
+Sep 14 17:22:35 kali systemd[2557088]: Stopped target basic.target - Basic System.
+Sep 14 17:22:35 kali systemd[2557088]: Stopped target paths.target - Paths.
+Sep 14 17:22:35 kali systemd[2557088]: Stopped target sockets.target - Sockets.
+Sep 14 17:22:35 kali systemd[2557088]: Stopped target timers.target - Timers.
+Sep 14 17:22:35 kali systemd[2557088]: Closed dbus.socket - D-Bus User Message Bus Socket.
+Sep 14 17:22:35 kali systemd[2557088]: Closed dirmngr.socket - GnuPG network certificate management daemon.
+Sep 14 17:22:35 kali systemd[2557088]: Closed gcr-ssh-agent.socket - GCR ssh-agent wrapper.
+Sep 14 17:22:35 kali systemd[2557088]: Closed gnome-keyring-daemon.socket - GNOME Keyring daemon.
+Sep 14 17:22:35 kali systemd[2557088]: Closed gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (access for web browsers).
+Sep 14 17:22:35 kali systemd[2557088]: Closed gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restricted).
+Sep 14 17:22:35 kali systemd[2557088]: Closed gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation).
+Sep 14 17:22:35 kali systemd[2557088]: Closed gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+Sep 14 17:22:35 kali systemd[2557088]: Closed pipewire-pulse.socket - PipeWire PulseAudio.
+Sep 14 17:22:35 kali systemd[2557088]: Closed pipewire.socket - PipeWire Multimedia System Sockets.
+Sep 14 17:22:35 kali systemd[2557088]: Removed slice app.slice - User Application Slice.
+Sep 14 17:22:35 kali systemd[2557088]: Reached target shutdown.target - Shutdown.
+Sep 14 17:22:35 kali systemd[2557088]: Finished systemd-exit.service - Exit the Session.
+Sep 14 17:22:35 kali systemd[2557088]: Reached target exit.target - Exit the Session.
+Sep 14 17:22:35 kali systemd[1]: user@124.service: Deactivated successfully.
+Sep 14 17:22:35 kali systemd[1]: Stopped user@124.service - User Manager for UID 124.
+Sep 14 17:22:35 kali systemd[1]: Stopping user-runtime-dir@124.service - User Runtime Directory /run/user/124...
+Sep 14 17:22:35 kali systemd[1]: run-user-124.mount: Deactivated successfully.
+Sep 14 17:22:35 kali systemd[1]: user-runtime-dir@124.service: Deactivated successfully.
+Sep 14 17:22:35 kali systemd[1]: Stopped user-runtime-dir@124.service - User Runtime Directory /run/user/124.
+Sep 14 17:22:35 kali systemd[1]: Removed slice user-124.slice - User Slice of UID 124.
+Sep 14 17:22:35 kali systemd-logind[703]: Removed session 844.
+
+==== Recent Errors/Warnings (last 50) ====
+May 10 07:40:50 kali pipewire[1118]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 07:40:50 kali pipewire[1118]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 07:40:58 kali lightdm[1200]: gkr-pam: unable to locate daemon control file
+May 10 07:40:58 kali lightdm[1094]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+May 10 07:41:00 kali pipewire[1228]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 07:41:00 kali pipewire[1228]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 09 23:51:21 kali pipewire[6771]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 09 23:51:21 kali pipewire[6771]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 09:46:22 kali lightdm[6867]: gkr-pam: unable to locate daemon control file
+May 10 09:46:22 kali lightdm[6723]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+May 10 09:56:52 kali pipewire[113483]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 09:56:52 kali pipewire[113483]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 12:53:34 kali lightdm[113567]: gkr-pam: unable to locate daemon control file
+May 10 12:53:34 kali lightdm[113422]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+May 10 13:06:20 kali pipewire[204815]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 13:06:20 kali pipewire[204815]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 13:06:22 kali lightdm[204903]: gkr-pam: unable to locate daemon control file
+May 10 13:06:22 kali lightdm[204768]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+May 10 13:16:41 kali pipewire[210169]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 13:16:41 kali pipewire[210169]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 13:16:42 kali lightdm[210260]: gkr-pam: unable to locate daemon control file
+May 10 13:16:42 kali lightdm[210116]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+May 10 13:46:08 kali pipewire[224558]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 13:46:08 kali pipewire[224558]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 13:46:11 kali lightdm[224648]: gkr-pam: unable to locate daemon control file
+May 10 13:46:11 kali lightdm[224510]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+May 10 14:32:00 kali pipewire[246813]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 14:32:00 kali pipewire[246813]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 14:43:49 kali lightdm[246903]: gkr-pam: unable to locate daemon control file
+May 10 14:43:49 kali lightdm[246765]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+May 10 16:06:54 kali pipewire[292747]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+May 10 16:06:54 kali pipewire[292747]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 07 09:12:37 kali lightdm[325962]: gkr-pam: unable to locate daemon control file
+Sep 07 09:12:37 kali lightdm[292700]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+Sep 07 10:31:40 kali pipewire[367065]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 07 10:31:40 kali pipewire[367065]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 07 10:33:12 kali lightdm[367147]: gkr-pam: unable to locate daemon control file
+Sep 07 10:33:12 kali lightdm[367018]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+Sep 07 11:09:50 kali pipewire[386342]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 07 11:09:50 kali pipewire[386342]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 13 22:17:59 kali lightdm[386427]: gkr-pam: unable to locate daemon control file
+Sep 13 22:18:01 kali lightdm[386283]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+Sep 14 11:36:44 kali pipewire[2411781]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 14 11:36:44 kali pipewire[2411781]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 14 16:58:15 kali lightdm[2411866]: gkr-pam: unable to locate daemon control file
+Sep 14 16:58:16 kali lightdm[2411734]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+Sep 14 17:10:48 kali pipewire[2557118]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 14 17:10:48 kali pipewire[2557118]: spa.v4l2: '/dev/video0' VIDIOC_QUERYCTRL: Broken pipe
+Sep 14 17:22:24 kali lightdm[2557209]: gkr-pam: unable to locate daemon control file
+Sep 14 17:22:24 kali lightdm[2557071]: pam_systemd(lightdm-greeter:session): Failed to release session: Transport endpoint is not connected
+
+Event log collection complete.
