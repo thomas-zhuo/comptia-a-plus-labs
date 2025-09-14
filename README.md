@@ -117,27 +117,27 @@ Sample runs of the scripts are saved with date-stamped filenames that also indic
 Each category has separate **`linux/`** and **`windows/`** subfolders for scripts and outputs.
 
 - **System Health (`scripts/system-health/`)**
-  - Linux/macOS → `scripts/system-health/linux/`
-    - `sysinfo_macOS_2025-09-07.txt`
-    - `sysinfo_Kali_Linux_2025-09-07.txt`
-    - `disk_health_macOS_2025-09-14.txt`
-    - `disk_health_Kali_Linux_2025-09-14.txt`
-  - Windows → `scripts/system-health/windows/`
-    - `system_health_windows_2025-09-14.txt`
+  - [Linux/macOS](scripts/system-health/linux/)  
+    - `sysinfo_macOS_2025-09-07.txt`  
+    - `sysinfo_Kali_Linux_2025-09-07.txt`  
+    - `disk_health_macOS_2025-09-14.txt`  
+    - `disk_health_Kali_Linux_2025-09-14.txt`  
+  - [Windows](scripts/system-health/windows/)  
+    - `system_health_windows_2025-09-14.txt`  
     - `disk_health_windows_2025-09-14.txt`
 
 - **Network Diagnostics (`scripts/network-diagnostics/`)**
-  - Linux/macOS → `scripts/network-diagnostics/linux/`
-    - `network_diag_macOS_2025-09-13.txt`
-    - `network_diag_Kali_Linux_2025-09-14.txt`
-  - Windows → `scripts/network-diagnostics/windows/`
+  - [Linux/macOS](scripts/network-diagnostics/linux/)  
+    - `network_diag_macOS_2025-09-13.txt`  
+    - `network_diag_Kali_Linux_2025-09-14.txt`  
+  - [Windows](scripts/network-diagnostics/windows/)  
     - `network_diag_windows_2025-09-14.txt`
 
 - **Log Monitoring (`scripts/log-monitoring/`)**
-  - Linux/macOS → `scripts/log-monitoring/linux/`
-    - `event_logs_macOS_2025-09-14.txt`
-    - `event_logs_Kali_Linux_2025-09-14.txt`
-  - Windows → `scripts/log-monitoring/windows/`
+  - [Linux/macOS](scripts/log-monitoring/linux/)  
+    - `event_logs_macOS_2025-09-14.txt`  
+    - `event_logs_Kali_Linux_2025-09-14.txt`  
+  - [Windows](scripts/log-monitoring/windows/)  
     - `event_logs_windows_2025-09-14.txt`
 
 These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, and log collection**.  
