@@ -116,28 +116,49 @@ Future labs will be added to this portfolio, including:
 comptia-a-plus-labs/
 ├─ README.md
 ├─ scripts/
-│  ├─ linux/
-│  │  ├─ sysinfo.sh
-│  │  ├─ sysinfo_macOS_2025-09-07.txt
-│  │  ├─ sysinfo_Kali_Linux_2025-09-07.txt
-│  │  ├─ network_diagnostics.sh
-│  │  ├─ network_diag_macOS_2025-09-13.txt
-│  │  ├─ network_diag_Kali_Linux_2025-09-14.txt
-│  │  ├─ disk_health.sh
-│  │  ├─ disk_health_macOS_2025-09-14.txt
-│  │  ├─ disk_health_Kali_Linux_2025-09-14.txt
-│  │  ├─ event_logs.sh
-│  │  ├─ event_logs_macOS_2025-09-14.txt
-│  │  └─ event_logs_Kali_Linux_2025-09-14.txt
-│  └─ windows/
-│     ├─ system_health_check.ps1
-│     ├─ system_health_windows_2025-09-14.txt
-│     ├─ network_diagnostics.ps1
-│     ├─ network_diag_windows_2025-09-14.txt
-│     ├─ disk_health.ps1
-│     ├─ disk_health_windows_2025-09-14.txt
-│     ├─ event_logs.ps1
-│     └─ event_logs_windows_2025-09-15.txt
+│  ├─ system-health/
+│  │  ├─ linux/
+│  │  │  ├─ sysinfo.sh
+│  │  │  ├─ sysinfo_macOS_2025-09-07.txt
+│  │  │  ├─ sysinfo_Kali_Linux_2025-09-07.txt
+│  │  │  ├─ disk_health.sh
+│  │  │  ├─ disk_health_macOS_2025-09-14.txt
+│  │  │  └─ disk_health_Kali_Linux_2025-09-14.txt
+│  │  └─ windows/
+│  │     ├─ system_health_check.ps1
+│  │     ├─ system_health_windows_2025-09-14.txt
+│  │     ├─ disk_health.ps1
+│  │     └─ disk_health_windows_2025-09-14.txt
+│  │
+│  ├─ network-diagnostics/
+│  │  ├─ linux/
+│  │  │  ├─ network_diagnostics.sh
+│  │  │  ├─ network_diag_macOS_2025-09-13.txt
+│  │  │  └─ network_diag_Kali_Linux_2025-09-14.txt
+│  │  └─ windows/
+│  │     ├─ network_diagnostics.ps1
+│  │     └─ network_diag_windows_2025-09-14.txt
+│  │
+│  ├─ log-monitoring/
+│  │  ├─ linux/
+│  │  │  ├─ event_logs.sh
+│  │  │  ├─ event_logs_macOS_2025-09-14.txt
+│  │  │  └─ event_logs_Kali_Linux_2025-09-14.txt
+│  │  └─ windows/
+│  │     ├─ event_logs.ps1
+│  │     └─ event_logs_windows_2025-09-14.txt
+│  │
+│  ├─ security/                # 🔒 (future: firewall_audit.sh, firewall_audit.ps1, etc.)
+│  │  ├─ linux/
+│  │  └─ windows/
+│  │
+│  ├─ hardware-playbooks/      # 🖥️ (future: battery_check.sh, ssd_upgrade.md, etc.)
+│  │  ├─ linux/
+│  │  └─ windows/
+│  │
+│  └─ case-studies/            # 📝 (future: troubleshooting writeups in markdown)
+│
 └─ docs/
    └─ CHANGELOG.md
+
 ```
