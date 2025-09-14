@@ -1,113 +1,193 @@
-# CompTIA A+ Labs Portfolio
+# Cybersecurity Labs Portfolio
 
-This repo showcases hands-on CompTIA A+ skills. First project: a Bash script that collects system info (works on Linux and macOS).
+Cross-platform cybersecurity labs showcasing diagnostics, monitoring, and security fundamentals.  
 
-## Projects
-- **Linux sysinfo script** (`scripts/linux/sysinfo.sh`) — prints host, uptime, IP(s), disk usage, and top processes. Sample output included.
-- **Windows system health script** (`scripts/windows/system_health_check.ps1`) — collects OS details, uptime, IP config, disk usage, and top processes. Sample output included.
-- **Network diagnostics scripts** (`scripts/linux/network_diagnostics.sh`, `scripts/windows/network_diagnostics.ps1`) — run connectivity tests (IP config, DNS, ping, traceroute, DNS lookup). Sample outputs included.  
-- **Disk & storage health scripts** (`scripts/linux/disk_health.sh`, `scripts/windows/disk_health.ps1`) — display disk usage, partitions, physical disk details, and health/SMART status. Sample outputs included.  
-- **Event log collector scripts** (`scripts/linux/event_logs.sh`, `scripts/windows/event_logs.ps1`) — collect recent system and application logs, with errors/warnings highlighted. Sample outputs included.  
+This repo demonstrates hands-on skills across Linux, macOS, and Windows, aligned with my CompTIA (A+/Net+/Sec+/Linux+) and EC-Council (CEH/CSA) learning path.  
 
-## How to run
+## 📂 Projects by Category
+
+### 🔹 System Health & Diagnostics
+Scripts:
+- Linux/macOS → `scripts/system-health/linux/sysinfo.sh`, `scripts/system-health/linux/disk_health.sh`
+- Windows → `scripts/system-health/windows/system_health_check.ps1`, `scripts/system-health/windows/disk_health.ps1`
+
+**Skills demonstrated:**
+- Automating system baselines (OS, uptime, processes, IPs)
+- Disk usage and health monitoring
+- Cross-platform troubleshooting fundamentals
+
+### 🔹 Network Diagnostics
+Scripts:
+- Linux/macOS → `scripts/network-diagnostics/linux/network_diagnostics.sh`
+- Windows → `scripts/network-diagnostics/windows/network_diagnostics.ps1`
+
+**Skills demonstrated:**
+- Connectivity and DNS validation
+- Routing and latency checks
+- Foundation for packet capture & vulnerability scanning (future labs)
+
+### 🔹 Log & Event Monitoring
+Scripts:
+- Linux/macOS → `scripts/log-monitoring/linux/event_logs.sh`
+- Windows → `scripts/log-monitoring/windows/event_logs.ps1`
+
+**Skills demonstrated:**
+- Collecting system/application logs
+- Extracting errors & warnings for analysis
+- Foundations for security log monitoring (SIEM workflows)
+
+### 🔹 Security & Compliance *(Planned)*
+- Firewall audits  
+- Antivirus/Defender checks  
+- User/group account audits  
+
+### 🔹 Hardware Playbooks *(Planned)*
+- SSD upgrade and disk cloning  
+- Battery and power health checks  
+- Peripheral device troubleshooting  
+
+### 🔹 Troubleshooting Case Studies *(Planned)*
+Markdown-based case studies applying the **CompTIA 7-step troubleshooting method**, evolving into **incident response workflows**.  
+
+## ⚙️ How to Run the Scripts
 
 ### Linux/macOS
 
 ```bash
-chmod +x scripts/linux/sysinfo.sh
-./scripts/linux/sysinfo.sh
+# Sysinfo
+chmod +x scripts/system-health/linux/sysinfo.sh
+./scripts/system-health/linux/sysinfo.sh
 
-chmod +x scripts/linux/network_diagnostics.sh
-./scripts/linux/network_diagnostics.sh
+# Network diagnostics
+chmod +x scripts/network-diagnostics/linux/network_diagnostics.sh
+./scripts/network-diagnostics/linux/network_diagnostics.sh
 
-chmod +x scripts/linux/disk_health.sh
-./scripts/linux/disk_health.sh
+# Disk health
+chmod +x scripts/system-health/linux/disk_health.sh
+./scripts/system-health/linux/disk_health.sh
 
-chmod +x scripts/linux/event_logs.sh
-./scripts/linux/event_logs.sh
+# Event logs
+chmod +x scripts/log-monitoring/linux/event_logs.sh
+./scripts/log-monitoring/linux/event_logs.sh
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
+# Allow this session to run scripts
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\scripts\windows\system_health_check.ps1
 
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\scripts\windows\network_diagnostics.ps1
+# System health
+.\scripts\system-health\windows\system_health_check.ps1
 
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\scripts\windows\disk_health.ps1
+# Network diagnostics
+.\scripts\network-diagnostics\windows\network_diagnostics.ps1
 
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\scripts\windows\event_logs.ps1
+# Disk health
+.\scripts\system-health\windows\disk_health.ps1
+
+# Event logs
+.\scripts\log-monitoring\windows\event_logs.ps1
 ```
 
-## How to save output to file (optional)
+## 💾 How to Save Output to File (Optional)
 
 ### Linux/macOS
 
 ```bash
-./scripts/linux/sysinfo.sh | tee scripts/linux/sysinfo_$(date +%F).txt
+OS="macOS"
 
-./scripts/linux/network_diagnostics.sh | tee scripts/linux/network_diag_$(date +%F).txt
-
-./scripts/linux/disk_health.sh | tee scripts/linux/disk_health_linux_$(date +%F).txt
-
-./scripts/linux/event_logs.sh | tee scripts/linux/event_logs_$(date +%F).txt
+./scripts/system-health/linux/sysinfo.sh | tee scripts/system-health/linux/sysinfo_${OS}_$(date +%F).txt
+./scripts/network-diagnostics/linux/network_diagnostics.sh | tee scripts/network-diagnostics/linux/network_diag_${OS}_$(date +%F).txt
+./scripts/system-health/linux/disk_health.sh | tee scripts/system-health/linux/disk_health_${OS}_$(date +%F).txt
+./scripts/log-monitoring/linux/event_logs.sh | tee scripts/log-monitoring/linux/event_logs_${OS}_$(date +%F).txt
 ```
 
 ### Windows (PowerShell)
-
 ```powershell
-.\scripts\windows\system_health_check.ps1 | Out-File scripts\windows\system_health_$(Get-Date -Format 'yyyy-MM-dd').txt
-
-.\scripts\windows\network_diagnostics.ps1 | Out-File scripts\windows\network_diag_$(Get-Date -Format 'yyyy-MM-dd').txt
-
-.\scripts\windows\disk_health.ps1 | Out-File scripts\windows\disk_health_$(Get-Date -Format 'yyyy-MM-dd').txt
-
-.\scripts\windows\event_logs.ps1 | Out-File scripts\windows\event_logs_$(Get-Date -Format 'yyyy-MM-dd').txt
+.\scripts\system-health\windows\system_health_check.ps1 | Out-File scripts\system-health\windows\system_health_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+.\scripts\network-diagnostics\windows\network_diagnostics.ps1   | Out-File scripts\network-diagnostics\windows\network_diag_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+.\scripts\system-health\windows\disk_health.ps1                 | Out-File scripts\system-health\windows\disk_health_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+.\scripts\log-monitoring\windows\event_logs.ps1                 | Out-File scripts\log-monitoring\windows\event_logs_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 ```
 
-## Sample Output
-
+## 📑 Sample Output
 
 Sample runs of the scripts are saved with date-stamped filenames that also indicate the operating system used.  
+Each category has separate **`linux/`** and **`windows/`** subfolders for scripts and outputs.
 
-- **Linux/macOS outputs** are saved in [`scripts/linux/`](scripts/linux/), for example:  
-  - `sysinfo_macOS_2025-09-07.txt`  
-  - `sysinfo_Kali_Linux_2025-09-07.txt`
-  - `network_diag_macOS_2025-09-13.txt`
-  - `network_diag_Kali_Linux_2025-09-14.txt`
-  - `disk_health_macOS_2025-09-14.txt`
-  - `disk_health_Kali_Linux_2025-09-14.txt`
-  - `event_logs_macOS_2025-09-14.txt`  
-  - `event_logs_Kali_Linux_2025-09-14.txt`  
+- **System Health (`scripts/system-health/`)**
+  - Linux/macOS → `scripts/system-health/linux/`
+    - `sysinfo_macOS_2025-09-07.txt`
+    - `sysinfo_Kali_Linux_2025-09-07.txt`
+    - `disk_health_macOS_2025-09-14.txt`
+    - `disk_health_Kali_Linux_2025-09-14.txt`
+  - Windows → `scripts/system-health/windows/`
+    - `system_health_windows_2025-09-14.txt`
+    - `disk_health_windows_2025-09-14.txt`
 
-- **Windows outputs** are saved in [`scripts/windows/`](scripts/windows/), for example:  
-  - `system_health_windows_2025-09-14.txt`
-  - `network_diag_windows_2025-09-14.txt`
-  - `disk_health_windows_2025-09-14.txt`
-  - `event_logs_windows_2025-09-14.txt`  
+- **Network Diagnostics (`scripts/network-diagnostics/`)**
+  - Linux/macOS → `scripts/network-diagnostics/linux/`
+    - `network_diag_macOS_2025-09-13.txt`
+    - `network_diag_Kali_Linux_2025-09-14.txt`
+  - Windows → `scripts/network-diagnostics/windows/`
+    - `network_diag_windows_2025-09-14.txt`
 
-These files demonstrate the expected output: system, network, disk, and event log diagnostics.  
+- **Log Monitoring (`scripts/log-monitoring/`)**
+  - Linux/macOS → `scripts/log-monitoring/linux/`
+    - `event_logs_macOS_2025-09-14.txt`
+    - `event_logs_Kali_Linux_2025-09-14.txt`
+  - Windows → `scripts/log-monitoring/windows/`
+    - `event_logs_windows_2025-09-14.txt`
 
-Having Linux, macOS, and Windows runs highlights cross-platform troubleshooting.
+These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, and log collection**.  
 
-## Why This Matters
-
-Collecting system information is a fundamental troubleshooting step in IT support.  
-This script shows the ability to:
-- Automate repetitive diagnostic tasks with Bash and PowerShell
-- Capture machine state into timestamped logs
-- Work across both Linux, macOS, and Windows environments
+Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring**.
 
 
-## Next Steps
-Future labs will be added to this portfolio, including:
-- **Advanced networking labs** with DNS troubleshooting and Wireshark captures
-- **Hardware playbooks** (e.g., SSD upgrades)
-- **Troubleshooting case studies** following the CompTIA A+ 7-step method
+## 🎯 Why This Matters
+
+These labs demonstrate:
+- Cross-platform scripting (Bash & PowerShell)
+- System, network, disk, and log diagnostics
+- Security readiness foundations (auditing & monitoring building blocks)
+
+This portfolio supports my pivot into cybersecurity by proving I can gather, interpret, and act on host-level signals across multiple operating systems.
+
+## 🔮 Next Steps
+
+This portfolio will expand alongside my cybersecurity training. Planned projects include:
+
+- **System Health & Diagnostics**
+  - Extend disk health checks with encryption status (BitLocker/FileVault)
+  - Automate performance monitoring (CPU/memory snapshots)
+
+- **Network Diagnostics**
+  - Add packet capture (tcpdump, Wireshark) labs
+  - Implement port scanning and service enumeration scripts
+  - Compare normal vs. abnormal traffic baselines
+
+- **Log & Event Monitoring**
+  - Automate filtering of security-related logs (auth failures, privilege escalation attempts)
+  - Build a SIEM-style correlation script to detect anomalies across logs
+  - Create case studies based on simulated incident logs
+
+- **Security & Compliance**
+  - Firewall configuration audit scripts
+  - Antivirus/Defender status checks
+  - User/group account and permission audits
+  - Vulnerability scan integrations (planned for CEH/CSA modules)
+
+- **Hardware Playbooks**
+  - SSD upgrade and cloning procedure
+  - Secure data wipe and disposal workflow
+  - Battery and peripheral health checks
+
+- **Case Studies**
+  - A+ level: Endpoint troubleshooting scenarios (slow Wi-Fi, low disk, printer errors)
+  - Network+ level: VLAN/DNS misconfigurations, packet loss investigations
+  - Security+ / CEH level: Malware infection response, unauthorized access, firewall misconfigurations
+  - CSA level: SOC analyst workflows — triage, correlation, incident reporting
 
 
 ## Repository Structure
