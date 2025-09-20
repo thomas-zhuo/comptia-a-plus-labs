@@ -98,22 +98,29 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 OS="macOS"
 
 ./scripts/system-health/linux/sysinfo.sh | tee scripts/system-health/linux/sysinfo_${OS}_$(date +%F).txt
+
 ./scripts/network-diagnostics/linux/network_diagnostics.sh | tee scripts/network-diagnostics/linux/network_diag_${OS}_$(date +%F).txt
+
 ./scripts/system-health/linux/disk_health.sh | tee scripts/system-health/linux/disk_health_${OS}_$(date +%F).txt
+
 ./scripts/log-monitoring/linux/event_logs.sh | tee scripts/log-monitoring/linux/event_logs_${OS}_$(date +%F).txt
 ```
 
 ### Windows (PowerShell)
 ```powershell
 .\scripts\system-health\windows\system_health_check.ps1 | Out-File scripts\system-health\windows\system_health_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
-.\scripts\network-diagnostics\windows\network_diagnostics.ps1   | Out-File scripts\network-diagnostics\windows\network_diag_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
-.\scripts\system-health\windows\disk_health.ps1                 | Out-File scripts\system-health\windows\disk_health_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
-.\scripts\log-monitoring\windows\event_logs.ps1                 | Out-File scripts\log-monitoring\windows\event_logs_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\network-diagnostics\windows\network_diagnostics.ps1 | Out-File scripts\network-diagnostics\windows\network_diag_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\system-health\windows\disk_health.ps1 | Out-File scripts\system-health\windows\disk_health_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\log-monitoring\windows\event_logs.ps1 | Out-File scripts\log-monitoring\windows\event_logs_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 ```
 
 ## 📑 Sample Output
 
-Sample runs of the scripts are saved with date-stamped filenames that also indicate the operating system used.  
+Sample runs of the scripts are saved with date-stamped filenames that also indicate the operating system used.
+
 Each category has separate **`linux/`** and **`windows/`** subfolders for scripts and outputs.
 
 - **System Health (`scripts/system-health/`)**
