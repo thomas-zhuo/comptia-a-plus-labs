@@ -1,0 +1,133 @@
+
+[1mFirewall Audit — Linux/macOS[0m
+  Host: Thomas-MBP
+  OS: Darwin 23.6.0
+  Date: 2025-09-20 21:04:27 +08
+
+[1mDetected Firewall Stack[0m
+  pf (macOS) detected
+
+[1mpf (macOS) Status[0m
+Status: Enabled for 0 days 03:55:52           Debug: Urgent
+
+State Table                          Total             Rate
+  current entries                        6               
+  searches                        81519498         5760.3/s
+  inserts                              610            0.0/s
+  removals                             604            0.0/s
+Counters
+  match                           77490464         5475.6/s
+  bad-offset                             0            0.0/s
+  fragment                               0            0.0/s
+  short                                  0            0.0/s
+  normalize                              0            0.0/s
+  memory                                 0            0.0/s
+  bad-timestamp                          0            0.0/s
+  congestion                             0            0.0/s
+  ip-option                            325            0.0/s
+  proto-cksum                            0            0.0/s
+  state-mismatch                         0            0.0/s
+  state-insert                           0            0.0/s
+  state-limit                            0            0.0/s
+  src-limit                              0            0.0/s
+  synproxy                               0            0.0/s
+  dummynet                               0            0.0/s
+  invalid-port                           0            0.0/s
+
+[1mpf Rules (read-only)[0m
+scrub-anchor "com.apple/*" all fragment reassemble
+scrub-anchor "com.apple.internet-sharing" all fragment reassemble
+anchor "com.apple/*" all
+anchor "com.apple.internet-sharing" all
+
+[1mpf NAT (if any)[0m
+nat-anchor "com.apple/*" all
+nat-anchor "com.apple.internet-sharing" all
+rdr-anchor "com.apple/*" all
+rdr-anchor "com.apple.internet-sharing" all
+
+[1mpf Anchors[0m
+TRANSLATION RULES:
+nat-anchor "com.apple/*" all
+nat-anchor "com.apple.internet-sharing" all
+rdr-anchor "com.apple/*" all
+rdr-anchor "com.apple.internet-sharing" all
+
+FILTER RULES:
+scrub-anchor "com.apple/*" all fragment reassemble
+scrub-anchor "com.apple.internet-sharing" all fragment reassemble
+anchor "com.apple/*" all
+anchor "com.apple.internet-sharing" all
+
+DUMMYNET RULES:
+dummynet-anchor "com.apple/*" all
+
+STATES:
+ALL udp 172.16.111.1:5353 -> 224.0.0.251:5353       SINGLE:NO_TRAFFIC
+ALL udp 192.168.50.1:5353 -> 224.0.0.251:5353       SINGLE:NO_TRAFFIC
+ALL udp fe80::c889:f3ff:feaa:9164[5353] -> ff02::fb[5353]       SINGLE:NO_TRAFFIC
+ALL udp fe80::c889:f3ff:feaa:9165[5353] -> ff02::fb[5353]       SINGLE:NO_TRAFFIC
+ALL udp 172.16.111.1:57621 -> 172.16.111.255:57621       SINGLE:NO_TRAFFIC
+ALL udp 192.168.50.1:57621 -> 192.168.50.255:57621       SINGLE:NO_TRAFFIC
+
+INFO:
+Status: Enabled for 0 days 03:55:52           Debug: Urgent
+
+State Table                          Total             Rate
+  current entries                        6               
+  searches                        81519533         5760.3/s
+  inserts                              610            0.0/s
+  removals                             604            0.0/s
+Counters
+  match                           77490477         5475.6/s
+  bad-offset                             0            0.0/s
+  fragment                               0            0.0/s
+  short                                  0            0.0/s
+  normalize                              0            0.0/s
+  memory                                 0            0.0/s
+  bad-timestamp                          0            0.0/s
+  congestion                             0            0.0/s
+  ip-option                            325            0.0/s
+  proto-cksum                            0            0.0/s
+  state-mismatch                         0            0.0/s
+  state-insert                           0            0.0/s
+  state-limit                            0            0.0/s
+  src-limit                              0            0.0/s
+  synproxy                               0            0.0/s
+  dummynet                               0            0.0/s
+  invalid-port                           0            0.0/s
+
+TIMEOUTS:
+tcp.first                   120s
+tcp.opening                  30s
+tcp.established           86400s
+tcp.closing                 900s
+tcp.finwait                  45s
+tcp.closed                   90s
+tcp.tsdiff                   60s
+udp.first                    60s
+udp.single                   30s
+udp.multiple                120s
+icmp.first                   20s
+icmp.error                   10s
+grev1.first                 120s
+grev1.initiating             30s
+grev1.estblished           1800s
+esp.first                   120s
+esp.estblished              900s
+other.first                  60s
+other.single                 30s
+other.multiple              120s
+frag                         30s
+interval                     10s
+adaptive.start             6000 states
+adaptive.end              12000 states
+src.track                     0s
+
+LIMITS:
+states        hard limit    10000
+app-states    hard limit    10000
+
+[1mSummary[0m
+  pf present — rules and NAT listed.
+
