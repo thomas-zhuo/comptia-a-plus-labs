@@ -1,0 +1,43 @@
+
+[1mFirewall Audit — Linux/macOS[0m
+  Host: kali
+  OS: Linux 6.8.11-arm64
+  Date: 2025-09-20 22:07:47 +08
+
+[1mDetected Firewall Stack[0m
+  nftables detected
+
+[1mnftables Ruleset (read-only)[0m
+
+[1miptables Policy & Rules (read-only)[0m
+Table: filter
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+
+Table: nat
+-P PREROUTING ACCEPT
+-P INPUT ACCEPT
+-P OUTPUT ACCEPT
+-P POSTROUTING ACCEPT
+
+Table: mangle
+-P PREROUTING ACCEPT
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+-P POSTROUTING ACCEPT
+
+Table: raw
+-P PREROUTING ACCEPT
+-P OUTPUT ACCEPT
+
+Table: security
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+
+
+[1mSummary[0m
+  nftables present — ruleset listed above.
+
