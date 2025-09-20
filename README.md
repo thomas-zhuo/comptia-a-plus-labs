@@ -43,14 +43,18 @@ Scripts:
 
 ### 🔹 Security & Compliance
 Scripts:
-- Linux/macOS → `scripts/security/linux/firewall_audit.sh`
-- Windows → `scripts/security/windows/firewall_audit.ps1`
+- **Implemented:**
+  - Linux/macOS → `scripts/security/linux/firewall_audit.sh`
+  - Windows → `scripts/security/windows/firewall_audit.ps1`
+- **Planned:**
+  - Antivirus/Defender status checks
+  - User/group account and permission audits
 
 **Skills demonstrated:**
 - Auditing firewall status (enabled/disabled profiles)
 - Listing active inbound rules
 - Capturing listening ports and services
-- Security posture baseline across Linux, macOS, and Windows
+- Building toward full security posture assessments across platforms
 
 ### 🔹 Hardware Playbooks *(Planned)*
 - SSD upgrade and disk cloning  
