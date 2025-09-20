@@ -3,6 +3,17 @@
 All notable changes to this project will be documented here.  
 Dates follow `YYYY-MM-DD` format.
 
+## 2025-09-20
+- **Security & Compliance**
+- Added Firewall Audit scripts:
+  - `scripts/security/linux/firewall_audit.sh`
+  - `scripts/security/windows/firewall_audit.ps1`
+- Added sample output files:
+  - `scripts/security/linux/firewall_audit_macOS_2025-09-20.txt`
+  - `scripts/security/linux/firewall_audit_Kali_Linux_2025-09-20.txt`
+  - `scripts/security/windows/firewall_audit_windows_2025-09-20.txt`
+- Updated README with Security & Compliance project details and run instructions
+
 ## 2025-09-13 – 2025-09-14
 - **System Health**
   - Added Windows system health script (`scripts/system-health/windows/system_health_check.ps1`)
