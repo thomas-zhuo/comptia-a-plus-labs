@@ -41,6 +41,17 @@ Scripts:
 - Antivirus/Defender checks  
 - User/group account audits  
 
+### 🔹 Security & Compliance
+Scripts:
+- Linux/macOS → `scripts/security/linux/firewall_audit.sh`
+- Windows → `scripts/security/windows/firewall_audit.ps1`
+
+**Skills demonstrated:**
+- Auditing firewall status (enabled/disabled profiles)
+- Listing active inbound rules
+- Capturing listening ports and services
+- Security posture baseline across Linux, macOS, and Windows
+
 ### 🔹 Hardware Playbooks *(Planned)*
 - SSD upgrade and disk cloning  
 - Battery and power health checks  
@@ -69,6 +80,10 @@ chmod +x scripts/system-health/linux/disk_health.sh
 # Event logs
 chmod +x scripts/log-monitoring/linux/event_logs.sh
 ./scripts/log-monitoring/linux/event_logs.sh
+
+# Firewall audit
+chmod +x scripts/security/linux/firewall_audit.sh
+./scripts/security/linux/firewall_audit.sh
 ```
 
 ### Windows (PowerShell)
@@ -88,6 +103,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 # Event logs
 .\scripts\log-monitoring\windows\event_logs.ps1
+
+# Firewall audit
+.\scripts\security\windows\firewall_audit.ps1
 ```
 
 ## 💾 How to Save Output to File (Optional)
@@ -104,6 +122,8 @@ OS="macOS"
 ./scripts/system-health/linux/disk_health.sh | tee scripts/system-health/linux/disk_health_${OS}_$(date +%F).txt
 
 ./scripts/log-monitoring/linux/event_logs.sh | tee scripts/log-monitoring/linux/event_logs_${OS}_$(date +%F).txt
+
+./scripts/security/linux/firewall_audit.sh | tee scripts/security/linux/firewall_audit_${OS}_$(date +%F).txt
 ```
 
 ### Windows (PowerShell)
@@ -115,6 +135,8 @@ OS="macOS"
 .\scripts\system-health\windows\disk_health.ps1 | Out-File scripts\system-health\windows\disk_health_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 
 .\scripts\log-monitoring\windows\event_logs.ps1 | Out-File scripts\log-monitoring\windows\event_logs_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\security\windows\firewall_audit.ps1 | Out-File scripts\security\windows\firewall_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 ```
 
 ## 📑 Sample Output
@@ -147,9 +169,16 @@ Each category has separate **`linux/`** and **`windows/`** subfolders for script
   - [Windows](scripts/log-monitoring/windows/)  
     - `event_logs_windows_2025-09-14.txt`
 
-These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, and log collection**.  
+**Security & Compliance (`scripts/security/`)**
+- [Linux/macOS](scripts/security/linux/):
+  - `firewall_audit_macOS_2025-09-20.txt`
+  - `firewall_audit_Kali_Linux_2025-09-20.txt`
+- [Windows](scripts/security/windows/)  
+    - `firewall_audit_windows_2025-09-20.txt`
 
-Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring**.
+These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, log collection, and firewall auditing**.  
+
+Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring and compliance auditing**.
 
 
 ## 🎯 Why This Matters
@@ -235,9 +264,14 @@ comptia-a-plus-labs/
 │  │     ├─ event_logs.ps1
 │  │     └─ event_logs_windows_2025-09-14.txt
 │  │
-│  ├─ security/                # 🔒 (future: firewall_audit.sh, firewall_audit.ps1, etc.)
+│  ├─ security/
 │  │  ├─ linux/
+│  │  │  ├─ firewall_audit.sh
+│  │  │  ├─ firewall_audit_macOS_2025-09-20.txt
+│  │  │  └─ firewall_audit_Kali_Linux_2025-09-20.txt
 │  │  └─ windows/
+│  │     ├─ firewall_audit.ps1
+│  │     └─ firewall_audit_windows_2025-09-20.txt
 │  │
 │  ├─ hardware-playbooks/      # 🖥️ (future: battery_check.sh, ssd_upgrade.md, etc.)
 │  │  ├─ linux/
