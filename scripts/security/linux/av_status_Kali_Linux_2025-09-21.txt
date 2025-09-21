@@ -1,0 +1,19 @@
+
+[1mAntivirus / Endpoint Protection Status[0m
+  Host: kali
+  OS  : Linux (6.8.11-arm64)
+  Date: 2025-09-21 16:40:11 +08
+
+[1mLinux Endpoint Checks[0m
+
+[1mClamAV (if installed)[0m
+  clamscan not found on PATH
+  freshclam not found on PATH (signatures may not auto-update)
+  Signature DB directory not found in common paths
+
+[1mClamAV Service Status (systemd)[0m
+
+[1mSummary[0m
+  Reported ClamAV presence, versions, signature DB freshness, and service status (if systemd).
+  Extend with distro-specific EDR/AV detections as needed.
+
