@@ -5,6 +5,9 @@ Dates follow `YYYY-MM-DD` format.
 
 ## 2025-09-21
 - **Security & Compliance**
+  - Added User & Group Account Audit scripts:
+    - `scripts/security/linux/account_audit.sh`
+    - `scripts/security/windows/account_audit.ps1`
   - Added Antivirus / Endpoint Protection Status scripts:
     - `scripts/security/linux/av_status.sh`
     - `scripts/security/windows/av_status.ps1`
@@ -12,6 +15,9 @@ Dates follow `YYYY-MM-DD` format.
     - `scripts/security/linux/av_status_macOS_2025-09-21.txt`
     - `scripts/security/linux/av_status_Kali_Linux_2025-09-21.txt`
     - `scripts/security/windows/av_status_windows_2025-09-21.txt`
+    - `scripts/security/linux/account_audit_macOS_2025-09-22.txt`
+    - `scripts/security/linux/account_audit_Kali_Linux_2025-09-22.txt`
+    - `scripts/security/windows/account_audit_windows_2025-09-22.txt`
   - Updated README with new Security & Compliance project details
 
 ## 2025-09-20
