@@ -1,0 +1,70 @@
+
+[1mUser & Group Account Audit[0m
+  Host: kali
+  OS  : Linux (6.8.11-arm64)
+  Date: 2025-09-21 17:53:54 +08
+
+[1mLocal Users (/etc/passwd)[0m
+  root: uid=0 gid=0 home=/root shell=/usr/bin/zsh
+  daemon: uid=1 gid=1 home=/usr/sbin shell=/usr/sbin/nologin (disabled shell)
+  bin: uid=2 gid=2 home=/bin shell=/usr/sbin/nologin (disabled shell)
+  sys: uid=3 gid=3 home=/dev shell=/usr/sbin/nologin (disabled shell)
+  sync: uid=4 gid=65534 home=/bin shell=/bin/sync
+  games: uid=5 gid=60 home=/usr/games shell=/usr/sbin/nologin (disabled shell)
+  man: uid=6 gid=12 home=/var/cache/man shell=/usr/sbin/nologin (disabled shell)
+  lp: uid=7 gid=7 home=/var/spool/lpd shell=/usr/sbin/nologin (disabled shell)
+  mail: uid=8 gid=8 home=/var/mail shell=/usr/sbin/nologin (disabled shell)
+  news: uid=9 gid=9 home=/var/spool/news shell=/usr/sbin/nologin (disabled shell)
+  uucp: uid=10 gid=10 home=/var/spool/uucp shell=/usr/sbin/nologin (disabled shell)
+  proxy: uid=13 gid=13 home=/bin shell=/usr/sbin/nologin (disabled shell)
+  www-data: uid=33 gid=33 home=/var/www shell=/usr/sbin/nologin (disabled shell)
+  backup: uid=34 gid=34 home=/var/backups shell=/usr/sbin/nologin (disabled shell)
+  list: uid=38 gid=38 home=/var/list shell=/usr/sbin/nologin (disabled shell)
+  irc: uid=39 gid=39 home=/run/ircd shell=/usr/sbin/nologin (disabled shell)
+  _apt: uid=42 gid=65534 home=/nonexistent shell=/usr/sbin/nologin (disabled shell)
+  nobody: uid=65534 gid=65534 home=/nonexistent shell=/usr/sbin/nologin (disabled shell)
+  systemd-network: uid=998 gid=998 home=/ shell=/usr/sbin/nologin (disabled shell)
+  _galera: uid=100 gid=65534 home=/nonexistent shell=/usr/sbin/nologin (disabled shell)
+  mysql: uid=101 gid=102 home=/nonexistent shell=/bin/false (disabled shell)
+  tss: uid=102 gid=103 home=/var/lib/tpm shell=/bin/false (disabled shell)
+  strongswan: uid=103 gid=65534 home=/var/lib/strongswan shell=/usr/sbin/nologin (disabled shell)
+  systemd-timesync: uid=992 gid=992 home=/ shell=/usr/sbin/nologin (disabled shell)
+  rwhod: uid=104 gid=65534 home=/var/spool/rwho shell=/usr/sbin/nologin (disabled shell)
+  _gophish: uid=105 gid=105 home=/var/lib/gophish shell=/usr/sbin/nologin (disabled shell)
+  iodine: uid=106 gid=65534 home=/run/iodine shell=/usr/sbin/nologin (disabled shell)
+  messagebus: uid=107 gid=106 home=/nonexistent shell=/usr/sbin/nologin (disabled shell)
+  tcpdump: uid=108 gid=107 home=/nonexistent shell=/usr/sbin/nologin (disabled shell)
+  miredo: uid=109 gid=65534 home=/var/run/miredo shell=/usr/sbin/nologin (disabled shell)
+  _rpc: uid=110 gid=65534 home=/run/rpcbind shell=/usr/sbin/nologin (disabled shell)
+  Debian-snmp: uid=111 gid=109 home=/var/lib/snmp shell=/bin/false (disabled shell)
+  redis: uid=112 gid=111 home=/var/lib/redis shell=/usr/sbin/nologin (disabled shell)
+  usbmux: uid=113 gid=46 home=/var/lib/usbmux shell=/usr/sbin/nologin (disabled shell)
+  mosquitto: uid=114 gid=114 home=/var/lib/mosquitto shell=/usr/sbin/nologin (disabled shell)
+  redsocks: uid=115 gid=115 home=/var/run/redsocks shell=/usr/sbin/nologin (disabled shell)
+  stunnel4: uid=991 gid=991 home=/var/run/stunnel4 shell=/usr/sbin/nologin (disabled shell)
+  sshd: uid=116 gid=65534 home=/run/sshd shell=/usr/sbin/nologin (disabled shell)
+  dnsmasq: uid=999 gid=65534 home=/var/lib/misc shell=/usr/sbin/nologin (disabled shell)
+  sslh: uid=117 gid=118 home=/nonexistent shell=/usr/sbin/nologin (disabled shell)
+  postgres: uid=118 gid=119 home=/var/lib/postgresql shell=/bin/bash
+  avahi: uid=119 gid=120 home=/run/avahi-daemon shell=/usr/sbin/nologin (disabled shell)
+  _gvm: uid=120 gid=122 home=/var/lib/openvas shell=/usr/sbin/nologin (disabled shell)
+  speech-dispatcher: uid=121 gid=29 home=/run/speech-dispatcher shell=/bin/false (disabled shell)
+  inetsim: uid=122 gid=124 home=/var/lib/inetsim shell=/usr/sbin/nologin (disabled shell)
+  geoclue: uid=123 gid=125 home=/var/lib/geoclue shell=/usr/sbin/nologin (disabled shell)
+  lightdm: uid=124 gid=126 home=/var/lib/lightdm shell=/bin/false (disabled shell)
+  statd: uid=125 gid=65534 home=/var/lib/nfs shell=/usr/sbin/nologin (disabled shell)
+  saned: uid=126 gid=128 home=/var/lib/saned shell=/usr/sbin/nologin (disabled shell)
+  polkitd: uid=989 gid=989 home=/ shell=/usr/sbin/nologin (disabled shell)
+  rtkit: uid=127 gid=129 home=/proc shell=/usr/sbin/nologin (disabled shell)
+  colord: uid=128 gid=130 home=/var/lib/colord shell=/usr/sbin/nologin (disabled shell)
+  nm-openvpn: uid=129 gid=131 home=/var/lib/openvpn/chroot shell=/usr/sbin/nologin (disabled shell)
+  nm-openconnect: uid=130 gid=132 home=/var/lib/NetworkManager shell=/usr/sbin/nologin (disabled shell)
+  kali: uid=1000 gid=1000 home=/home/kali shell=/usr/bin/zsh
+
+[1mUID 0 Accounts (root-equivalent)[0m
+  root (shell=/usr/bin/zsh)
+
+[1mSudo-Capable Groups & Members[0m
+  Group: sudo -> kali
+
+[1mHuman User Password/Lock Status (best effort)[0m
