@@ -1,0 +1,28 @@
+
+[1mAntivirus / Endpoint Protection Status[0m
+  Host: Thomas-MBP
+  OS  : Darwin (23.6.0)
+  Date: 2025-09-21 16:38:32 +08
+
+[1mmacOS Endpoint Protection[0m
+
+[1mGatekeeper[0m
+assessments enabled
+
+[1mXProtect[0m
+  XProtect bundle info not available (or PlistBuddy missing)
+
+[1mXProtect Remediator[0m
+  XProtect Remediator bundle not found (system may be older or path differs)
+
+[1mSystem Integrity Protection (SIP)[0m
+System Integrity Protection status: enabled.
+
+[1mClamAV (if installed)[0m
+  clamscan not found on PATH
+  freshclam not found on PATH (signatures may not auto-update)
+  Signature DB directory not found in common paths
+
+[1mSummary[0m
+  Reported Gatekeeper, XProtect/XProtect Remediator versions, SIP status, and ClamAV if installed (Homebrew).
+
