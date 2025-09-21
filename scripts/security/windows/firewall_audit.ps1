@@ -4,17 +4,17 @@ Shows profile status, a concise view of enabled rules, and listening ports.
 #>
 
 # ----- Header ---------------------------------------------------------------
-Write-Host ''
-Write-Host 'Firewall Audit — Windows' -ForegroundColor Cyan
+Write-Output ''
+Write-Output 'Firewall Audit — Windows' -ForegroundColor Cyan
 $os = (Get-CimInstance Win32_OperatingSystem).Caption
 $dt = Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz'
-Write-Host ('Host : ' + $env:COMPUTERNAME)
-Write-Host ('OS   : ' + $os)
-Write-Host ('Date : ' + $dt)
+Write-Output ('Host : ' + $env:COMPUTERNAME)
+Write-Output ('OS   : ' + $os)
+Write-Output ('Date : ' + $dt)
 
 # ----- Profile status -------------------------------------------------------
-Write-Host ''
-Write-Host '=== Profile Status (Get-NetFirewallProfile) ===' -ForegroundColor Yellow
+Write-Output ''
+Write-Output '=== Profile Status (Get-NetFirewallProfile) ===' -ForegroundColor Yellow
 try {
     Get-NetFirewallProfile -PolicyStore ActiveStore |
         Select-Object Name, Enabled, DefaultInboundAction, DefaultOutboundAction |
@@ -24,8 +24,8 @@ try {
 }
 
 # ----- Enabled rule counts (direction/action) -------------------------------
-Write-Host ''
-Write-Host '=== Rule Counts (enabled only) ===' -ForegroundColor Yellow
+Write-Output ''
+Write-Output '=== Rule Counts (enabled only) ===' -ForegroundColor Yellow
 try {
     $enabledRules = Get-NetFirewallRule -Enabled True
     $counts = $enabledRules |
@@ -39,8 +39,8 @@ try {
 }
 
 # ----- Enabled inbound rules (example subset) -------------------------------
-Write-Host ''
-Write-Host '=== Enabled Inbound Rules (top 40) ===' -ForegroundColor Yellow
+Write-Output ''
+Write-Output '=== Enabled Inbound Rules (top 40) ===' -ForegroundColor Yellow
 try {
     $inbound = Get-NetFirewallRule -Direction Inbound -Enabled True |
                Sort-Object -Property DisplayName |
@@ -55,8 +55,8 @@ try {
 }
 
 # ----- Listening ports snapshot --------------------------------------------
-Write-Host ''
-Write-Host '=== Listening Ports Snapshot (netstat -ano) ===' -ForegroundColor Yellow
+Write-Output ''
+Write-Output '=== Listening Ports Snapshot (netstat -ano) ===' -ForegroundColor Yellow
 try {
     netstat -ano | Select-String -Pattern 'LISTENING' | Select-Object -First 40
 } catch {
@@ -64,8 +64,8 @@ try {
 }
 
 # ----- Legacy summary (useful on older builds) ------------------------------
-Write-Host ''
-Write-Host '=== netsh advfirewall (summary) ===' -ForegroundColor Yellow
+Write-Output ''
+Write-Output '=== netsh advfirewall (summary) ===' -ForegroundColor Yellow
 try {
     netsh advfirewall show allprofiles
 } catch {
@@ -73,10 +73,10 @@ try {
 }
 
 # ----- Summary --------------------------------------------------------------
-Write-Host ''
-Write-Host 'Summary:' -ForegroundColor Cyan
-Write-Host '  - Profile status shown above (Domain/Private/Public)'
-Write-Host '  - Counts of enabled rules by direction/action'
-Write-Host '  - Example enabled inbound rules (ports/protocols where applicable)'
-Write-Host '  - Snapshot of listening ports (pair with rule review)'
-Write-Host ''
+Write-Output ''
+Write-Output 'Summary:' -ForegroundColor Cyan
+Write-Output '  - Profile status shown above (Domain/Private/Public)'
+Write-Output '  - Counts of enabled rules by direction/action'
+Write-Output '  - Example enabled inbound rules (ports/protocols where applicable)'
+Write-Output '  - Snapshot of listening ports (pair with rule review)'
+Write-Output ''
