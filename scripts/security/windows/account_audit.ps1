@@ -1,11 +1,10 @@
 <#
 User & Group Account Audit (Windows) — DISPLAY + PIPELINE SAFE
-- Enumerates local users, key properties, and privileged group memberships
-- Highlights Administrators membership and risky settings (password never expires, password not required)
-- Uses Write-Output so you can pipe to Out-File or Tee-Object
+- Enumerates local users and key properties
+- Flags risky settings (password never expires / not required)
+- Reports on privileged groups
 #>
 
-# ----- Helpers --------------------------------------------------------------
 function Show-Table {
     param([Parameter(ValueFromPipeline=$true)] $InputObject)
     $sb = [System.Text.StringBuilder]::new()
@@ -25,23 +24,24 @@ Write-Output ("OS   : {0}" -f $os)
 Write-Output ("Date : {0}" -f $dt)
 Write-Output ""
 
-# ----- Local users (overview) ----------------------------------------------
+# --- Local users overview ---
 Write-Output "=== Local Users (Get-LocalUser) ==="
 try {
     $users = Get-LocalUser | Sort-Object Name
-    if (-not $users) { Write-Output "No local users found."; }
-    else {
+    if ($users) {
         $users |
-            Select-Object Name, Enabled, Description, PasswordRequired, PasswordExpires, AccountExpires, LastLogon |
-            Show-Table
+          Select-Object Name, Enabled, Description, PasswordRequired, PasswordExpires, AccountExpires, LastLogon |
+          Show-Table
+    } else {
+        Write-Output "No local users found."
     }
 } catch {
-    Write-Output ("ERROR: Failed to enumerate local users: {0}" -f $_)
+    Write-Output ("ERROR: {0}" -f $_)
 }
 Write-Output ""
 
-# ----- Flag: password never expires / not required -------------------------
-Write-Output "=== Potential Risk Flags (Local Accounts) ==="
+# --- Risky settings ---
+Write-Output "=== Potential Risk Flags ==="
 try {
     $neverExpires = $users | Where-Object { $_.PasswordExpires -eq $false }
     $noPassword   = $users | Where-Object { $_.PasswordRequired -eq $false }
@@ -50,95 +50,82 @@ try {
         Write-Output "Accounts with 'Password never expires':"
         $neverExpires | Select-Object Name, Enabled, PasswordExpires | Show-Table
     } else {
-        Write-Output "No accounts with 'Password never expires' found."
+        Write-Output "No accounts with 'Password never expires'."
     }
-
-    Write-Output ""
 
     if ($noPassword) {
-        Write-Output "Accounts with 'Password not required':"
+        Write-Output "`nAccounts with 'Password not required':"
         $noPassword | Select-Object Name, Enabled, PasswordRequired | Show-Table
     } else {
-        Write-Output "No accounts with 'Password not required' found."
+        Write-Output "No accounts with 'Password not required'."
     }
 } catch {
-    Write-Output ("ERROR: Flag analysis failed: {0}" -f $_)
+    Write-Output ("ERROR: {0}" -f $_)
 }
 Write-Output ""
 
-# ----- Built-in Administrator account state --------------------------------
+# --- Built-in Administrator ---
 Write-Output "=== Built-in Administrator Account ==="
 try {
-    $adminBuiltIn = $users | Where-Object { $_.Name -match '^(Administrator|BUILTIN\\Administrator)$' }
-    if ($adminBuiltIn) {
-        $adminBuiltIn | Select-Object Name, Enabled, Description | Show-Table
+    $adminAccount = $users | Where-Object { $_.Name -eq "Administrator" }
+    if ($adminAccount) {
+        $adminAccount | Select-Object Name, Enabled, Description | Show-Table
     } else {
-        Write-Output "Built-in Administrator account not present or localized under a different name."
+        Write-Output "Built-in Administrator not found (may be renamed or localized)."
     }
 } catch {
-    Write-Output ("ERROR: Checking built-in Administrator failed: {0}" -f $_)
+    Write-Output ("ERROR: {0}" -f $_)
 }
 Write-Output ""
 
-# ----- Privileged groups & memberships -------------------------------------
+# --- Privileged groups ---
 function Show-GroupMembers {
     param([string]$GroupName)
     try {
         $members = Get-LocalGroupMember -Group $GroupName -ErrorAction Stop
+        Write-Output "Group: $GroupName"
         if ($members) {
-            Write-Output ("Group: {0}" -f $GroupName)
-            $members |
-                Select-Object Name, ObjectClass, PrincipalSource |
-                Show-Table
+            $members | Select-Object Name, ObjectClass, PrincipalSource | Show-Table
         } else {
-            Write-Output ("Group: {0} (no members)" -f $GroupName)
+            Write-Output "  (no members)"
         }
     } catch {
-        Write-Output ("Group: {0} (not found or inaccessible)" -f $GroupName)
+        Write-Output "  Group not found or inaccessible: $GroupName"
     }
     Write-Output ""
 }
 
-Write-Output "=== Privileged Local Groups (Members) ==="
-Show-GroupMembers -GroupName 'Administrators'
-Show-GroupMembers -GroupName 'Remote Desktop Users'
-Show-GroupMembers -GroupName 'Users'
-Show-GroupMembers -GroupName 'Guests'
-Show-GroupMembers -GroupName 'Backup Operators'
-Show-GroupMembers -GroupName 'Power Users'        # legacy, may not exist
-Show-GroupMembers -GroupName 'Hyper-V Administrators' # if applicable
+Write-Output "=== Privileged Groups ==="
+Show-GroupMembers "Administrators"
+Show-GroupMembers "Remote Desktop Users"
+Show-GroupMembers "Guests"
+Show-GroupMembers "Users"
+Show-GroupMembers "Backup Operators"
+Show-GroupMembers "Power Users"
+Show-GroupMembers "Hyper-V Administrators"
 
-# ----- Optional: per-user password metadata (best effort) -------------------
-# Uses 'net user' to fetch human-readable last set/expire data for local SAM users.
-Write-Output "=== Per-User Password Metadata (best effort via 'net user') ==="
-try {
-    foreach ($u in $users) {
-        $info = (net user $u.Name) 2>$null
+# --- Per-user password metadata ---
+Write-Output "=== Per-User Password Metadata (via 'net user') ==="
+foreach ($u in $users) {
+    try {
+        $info = net user $u.Name 2>$null
         if ($LASTEXITCODE -eq 0 -and $info) {
-            # Extract common fields; formatting localized per OS language.
-            $pwLastSet   = ($info | Select-String -Pattern 'Password last set|Last password set' -SimpleMatch | ForEach-Object { $_.ToString().Split(':',2)[1].Trim() }) -join ', '
-            $pwExpires   = ($info | Select-String -Pattern 'Password expires' -SimpleMatch | ForEach-Object { $_.ToString().Split(':',2)[1].Trim() }) -join ', '
-            $pwRequired  = ($info | Select-String -Pattern 'Password required' -SimpleMatch | ForEach-Object { $_.ToString().Split(':',2)[1].Trim() }) -join ', '
-            $userMayChg  = ($info | Select-String -Pattern 'User may change password' -SimpleMatch | ForEach-Object { $_.ToString().Split(':',2)[1].Trim() }) -join ', '
-
-            Write-Output ("User: {0}" -f $u.Name)
-            Write-Output ("  Password last set      : {0}" -f ($pwLastSet   -ne '' ? $pwLastSet   : 'unknown'))
-            Write-Output ("  Password expires       : {0}" -f ($pwExpires   -ne '' ? $pwExpires   : 'unknown'))
-            Write-Output ("  Password required      : {0}" -f ($pwRequired  -ne '' ? $pwRequired  : 'unknown'))
-            Write-Output ("  User may change pwd    : {0}" -f ($userMayChg  -ne '' ? $userMayChg  : 'unknown'))
+            Write-Output "User: $($u.Name)"
+            ($info | Select-String "Password last set") -replace ".*:","" | ForEach-Object { Write-Output "  Password last set : $($_.Trim())" }
+            ($info | Select-String "Password expires") -replace ".*:","" | ForEach-Object { Write-Output "  Password expires  : $($_.Trim())" }
+            ($info | Select-String "Password required") -replace ".*:","" | ForEach-Object { Write-Output "  Password required : $($_.Trim())" }
+            ($info | Select-String "User may change password") -replace ".*:","" | ForEach-Object { Write-Output "  User may change  : $($_.Trim())" }
             Write-Output ""
         }
+    } catch {
+        Write-Output "WARN: Could not parse 'net user' for $($u.Name)"
     }
-} catch {
-    Write-Output ("WARN: 'net user' metadata collection failed: {0}" -f $_)
 }
-Write-Output ""
 
-# ----- Summary --------------------------------------------------------------
 Write-Output "Summary:"
-Write-Output "  - Listed local users with key properties (enabled, expires, last logon)."
-Write-Output "  - Highlighted risky settings (password never expires / not required)."
-Write-Output "  - Reported Built-in Administrator status."
-Write-Output "  - Enumerated privileged groups (Administrators, RDP, etc.) and members."
-Write-Output "  - Included best-effort per-user password metadata using 'net user'."
+Write-Output "  - Enumerated local users & key properties"
+Write-Output "  - Flagged risky password settings"
+Write-Output "  - Reported built-in Administrator state"
+Write-Output "  - Listed privileged groups and memberships"
+Write-Output "  - Collected password metadata via 'net user'"
 Write-Output ""
