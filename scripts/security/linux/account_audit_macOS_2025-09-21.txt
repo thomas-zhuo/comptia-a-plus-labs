@@ -1,0 +1,22 @@
+
+[1mUser & Group Account Audit[0m
+  Host: Thomas-MBP
+  OS  : Darwin (23.6.0)
+  Date: 2025-09-21 17:50:10 +08
+
+[1mLocal Users (dscl)[0m
+  thomaszhuo: uid=501 gid=20 home=/Users/thomaszhuo shell=/bin/zsh
+
+[1mUID 0 Accounts (root-equivalent)[0m
+  root (shell=/bin/sh)
+
+[1mAdmin & Wheel Group Members[0m
+  admin -> root thomaszhuo
+  wheel -> root
+
+[1mSudoers (hint)[0m
+  /etc/sudoers not readable (try: sudo cat /etc/sudoers)
+
+[1mSummary[0m
+  Listed local users (UID>=501), UID 0 account, admin/wheel membership, and sudoers hints.
+
