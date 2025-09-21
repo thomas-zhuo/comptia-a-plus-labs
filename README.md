@@ -44,17 +44,21 @@ Scripts:
 ### 🔹 Security & Compliance
 Scripts:
 - **Implemented:**
-  - Linux/macOS → `scripts/security/linux/firewall_audit.sh`
-  - Windows → `scripts/security/windows/firewall_audit.ps1`
+  - Linux/macOS → 
+    - `scripts/security/linux/firewall_audit.sh`
+    - `scripts/security/linux/av_status.sh`
+  - Windows → 
+    - `scripts/security/windows/firewall_audit.ps1`
+    - `scripts/security/windows/av_status.ps1`
+
 - **Planned:**
-  - Antivirus/Defender status checks
   - User/group account and permission audits
+  - Extended compliance checks (e.g., patch status, encryption)
 
 **Skills demonstrated:**
-- Auditing firewall status (enabled/disabled profiles)
-- Listing active inbound rules
-- Capturing listening ports and services
-- Building toward full security posture assessments across platforms
+- Auditing firewall status (enabled/disabled profiles, inbound rules, listening ports)
+- Validating antivirus/endpoint protection status (real-time protection, signatures, scan history)
+- Cross-platform security posture assessment foundations
 
 ### 🔹 Hardware Playbooks *(Planned)*
 - SSD upgrade and disk cloning  
@@ -88,6 +92,10 @@ chmod +x scripts/log-monitoring/linux/event_logs.sh
 # Firewall audit
 chmod +x scripts/security/linux/firewall_audit.sh
 ./scripts/security/linux/firewall_audit.sh
+
+# Anti-virus status
+chmod +x scripts/security/linux/av_status.sh
+./scripts/security/linux/av_status.sh
 ```
 
 ### Windows (PowerShell)
@@ -110,6 +118,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 # Firewall audit
 .\scripts\security\windows\firewall_audit.ps1
+
+# Firewall audit
+.\scripts\security\windows\av_status.ps1
 ```
 
 ## 💾 How to Save Output to File (Optional)
@@ -128,6 +139,8 @@ OS="macOS"    # or Kali_Linux, Ubuntu, etc.
 ./scripts/log-monitoring/linux/event_logs.sh | tee scripts/log-monitoring/linux/event_logs_${OS}_$(date +%F).txt
 
 ./scripts/security/linux/firewall_audit.sh | tee scripts/security/linux/firewall_audit_${OS}_$(date +%F).txt
+
+./scripts/security/linux/av_status.sh | tee scripts/security/linux/av_status${OS}_$(date +%F).txt
 ```
 
 ### Windows (PowerShell)
@@ -141,6 +154,8 @@ OS="macOS"    # or Kali_Linux, Ubuntu, etc.
 .\scripts\log-monitoring\windows\event_logs.ps1 | Out-File scripts\log-monitoring\windows\event_logs_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 
 .\scripts\security\windows\firewall_audit.ps1 | Out-File scripts\security\windows\firewall_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\security\windows\av_status.ps1 | Out-File scripts\security\windows\av_status_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 ```
 
 ## 📑 Sample Output
@@ -177,10 +192,13 @@ Each category has separate **`linux/`** and **`windows/`** subfolders for script
 - [Linux/macOS](scripts/security/linux/):
   - `firewall_audit_macOS_2025-09-20.txt`
   - `firewall_audit_Kali_Linux_2025-09-20.txt`
+  - `av_status_macOS_2025-09-21.txt`  
+  - `av_status_Kali_Linux_2025-09-21.txt`  
 - [Windows](scripts/security/windows/)  
     - `firewall_audit_windows_2025-09-20.txt`
+    - `av_status_windows_2025-09-21.txt`
 
-These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, log collection, and firewall auditing**.  
+These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, log collection, firewall auditing, and antivirus/endpoint protection status**.  
 
 Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring and compliance auditing**.
 
