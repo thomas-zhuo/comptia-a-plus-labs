@@ -3,6 +3,17 @@
 All notable changes to this project will be documented here.  
 Dates follow `YYYY-MM-DD` format.
 
+## 2025-09-21
+- **Security & Compliance**
+  - Added Antivirus / Endpoint Protection Status scripts:
+    - `scripts/security/linux/av_status.sh`
+    - `scripts/security/windows/av_status.ps1`
+  - Added sample output files:
+    - `scripts/security/linux/av_status_macOS_2025-09-21.txt`
+    - `scripts/security/linux/av_status_Kali_Linux_2025-09-21.txt`
+    - `scripts/security/windows/av_status_windows_2025-09-21.txt`
+  - Updated README with new Security & Compliance project details
+
 ## 2025-09-20
 - **Security & Compliance**
 - Added Firewall Audit scripts:
