@@ -117,7 +117,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ### Linux/macOS
 
 ```bash
-OS="macOS"
+OS="macOS"    # or Kali_Linux, Ubuntu, etc.
 
 ./scripts/system-health/linux/sysinfo.sh | tee scripts/system-health/linux/sysinfo_${OS}_$(date +%F).txt
 
