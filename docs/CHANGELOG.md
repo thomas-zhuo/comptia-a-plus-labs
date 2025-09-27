@@ -3,6 +3,16 @@
 All notable changes to this project will be documented here.  
 Dates follow `YYYY-MM-DD` format.
 
+## 2025-09-27
+- Added Patch & Update Compliance Audit scripts:
+  - `scripts/security/linux/patch_audit.sh`
+  - `scripts/security/windows/patch_audit.ps1`
+- Added sample output files:
+  - `scripts/security/linux/patch_audit_macOS_2025-09-27.txt`
+  - `scripts/security/linux/patch_audit_Kali_Linux_2025-09-27.txt`
+  - `scripts/security/windows/patch_audit_windows_2025-09-27.txt`
+- Updated README with Patch Audit project details and run instructions
+
 ## 2025-09-21
 - **Security & Compliance**
   - Added User & Group Account Audit scripts:
