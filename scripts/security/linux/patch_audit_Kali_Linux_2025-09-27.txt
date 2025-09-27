@@ -1,0 +1,16 @@
+
+[1mPatch & Update Compliance Audit[0m
+  Host: kali
+  OS  : Kali GNU/Linux Rolling
+  Kernel: 6.8.11-arm64
+  Date: 2025-09-27 10:04:08 +08
+
+[1mDebian/Ubuntu (APT) — Pending Updates[0m
+[33m! apt update requires privileges or network; showing cached upgradeable list if available.[0m
+  No upgradeable packages reported (or index not available).
+
+[1mSummary[0m
+  Reported OS/kernel and pending updates per package manager.
+  Security advisories shown where supported (dnf/yum/zypper, best-effort on apt).
+  Run with network access (and sudo where required) for freshest results.
+
