@@ -1,0 +1,29 @@
+
+[1mPatch & Update Compliance Audit[0m
+  Host: Thomas-MBP
+  OS  : macOS 14.6.1
+  Kernel: 23.6.0
+  Date: 2025-09-27 10:00:26 +08
+
+[1mmacOS — Pending Updates[0m
+  Software Update Tool
+  
+  Finding available software
+  Software Update found the following new or updated software:
+  * Label: Command Line Tools for Xcode-16.2
+  	Title: Command Line Tools for Xcode, Version: 16.2, Size: 751786KiB, Recommended: YES, 
+  * Label: Safari26.0.1SonomaAuto-26.0.1
+  	Title: Safari, Version: 26.0.1, Size: 211762KiB, Recommended: YES, 
+  * Label: macOS Sonoma 14.8-23J21
+  	Title: macOS Sonoma 14.8, Version: 14.8, Size: 1831291KiB, Recommended: YES, Action: restart, 
+  * Label: macOS Tahoe 26-25A354
+  	Title: macOS Tahoe 26, Version: 26.0, Size: 10250959KiB, Recommended: YES, Action: restart, 
+
+[1mHomebrew — Outdated Formulae (if installed)[0m
+  gh
+
+[1mSummary[0m
+  Reported OS/kernel and pending updates per package manager.
+  Security advisories shown where supported (dnf/yum/zypper, best-effort on apt).
+  Run with network access (and sudo where required) for freshest results.
+
