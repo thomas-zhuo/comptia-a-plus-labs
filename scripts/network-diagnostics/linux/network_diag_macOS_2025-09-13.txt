@@ -1,6 +1,6 @@
 Network Diagnostics Report
-Host     : Thomass-MBP
-OS       : Darwin 23.6.0 arm64
+Host     : Lab-MBP
+OS       : Darwin 23.x.x arm64
 Date     : Sat Sep 13 23:52:59 +08 2025
 
 ==== Interfaces & IP Addresses ====
@@ -12,166 +12,33 @@ lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 16384
 	nd6 options=201<PERFORMNUD,DAD>
 gif0: flags=8010<POINTOPOINT,MULTICAST> mtu 1280
 stf0: flags=0<> mtu 1280
-anpi0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=400<CHANNEL_IO>
-	ether e6:65:c2:15:1f:a7
-	media: none
-	status: inactive
-anpi1: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=400<CHANNEL_IO>
-	ether e6:65:c2:15:1f:a8
-	media: none
-	status: inactive
-anpi2: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=400<CHANNEL_IO>
-	ether e6:65:c2:15:1f:a9
-	media: none
-	status: inactive
-en4: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=400<CHANNEL_IO>
-	ether e6:65:c2:15:1f:87
-	nd6 options=201<PERFORMNUD,DAD>
-	media: none
-	status: inactive
-en5: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=400<CHANNEL_IO>
-	ether e6:65:c2:15:1f:88
-	nd6 options=201<PERFORMNUD,DAD>
-	media: none
-	status: inactive
-en6: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=400<CHANNEL_IO>
-	ether e6:65:c2:15:1f:89
-	nd6 options=201<PERFORMNUD,DAD>
-	media: none
-	status: inactive
-en1: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
-	options=460<TSO4,TSO6,CHANNEL_IO>
-	ether 36:67:f5:0e:80:40
-	media: autoselect <full-duplex>
-	status: inactive
-en2: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
-	options=460<TSO4,TSO6,CHANNEL_IO>
-	ether 36:67:f5:0e:80:44
-	media: autoselect <full-duplex>
-	status: inactive
-en3: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
-	options=460<TSO4,TSO6,CHANNEL_IO>
-	ether 36:67:f5:0e:80:48
-	media: autoselect <full-duplex>
-	status: inactive
-bridge0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=63<RXCSUM,TXCSUM,TSO4,TSO6>
-	ether 36:67:f5:0e:80:40
-	Configuration:
-		id 0:0:0:0:0:0 priority 0 hellotime 0 fwddelay 0
-		maxage 0 holdcnt 0 proto stp maxaddr 100 timeout 1200
-		root id 0:0:0:0:0:0 priority 0 ifcost 0 port 0
-		ipfilter disabled flags 0x0
-	member: en1 flags=3<LEARNING,DISCOVER>
-	        ifmaxaddr 0 port 11 priority 0 path cost 0
-	member: en2 flags=3<LEARNING,DISCOVER>
-	        ifmaxaddr 0 port 12 priority 0 path cost 0
-	member: en3 flags=3<LEARNING,DISCOVER>
-	        ifmaxaddr 0 port 13 priority 0 path cost 0
-	nd6 options=201<PERFORMNUD,DAD>
-	media: <unknown type>
-	status: inactive
-ap1: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
-	ether ea:89:f3:aa:fb:2e
-	inet6 fe80::e889:f3ff:feaa:fb2e%ap1 prefixlen 64 scopeid 0xf 
-	nd6 options=201<PERFORMNUD,DAD>
-	media: autoselect (<unknown type>)
-	status: inactive
 en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
 	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
-	ether c8:89:f3:aa:fb:2e
-	inet6 fe80::1c2a:27e5:73a4:8b4c%en0 prefixlen 64 secured scopeid 0x10 
-	inet 192.168.2.87 netmask 0xffffff00 broadcast 192.168.2.255
+	ether aa:bb:cc:dd:ee:01
+	inet6 fe80::abcd:1234:5678:9abc%en0 prefixlen 64 secured scopeid 0x10 
+	inet 192.168.100.10 netmask 0xffffff00 broadcast 192.168.100.255
 	nd6 options=201<PERFORMNUD,DAD>
 	media: autoselect
 	status: active
 awdl0: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=6460<TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
-	ether 76:7a:bf:a3:0d:0c
-	inet6 fe80::747a:bfff:fea3:d0c%awdl0 prefixlen 64 scopeid 0x11 
+	ether aa:bb:cc:dd:ee:02
+	inet6 fe80::abcd:5678:90ab:cdef%awdl0 prefixlen 64 scopeid 0x11 
 	nd6 options=201<PERFORMNUD,DAD>
-	media: autoselect
-	status: active
-llw0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=400<CHANNEL_IO>
-	ether 76:7a:bf:a3:0d:0c
-	inet6 fe80::747a:bfff:fea3:d0c%llw0 prefixlen 64 scopeid 0x12 
-	nd6 options=201<PERFORMNUD,DAD>
-	media: autoselect
-	status: inactive
-utun0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
-	inet6 fe80::40f2:59b7:8709:c4c6%utun0 prefixlen 64 scopeid 0x13 
-	nd6 options=201<PERFORMNUD,DAD>
-utun1: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 2000
-	inet6 fe80::c33f:954a:9e50:a4a1%utun1 prefixlen 64 scopeid 0x14 
-	nd6 options=201<PERFORMNUD,DAD>
-utun2: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1000
-	inet6 fe80::ce81:b1c:bd2c:69e%utun2 prefixlen 64 scopeid 0x15 
-	nd6 options=201<PERFORMNUD,DAD>
-utun3: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1380
-	inet6 fe80::18ae:a380:a0e3:2f54%utun3 prefixlen 64 scopeid 0x16 
-	nd6 options=201<PERFORMNUD,DAD>
-utun4: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1380
-	inet6 fe80::9a5c:8ee4:72a5:1bea%utun4 prefixlen 64 scopeid 0x17 
-	nd6 options=201<PERFORMNUD,DAD>
-utun5: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1380
-	inet6 fe80::cbac:5f77:f23a:ab3f%utun5 prefixlen 64 scopeid 0x18 
-	nd6 options=201<PERFORMNUD,DAD>
-vmenet0: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
-	ether d2:f1:9d:d6:bd:9c
 	media: autoselect
 	status: active
 bridge100: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
 	options=3<RXCSUM,TXCSUM>
-	ether ca:89:f3:aa:91:64
-	inet 192.168.50.1 netmask 0xffffff00 broadcast 192.168.50.255
-	inet6 fe80::c889:f3ff:feaa:9164%bridge100 prefixlen 64 scopeid 0x1a 
+	ether aa:bb:cc:dd:ee:03
+	inet 10.10.50.1 netmask 0xffffff00 broadcast 10.10.50.255
+	inet6 fe80::abcd:1111:2222:3333%bridge100 prefixlen 64 scopeid 0x1a 
 	Configuration:
 		id 0:0:0:0:0:0 priority 0 hellotime 0 fwddelay 0
 		maxage 0 holdcnt 0 proto stp maxaddr 100 timeout 1200
 		root id 0:0:0:0:0:0 priority 0 ifcost 0 port 0
 		ipfilter disabled flags 0x0
-	member: vmenet0 flags=3<LEARNING,DISCOVER>
+	member: en0 flags=3<LEARNING,DISCOVER>
 	        ifmaxaddr 0 port 25 priority 0 path cost 0
 	nd6 options=201<PERFORMNUD,DAD>
-	media: autoselect
-	status: active
-vmenet1: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
-	ether 26:bd:b1:6b:2b:32
-	media: autoselect
-	status: active
-bridge101: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-	options=3<RXCSUM,TXCSUM>
-	ether ca:89:f3:aa:91:65
-	inet 172.16.111.1 netmask 0xffffff00 broadcast 172.16.111.255
-	inet6 fe80::c889:f3ff:feaa:9165%bridge101 prefixlen 64 scopeid 0x1c 
-	Configuration:
-		id 0:0:0:0:0:0 priority 0 hellotime 0 fwddelay 0
-		maxage 0 holdcnt 0 proto stp maxaddr 100 timeout 1200
-		root id 0:0:0:0:0:0 priority 0 ifcost 0 port 0
-		ipfilter disabled flags 0x0
-	member: vmenet1 flags=3<LEARNING,DISCOVER>
-	        ifmaxaddr 0 port 27 priority 0 path cost 0
-	member: vmenet2 flags=3<LEARNING,DISCOVER>
-	        ifmaxaddr 0 port 29 priority 0 path cost 0
-	member: vmenet3 flags=3<LEARNING,DISCOVER>
-	        ifmaxaddr 0 port 30 priority 0 path cost 0
-	nd6 options=201<PERFORMNUD,DAD>
-	media: autoselect
-	status: active
-vmenet2: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
-	ether 4a:ef:2a:7e:1b:16
-	media: autoselect
-	status: active
-vmenet3: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
-	ether 86:8f:72:de:d4:e0
 	media: autoselect
 	status: active
 
@@ -179,7 +46,7 @@ vmenet3: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 15
    route to: default
 destination: default
        mask: default
-    gateway: 192.168.2.1
+    gateway: 192.168.100.1
   interface: en0
       flags: <UP,GATEWAY,DONE,STATIC,PRCLONING,GLOBAL>
  recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire
@@ -187,42 +54,42 @@ destination: default
 
 ==== DNS Configuration ====
 From /etc/resolv.conf:
-nameserver 192.168.2.1
+nameserver 192.168.100.1
 
 ==== Ping (ICMP) to 8.8.8.8 ====
 PING 8.8.8.8 (8.8.8.8): 56 data bytes
-64 bytes from 8.8.8.8: icmp_seq=0 ttl=118 time=7.833 ms
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=4.357 ms
-64 bytes from 8.8.8.8: icmp_seq=2 ttl=118 time=6.979 ms
-64 bytes from 8.8.8.8: icmp_seq=3 ttl=118 time=4.577 ms
+64 bytes from 8.8.8.8: icmp_seq=0 ttl=118 time=7.8 ms
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=4.3 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=118 time=7.0 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=118 time=4.6 ms
 
 --- 8.8.8.8 ping statistics ---
 4 packets transmitted, 4 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 4.357/5.937/7.833/1.502 ms
+round-trip min/avg/max/stddev = 4.3/5.9/7.8/1.5 ms
 
 ==== Ping (ICMP) to cloudflare.com ====
 PING cloudflare.com (104.16.132.229): 56 data bytes
-64 bytes from 104.16.132.229: icmp_seq=0 ttl=55 time=8.656 ms
-64 bytes from 104.16.132.229: icmp_seq=1 ttl=55 time=5.533 ms
-64 bytes from 104.16.132.229: icmp_seq=2 ttl=55 time=5.445 ms
-64 bytes from 104.16.132.229: icmp_seq=3 ttl=55 time=6.315 ms
+64 bytes from 104.16.132.229: icmp_seq=0 ttl=55 time=8.6 ms
+64 bytes from 104.16.132.229: icmp_seq=1 ttl=55 time=5.5 ms
+64 bytes from 104.16.132.229: icmp_seq=2 ttl=55 time=5.4 ms
+64 bytes from 104.16.132.229: icmp_seq=3 ttl=55 time=6.3 ms
 
 --- cloudflare.com ping statistics ---
 4 packets transmitted, 4 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 5.445/6.487/8.656/1.297 ms
+round-trip min/avg/max/stddev = 5.4/6.5/8.6/1.3 ms
 
 ==== Traceroute to cloudflare.com ====
 traceroute: Warning: cloudflare.com has multiple addresses; using 104.16.132.229
 traceroute to cloudflare.com (104.16.132.229), 64 hops max, 40 byte packets
- 1  192.168.2.1  3.360 ms  2.546 ms  2.404 ms
- 2  195.133.136.2  4.417 ms  5.354 ms  5.524 ms
- 3  202.55.89.188  101.512 ms  13.621 ms  131.780 ms
- 4  132.147.112.82  4.558 ms  24.003 ms  5.338 ms
+ 1  192.168.100.1  3.3 ms  2.5 ms  2.4 ms
+ 2  203.0.113.2    4.4 ms  5.3 ms  5.5 ms
+ 3  198.51.100.10  13.6 ms  14.0 ms  13.9 ms
+ 4  203.0.113.50   5.5 ms  5.3 ms  5.4 ms
  5  * * *
- 6  162.158.160.55  8.141 ms
-    162.158.160.139  21.960 ms
-    162.158.160.155  14.599 ms
- 7  104.16.132.229  11.124 ms  5.002 ms  5.415 ms
+ 6  162.158.160.55  8.1 ms
+    162.158.160.139 21.9 ms
+    162.158.160.155 14.6 ms
+ 7  104.16.132.229 11.1 ms  5.0 ms  5.4 ms
 
 ==== DNS Lookup for cloudflare.com ====
 104.16.133.229

@@ -1,11 +1,12 @@
 Collecting Linux/macOS sysinfo…
-Host: Thomas’s MacBook Pro
-Uptime: 10:49  up 8 days,  1:51, 4 users, load averages: 5.15 4.19 3.94
+Host: Lab-MBP
+Uptime: 10:49  up 8 days,  1:51, 3 users, load averages: 5.10 4.15 3.90
+
 IP(s):
-192.168.2.87
-172.16.111.1
-192.168.2.87
-192.168.50.1
+192.168.100.10
+10.10.50.1
+192.168.100.10
+10.10.50.1
 
 Disk usage:
 Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
@@ -23,13 +24,13 @@ map auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volu
 /dev/disk3s1     926Gi    12Gi   153Gi     8%    404k  1.6G    0%   /System/Volumes/Update/mnt1
 
 Top processes (top 10 by listing order):
-  PID COMM              %CPU %MEM
-    1 /sbin/launchd      0.7  0.1
-  310 /usr/libexec/log   0.3  0.1
-  312 /usr/libexec/Use   0.0  0.0
-  314 /System/Library/   0.0  0.0
-  315 /System/Library/   0.0  0.0
-  316 /System/Library/   0.0  0.0
-  319 /usr/sbin/system   0.0  0.0
-  322 /usr/libexec/con   0.1  0.0
-  324 /System/Library/   0.4  0.0
+  PID   COMM                %CPU %MEM
+  PID_1 /sbin/launchd        0.7  0.1
+  PID_2 /usr/libexec/logd    0.3  0.1
+  PID_3 /usr/libexec/UserE   0.0  0.0
+  PID_4 /System/Library/..   0.0  0.0
+  PID_5 /System/Library/..   0.0  0.0
+  PID_6 /System/Library/..   0.0  0.0
+  PID_7 /usr/sbin/system..   0.0  0.0
+  PID_8 /usr/libexec/con..   0.1  0.0
+  PID_9 /System/Library/..   0.4  0.0

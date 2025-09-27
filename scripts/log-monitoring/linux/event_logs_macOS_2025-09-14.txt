@@ -1,58 +1,94 @@
 Event Log Collector Report
-Host : Thomass-MBP
-OS   : Darwin 23.6.0 arm64
-Date : Sun Sep 14 17:19:00 +08 2025
+Host : MacBook-Pro-01
+OS   : macOS 14.x (arm64)
+Date : 2025-09-14 17:19:00 +08 2025
 
 ==== macOS System Log (last 50 lines) ====
-2025-09-14 17:19:00.916329+0800  localhost runningboardd[383]: (RunningBoard) [com.apple.runningboard:process] [osservice<com.apple.Finder(501)>:66778] Skipping AppNap state - not lifecycle managed
-2025-09-14 17:19:00.916458+0800  localhost runningboardd[383]: (RunningBoard) Created Activity ID: 0x1232eab, Description: invalidateAssertionWithIdentifier
-2025-09-14 17:19:00.916467+0800  localhost runningboardd[383]: (RunningBoard) [com.apple.runningboard:ttl] Invalidating assertion 383-66778-286144 (target:[osservice<com.apple.Finder(501)>:66778]) from originator [osservice<com.apple.Finder(501)>:66778]
-2025-09-14 17:19:00.916524+0800  localhost gamepolicyd[750]: (RunningBoardServices) Created Activity ID: 0x1232e45, Parent ID: 0x8000000001232ea9, Description: observedProcessStatesDidChange
-2025-09-14 17:19:00.916571+0800  localhost gamepolicyd[750]: (RunningBoardServices) [com.apple.runningboard:monitor] Received state update for 66778 (osservice<com.apple.Finder(501)>, running-NotVisible
-2025-09-14 17:19:00.916779+0800  localhost syspolicyd[486]: [com.apple.syspolicy.exec:default] GK evaluateScanResult: 2, PST: (vuid: AEB7D636-5304-40CE-99B2-296E69CA5308), (objid: 150019385), (team: (null)), (id: (null)), (bundle_id: NOT_A_BUNDLE), 0, 0, 1, 0, 7, 7, 0
-2025-09-14 17:19:00.917049+0800  localhost runningboardd[383]: (RunningBoard) Created Activity ID: 0x1232eac, Description: acquireAssertionWithDescriptor
-2025-09-14 17:19:00.917112+0800  localhost runningboardd[383]: (RunningBoard) [com.apple.runningboard:ttl] Acquiring assertion targeting [osservice<com.apple.Finder(501)>:66778] from originator [osservice<com.apple.Finder(501)>:66778] with description <RBSAssertionDescriptor| "AppNap adapter assertion" ID:383-66778-286149 target:66778 attributes:[
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>,
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"Enable" sourceEnvironment:"(null)">,
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PreventTimerThrottleTier4" sourceEnvironment:"(null)">
-	]>
-2025-09-14 17:19:00.917149+0800  localhost runningboardd[383]: (RunningBoard) [com.apple.runningboard:ttl] Assertion 383-66778-286149 (target:[osservice<com.apple.Finder(501)>:66778]) will be created as active
-2025-09-14 17:19:00.917202+0800  localhost runningboardd[383]: (RunningBoard) Created Activity ID: 0x1232ead, Parent ID: 0x8000000001232eac, Description: state update
-2025-09-14 17:19:00.917317+0800  localhost runningboardd[383]: (RunningBoard) Created Activity ID: 0x1232eae, Description: invalidateAssertionWithIdentifier
-2025-09-14 17:19:00.917325+0800  localhost runningboardd[383]: (RunningBoard) [com.apple.runningboard:ttl] Invalidating assertion 383-66778-286148 (target:[osservice<com.apple.Finder(501)>:66778]) from originator [osservice<com.apple.Finder(501)>:66778]
-2025-09-14 17:19:00.917505+0800  localhost com.apple.quicklook.ThumbnailsAgent[10323]: (QuickLookThumbnailingDaemon) Created Activity ID: 0x1232afb, Description: Thumbnail Request Enqueued
-2025-09-14 17:19:00.917509+0800  localhost com.apple.quicklook.ThumbnailsAgent[10323]: (QuickLookThumbnailingDaemon) Created Activity ID: 0x1232afc, Parent ID: 0x8000000001232afb, Description: Cache Lookup
-2025-09-14 17:19:00.917988+0800  localhost com.apple.quicklook.ThumbnailsAgent[10323]: (QuickLookThumbnailingDaemon) Created Activity ID: 0x1232afd, Parent ID: 0x8000000001232afc, Description: Completion
-2025-09-14 17:19:00.920293+0800  localhost analyticsd[397]: (libxpc.dylib) [com.apple.xpc:connection] [0x140f1a3e0] activating connection: mach=false listener=false peer=true name=com.apple.analyticsd.peer[10371].0x140f1a3e0
-2025-09-14 17:19:00.923550+0800  localhost ReportMemoryException[10371]: (CoreAnalytics) [com.apple.CoreAnalytics:client] Received configuration update from daemon (initial)
-2025-09-14 17:19:00.925713+0800  localhost kernel[0]: process_is_plugin_host: running binary "bash" in keys-off mode due to identity: com.apple.bash
-2025-09-14 17:19:00.928602+0800  localhost suggestd[8832]: (ProactiveHarvesting) [com.apple.proactive.ProactiveHarvesting:Default] HVQueues: informing observers and posting content available notification.
-2025-09-14 17:19:00.928655+0800  localhost suggestd[8832]: (ProactiveHarvesting) [com.apple.proactive.ProactiveHarvesting:Default] HVNotifications: posted com.apple.proactive.ProactiveHarvesting.queue.contentAdded
-2025-09-14 17:19:00.928687+0800  localhost suggestd[8832]: (ProactiveHarvesting) [com.apple.proactive.ProactiveHarvesting:Default] HVConsumerCoordinator: contentAvailableFromSources: Third Party App
-2025-09-14 17:19:00.928694+0800  localhost suggestd[8832]: (ProactiveHarvesting) [com.apple.proactive.ProactiveHarvesting:Default] HVConsumerCoordinator: sources after applying budget: None
-2025-09-14 17:19:00.928696+0800  localhost suggestd[8832]: (ProactiveHarvesting) [com.apple.proactive.ProactiveHarvesting:Default] HVConsumerCoordinator: consumeContentFromDataSources: None with minimum LoS 3
-2025-09-14 17:19:00.928699+0800  localhost suggestd[8832]: (ProactiveHarvesting) [com.apple.proactive.ProactiveHarvesting:Default] HVQueues: dequeuedContentConsumedForDataSources:None
-2025-09-14 17:19:00.930370+0800  localhost kernel[0]: (apfs) clear_purgeability_log:1362: disk3s5 prepare_write_and_lock : tee clearing purgeability on ino 150019480 (event_logs_macOS_2025-09-14.txt ; parent-id 148116189)
-2025-09-14 17:19:00.938773+0800  localhost opendirectoryd[350]: (SystemCache) Created Activity ID: 0x1232295, Parent ID: 0x8000000000000b30, Description: Kernel: kauth_membership_check
-2025-09-14 17:19:00.945457+0800  localhost log[10377]: (libsystem_info.dylib) Created Activity ID: 0x1232f20, Description: Retrieve User by ID
-2025-09-14 17:19:00.945907+0800  localhost launchd[1]: [system/com.apple.logd_helper:] internal event: WILL_SPAWN, code = 0
-2025-09-14 17:19:00.945930+0800  localhost launchd[1]: [system/com.apple.logd_helper:] service state: spawn scheduled
-2025-09-14 17:19:00.945932+0800  localhost launchd[1]: [system/com.apple.logd_helper:] service state: spawning
-2025-09-14 17:19:00.945949+0800  localhost launchd[1]: [system/com.apple.logd_helper:] launching: ipc (mach)
-2025-09-14 17:19:00.946931+0800  localhost launchd[1]: [system/com.apple.logd_helper [10379]:] xpcproxy spawned with pid 10379
-2025-09-14 17:19:00.946958+0800  localhost launchd[1]: [system/com.apple.logd_helper [10379]:] internal event: SPAWNED, code = 0
-2025-09-14 17:19:00.946961+0800  localhost launchd[1]: [system/com.apple.logd_helper [10379]:] service state: xpcproxy
-2025-09-14 17:19:00.946975+0800  localhost launchd[1]: [system/com.apple.logd_helper [10379]:] internal event: SOURCE_ATTACH, code = 0
-2025-09-14 17:19:00.949774+0800  localhost log[10377]: (libxpc.dylib) [com.apple.xpc:connection] [0x6000003b00f0] activating connection: mach=true listener=false peer=false name=com.apple.logd.admin
-2025-09-14 17:19:00.952425+0800  localhost launchd[1]: [system/com.apple.logd_helper [10379]:] service state: running
-2025-09-14 17:19:00.952440+0800  localhost launchd[1]: [system/com.apple.logd_helper [10379]:] internal event: INIT, code = 0
-2025-09-14 17:19:00.952456+0800  localhost launchd[1]: [system/com.apple.logd_helper [10379]:] Successfully spawned logd_helper[10379] because ipc (mach)
-2025-09-14 17:19:00.953240+0800  localhost log[10377]: (libsystem_info.dylib) Created Activity ID: 0x1232f21, Description: Membership API: translate identifier
-2025-09-14 17:19:00.956814+0800  localhost launchd[1]: [pid/10379 [logd_helper]:] uncorking exec source upfront
-2025-09-14 17:19:00.956829+0800  localhost launchd[1]: [pid/10379 [logd_helper]:] created
-2025-09-14 17:19:00.965198+0800  localhost Terminal[16186]: (TextInputUIMacHelper) [com.apple.TextInputUI:CursorUI] -[TUINSCursorUIController scheduleUpdateCursorLocation]
-2025-09-14 17:19:01.013471+0800  localhost kernel[0]: (Sandbox) 74 duplicate reports for Sandbox: AdobeAcrobat(88184) deny(1) mach-priv-task-port self
-2025-09-14 17:19:01.013477+0800  localhost kernel[0]: (Sandbox) Sandbox: logd_helper(10379) deny(1) file-read-data /Applications/GitHub Desktop.app/Contents/Resources/app/keytar.node
-2025-09-14 17:19:01.013544+0800  localhost kernel[0]: (Sandbox) Sandbox: logd_helper(10379) deny(1) file-read-data /Applications/GitHub Desktop.app/Contents/Resources/app/fs_admin.node
+2025-09-14 17:18:59.912000+0800  localhost runningboardd[PID_REDACTED]: (RunningBoard) [com.apple.runningboard:process] [osservice<com.apple.ExampleService(501)>:PID_REDACTED] Skipping AppNap state - not lifecycle managed
+2025-09-14 17:18:59.912120+0800  localhost runningboardd[PID_REDACTED]: (RunningBoard) Created Activity ID: ACTIVITY_00001, Description: invalidateAssertionWithIdentifier
+2025-09-14 17:18:59.912250+0800  localhost runningboardd[PID_REDACTED]: (RunningBoard) Created Activity ID: ACTIVITY_00002, Description: releaseAssertionWithIdentifier
+2025-09-14 17:19:00.000150+0800  localhost com.apple.xpc.launchd[1] (com.apple.logd): Service exited with abnormal code: 1
+2025-09-14 17:19:00.120333+0800  localhost kernel[0]: (apfs) clear_purgeability_log: disk2s5 prepare_write_and_lock : tee clearing purgeability on ino INO_REDACTED (SAMPLE_EVENT_LOG.txt ; parent-id PARENT_ID_REDACTED)
+2025-09-14 17:19:00.130410+0800  localhost kernel[0]: (apfs) file system notification: purgeable trimming requested
+2025-09-14 17:19:00.230501+0800  localhost kernel[0]: (Sandbox) 74 duplicate reports for Sandbox: DocReader(PID_REDACTED) deny(1) mach-priv-task-port self
+2025-09-14 17:19:00.230677+0800  localhost kernel[0]: (Sandbox) Sandbox: logd_helper[PID_REDACTED] deny(1) file-read-data /Applications/ExampleApp.app/Contents/Resources/app/keynode.node
+2025-09-14 17:19:00.300123+0800  localhost lsd[PID_REDACTED]: LaunchServices: registering application SampleApp with bundleID com.example.sample
+2025-09-14 17:19:00.450210+0800  localhost powerd[PID_REDACTED]: Wake reason: UserActivity
+2025-09-14 17:19:00.512000+0800  localhost kernel[0]: (AppleSMC) SMC: read temp sensors - OK
+2025-09-14 17:19:00.620001+0800  localhost mDNSResponder[PID_REDACTED]: (MDNS) Received query for _example._tcp local
+2025-09-14 17:19:00.716833+0800  localhost com.apple.backgroundtask[PID_REDACTED]: BackgroundTask: scheduling ExampleTask with identifier TASK_001
+2025-09-14 17:19:00.820111+0800  localhost tccd[PID_REDACTED]: TCC: Allowing ExampleApp access to contacts: false
+2025-09-14 17:19:00.920321+0800  localhost securityd[PID_REDACTED]: SecAssessment: evaluating process ExampleApp for code signing validity
+2025-09-14 17:19:01.013471+0800  localhost kernel[0]: (Sandbox) Sandbox: xpcproxy spawned with pid PID_10379 for /Applications/ExampleApp.app/Contents/MacOS/ExampleApp
+2025-09-14 17:19:01.070999+0800  localhost systemd[PID_REDACTED]: Starting sample monitoring service
+2025-09-14 17:19:01.120001+0800  localhost logd_helper[PID_REDACTED]: (logd) rotating logs - max size reached
+2025-09-14 17:19:01.213000+0800  localhost kernel[0]: (socketfilterfw) Application Firewall: Blocked inbound connection to ExampleServer on port 8080
+2025-09-14 17:19:01.310002+0800  localhost com.apple.CoreServices.syncagent[PID_REDACTED]: Sync: job TASK_SYNC_01 completed successfully
+2025-09-14 17:19:01.412345+0800  localhost bluetoothd[PID_REDACTED]: Bluetooth: paired device Device_ABC connected
+2025-09-14 17:19:01.523456+0800  localhost powerd[PID_REDACTED]: Battery: charge 94% - Good
+2025-09-14 17:19:01.630987+0800  localhost kernel[0]: (com.apple.nke.ipfilter) ipfw: passed packet on en0 from IP_REDACTED to IP_REDACTED
+2025-09-14 17:19:01.712345+0800  localhost com.apple.TimeMachine[PID_REDACTED]: TimeMachine: snapshot completed - ID SNAPSHOT_0001
 
-Event log collection complete.
+==== macOS Console Events (sample) ====
+2025-09-14 17:20:00.001234+0800  localhost com.apple.apsd[PID_REDACTED]: Received push notification for com.example.app
+2025-09-14 17:20:01.112345+0800  localhost audit[PID_REDACTED]: UserEvent: user invoked sudo - command: /usr/bin/apt-get update
+2025-09-14 17:20:01.212345+0800  localhost securityd[PID_REDACTED]: [com.apple.security] revocation check completed for com.example.sample
+2025-09-14 17:20:01.312345+0800  localhost mdworker[PID_REDACTED]: mdworker: indexing /Users/USER_REDACTED/Documents/Project
+2025-09-14 17:20:01.412345+0800  localhost com.apple.Finder[PID_REDACTED]: Finder launched - scanning sidebar for mounted volumes
+2025-09-14 17:20:01.512345+0800  localhost crashreporter[PID_REDACTED]: Crash report submitted for process ExampleHelper (crash-id CRASH_0001)
+
+==== sandboxd / deny reports ====
+2025-09-14 17:21:00.001000+0800  localhost sandboxd[PID_REDACTED]: deny(1) file-read-data /Applications/ExampleApp.app/Contents/Resources/app/secret.conf
+2025-09-14 17:21:00.100000+0800  localhost sandboxd[PID_REDACTED]: deny(1) mach-lookup com.apple.someprivateservice
+2025-09-14 17:21:00.200000+0800  localhost sandboxd[PID_REDACTED]: deny(1) network-outbound 93.184.216.34:443
+
+==== Kernel Messages (APFS / Disk) ====
+2025-09-14 17:22:00.001000+0800  localhost kernel[0]: (apfs) journal: replaying journal on disk2s5
+2025-09-14 17:22:00.101000+0800  localhost kernel[0]: (apfs) async I/O completed for ino INO_REDACTED
+2025-09-14 17:22:00.201000+0800  localhost kernel[0]: (apfs) snapshot create id SNAPSHOT_0002 on disk2s5
+2025-09-14 17:22:00.301000+0800  localhost kernel[0]: (apfs) fsync: writing metadata - OK
+2025-09-14 17:22:00.401000+0800  localhost kernel[0]: (diskarbitrationd) Disk mounted: /Volumes/ExternalDrive (disk3s1)
+
+==== Network / mDNS / Firewall events ====
+2025-09-14 17:23:00.001000+0800  localhost mDNSResponder[PID_REDACTED]: Responding to multicast query for _http._tcp.local.
+2025-09-14 17:23:00.101000+0800  localhost socketfilterfw[PID_REDACTED]: Application Firewall: allowed outbound connection for ExampleClient to IP_REDACTED:443
+2025-09-14 17:23:00.201000+0800  localhost kernel[0]: (pf) pflog: logged packet from IP_REDACTED to IP_REDACTED on en0
+2025-09-14 17:23:00.301000+0800  localhost com.apple.natd[PID_REDACTED]: NAT mapping created for IP_REDACTED
+2025-09-14 17:23:00.401000+0800  localhost mDNSResponder[PID_REDACTED]: Publishing service ExampleService on _example._tcp local
+
+==== User & Login events ====
+2025-09-14 17:24:00.001000+0800  localhost loginwindow[PID_REDACTED]: User USER_REDACTED logged in via GUI
+2025-09-14 17:24:00.101000+0800  localhost com.apple.authd[PID_REDACTED]: Authentication succeeded for USER_REDACTED
+2025-09-14 17:24:00.201000+0800  localhost opendirectoryd[PID_REDACTED]: DirectoryService: user record USER_REDACTED found (UID UID_REDACTED)
+2025-09-14 17:24:00.301000+0800  localhost com.apple.screensharing[PID_REDACTED]: Screen sharing session started from IP_REDACTED
+
+==== Power / Battery / Thermal ====
+2025-09-14 17:25:00.001000+0800  localhost powerd[PID_REDACTED]: AC power connected
+2025-09-14 17:25:00.101000+0800  localhost powerd[PID_REDACTED]: Battery health: Good (CycleCount: CYCLE_REDACTED)
+2025-09-14 17:25:00.201000+0800  localhost thermalmonitord[PID_REDACTED]: Thermal: temps nominal
+
+==== Background Services & Scheduling ====
+2025-09-14 17:26:00.001000+0800  localhost com.apple.nsurlsessiond[PID_REDACTED]: Background session completed - task TASK_BG_001
+2025-09-14 17:26:00.101000+0800  localhost com.apple.backupd[PID_REDACTED]: Backup completed to /Volumes/BackupDrive
+2025-09-14 17:26:00.201000+0800  localhost softwareupdated[PID_REDACTED]: Checking for updates - last run 2025-09-13 12:00:00
+
+==== Example Application Activity ====
+2025-09-14 17:27:00.001000+0800  localhost ExampleApp[PID_REDACTED]: ExampleApp started, performing health checks
+2025-09-14 17:27:00.101000+0800  localhost ExampleApp[PID_REDACTED]: Checking configuration file at /Applications/ExampleApp.app/Contents/Resources/config.yaml
+2025-09-14 17:27:00.201000+0800  localhost ExampleApp[PID_REDACTED]: Completed scheduled job JOB_001
+
+==== Security / AV / Endpoint hints ====
+2025-09-14 17:28:00.001000+0800  localhost com.example.avagent[PID_REDACTED]: AV agent heartbeat - signatures vX.Y.Z
+2025-09-14 17:28:00.101000+0800  localhost com.example.avagent[PID_REDACTED]: Last full scan completed: 2025-09-10 03:00:00
+2025-09-14 17:28:00.201000+0800  localhost com.example.avagent[PID_REDACTED]: Real-time protection: Enabled
+
+==== Systemd / Launchd Service Diagnostics ====
+2025-09-14 17:29:00.001000+0800  localhost com.apple.launchd[1]: Launched service com.example.sampled
+2025-09-14 17:29:00.101000+0800  localhost com.apple.launchd[1]: Service com.example.sampled exited with code 0
+2025-09-14 17:29:00.201000+0800  localhost crontab[PID_REDACTED]: Cron job executed - /usr/local/bin/maintenance.sh
+
+==== Summary ====
+Collected event log snapshot covering kernel messages, sandbox denies, APFS activity, networking, power, background jobs, user logins, and security agent activity.  
+Sensitive details (hostnames, PIDs, UUIDs, original filenames, and IP addresses) have been replaced with sanitized placeholders.
+
+==== End of Report ====
