@@ -245,36 +245,37 @@ This portfolio supports my pivot into cybersecurity by proving I can gather, int
 
 This portfolio will continue to expand alongside my cybersecurity training, progressing from **foundational diagnostics** into **security operations and incident response**.
 
-- **System Health & Diagnostics**
-  - Extend disk health checks with encryption status (BitLocker/FileVault)
-  - Automate performance monitoring (CPU/memory snapshots over time)
+### 🔹 System Health & Diagnostics
+- Extend disk health checks with **encryption status** (BitLocker/FileVault/LUKS).
+- Automate **performance monitoring** (CPU/memory snapshots over time).
+- Add **patch audit with vulnerability scoring** (CVE lookups).
 
-- **Network Diagnostics**
-  - Add packet capture and analysis labs (tcpdump, Wireshark)
-  - Implement port scanning and service enumeration (nmap, PowerShell equivalents)
-  - Compare normal vs abnormal traffic baselines to simulate threat detection
+### 🔹 Network Diagnostics
+- Add **packet capture and analysis labs** (tcpdump, Wireshark).
+- Implement **port scanning and service enumeration** (nmap, PowerShell equivalents).
+- Compare **normal vs abnormal traffic baselines** to simulate threat detection.
 
-- **Log & Event Monitoring**
-  - Automate filtering of security-related logs (authentication failures, privilege escalation attempts)
-  - Build a lightweight SIEM-style correlation script to detect anomalies across logs
-  - Create case studies based on simulated incident logs to mimic SOC workflows
+### 🔹 Log & Event Monitoring
+- Automate **filtering of security-related logs** (auth failures, privilege escalation attempts).
+- Build a lightweight **SIEM-style correlation script** to detect anomalies across logs.
+- Create **case studies from simulated incident logs** to mimic SOC workflows.
 
-- **Security & Compliance**
-  - Expand patch audit to include vulnerability scoring (e.g., CVE lookups)
-  - Add user/group permission hardening checks
-  - Integrate antivirus/Defender results with alerting scripts
-  - Simulate endpoint hardening playbooks (firewall + AV + patch + accounts)
+### 🔹 Security & Compliance
+- Expand **patch audits** with vulnerability scoring integrations.
+- Add **user/group permission hardening checks**.
+- Integrate **antivirus/Defender results with alerting scripts**.
+- Simulate **endpoint hardening playbooks** (firewall + AV + patch + accounts).
 
-- **Hardware Playbooks**
-  - SSD upgrade and cloning procedure
-  - Secure data wipe and disposal workflow
-  - Battery and peripheral health diagnostics
+### 🔹 Hardware Playbooks
+- Document **SSD upgrade and cloning procedure**.
+- Add **secure data wipe and disposal workflow**.
+- Develop **battery and peripheral health diagnostics**.
 
-- **Troubleshooting Case Studies**
-  - A+ level: Endpoint troubleshooting scenarios (slow Wi-Fi, low disk, printer errors)
-  - Network+ level: VLAN/DNS misconfigurations, packet loss investigations
-  - Security+ / CEH level: Malware infection response, unauthorized access detection, firewall misconfigurations
-  - CSA level: SOC analyst workflows — triage, log correlation, escalation, and incident reporting
+### 🔹 Troubleshooting Case Studies
+- **A+ level:** Endpoint troubleshooting scenarios (slow Wi-Fi, low disk, printer errors).  
+- **Network+ level:** VLAN/DNS misconfigurations, packet loss investigations.  
+- **Security+ / CEH level:** Malware infection response, unauthorized access detection, firewall misconfigurations.  
+- **CSA level:** SOC analyst workflows — alert triage, log correlation, escalation, and incident reporting.  
 
 ## Repository Structure
 
