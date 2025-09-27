@@ -36,11 +36,6 @@ Scripts:
 - Extracting errors & warnings for analysis
 - Foundations for security log monitoring (SIEM workflows)
 
-### 🔹 Security & Compliance *(Planned)*
-- Firewall audits  
-- Antivirus/Defender checks  
-- User/group account audits  
-
 ### 🔹 Security & Compliance
 Scripts:
 - **Implemented:**
@@ -304,10 +299,20 @@ comptia-a-plus-labs/
 │  │
 │  ├─ security/
 │  │  ├─ linux/
+│  │  │  ├─ account_audit.sh
+│  │  │  ├─ account_audit_macOS_2025-09-21.txt
+│  │  │  └─ account_audit_Kali_Linux_2025-09-21.txt
+│  │  │  ├─ av_status.sh
+│  │  │  ├─ av_status_macOS_2025-09-21.txt
+│  │  │  └─ av_status_Kali_Linux_2025-09-21.txt
 │  │  │  ├─ firewall_audit.sh
 │  │  │  ├─ firewall_audit_macOS_2025-09-20.txt
 │  │  │  └─ firewall_audit_Kali_Linux_2025-09-20.txt
 │  │  └─ windows/
+│  │     ├─ account_audit.ps1
+│  │     └─ account_audit_windows_2025-09-21.txt
+│  │     ├─ av_status.ps1
+│  │     └─ av_status_windows_2025-09-21.txt
 │  │     ├─ firewall_audit.ps1
 │  │     └─ firewall_audit_windows_2025-09-20.txt
 │  │
