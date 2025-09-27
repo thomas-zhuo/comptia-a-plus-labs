@@ -43,18 +43,21 @@ Scripts:
     - `scripts/security/linux/firewall_audit.sh`
     - `scripts/security/linux/av_status.sh`
     - `scripts/security/linux/account_audit.sh`
+    - `scripts/security/linux/patch_audit.sh`
   - Windows → 
     - `scripts/security/windows/firewall_audit.ps1`
     - `scripts/security/windows/av_status.ps1`
     - `scripts/security/windows/account_audit.ps1`
+    - `scripts/security/windows/patch_audit.ps1`
 
 - **Planned:**
-  - Extended compliance checks (patch status, encryption)
+  - Extended compliance checks (encryption, advanced configuration hardening)
 
 **Skills demonstrated:**
 - Auditing firewall status (enabled/disabled profiles, inbound rules, listening ports)
 - Validating antivirus/endpoint protection status (real-time protection, signatures, scan history)
 - Enumerating local users and groups, flagging privileged accounts and risky settings
+- Checking patch/update compliance (installed hotfixes, pending updates, reboot state)
 - Building toward full host-based security posture assessments across platforms
 
 ### 🔹 Hardware Playbooks *(Planned)*
@@ -97,6 +100,10 @@ chmod +x scripts/security/linux/av_status.sh
 # Account audit
 chmod +x scripts/security/linux/account_audit.sh
 ./scripts/security/linux/account_audit.sh
+
+# Patch audit
+chmod +x scripts/security/linux/patch_audit.sh
+./scripts/security/linux/patch_audit.sh
 ```
 
 ### Windows (PowerShell)
@@ -125,6 +132,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 # Account audit
 .\scripts\security\windows\account_audit.ps1
+
+# Patch audit
+.\scripts\security\windows\patch_audit.ps1
 ```
 
 ## 💾 How to Save Output to File (Optional)
@@ -147,6 +157,8 @@ OS="macOS"    # or Kali_Linux, Ubuntu, etc.
 ./scripts/security/linux/av_status.sh | tee scripts/security/linux/av_status${OS}_$(date +%F).txt
 
 ./scripts/security/linux/account_audit.sh | tee scripts/security/linux/account_audit${OS}_$(date +%F).txt
+
+./scripts/security/linux/patch_audit.sh | tee scripts/security/linux/patch_audit${OS}_$(date +%F).txt
 ```
 
 ### Windows (PowerShell)
@@ -164,6 +176,8 @@ OS="macOS"    # or Kali_Linux, Ubuntu, etc.
 .\scripts\security\windows\av_status.ps1 | Out-File scripts\security\windows\av_status_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 
 .\scripts\security\windows\account_audit.ps1 | Out-File scripts\security\windows\account_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\security\windows\patch_audit.ps1 | Out-File scripts\security\windows\patch_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 ```
 
 ## 📑 Sample Output
@@ -196,68 +210,71 @@ Each category has separate **`linux/`** and **`windows/`** subfolders for script
   - [Windows](scripts/log-monitoring/windows/)  
     - `event_logs_windows_2025-09-14.txt`
 
-**Security & Compliance (`scripts/security/`)**
-- [Linux/macOS](scripts/security/linux/):
-  - `firewall_audit_macOS_2025-09-20.txt`
-  - `firewall_audit_Kali_Linux_2025-09-20.txt`
-  - `av_status_macOS_2025-09-21.txt`  
-  - `av_status_Kali_Linux_2025-09-21.txt`
-  - `account_audit_macOS_2025-09-21.txt`  
-  - `account_audit_Kali_Linux_2025-09-21.txt`    
-- [Windows](scripts/security/windows/)  
-    - `firewall_audit_windows_2025-09-20.txt`
-    - `av_status_windows_2025-09-21.txt`
-    - `account_audit_windows_2025-09-21.txt`
+- **Security & Compliance (`scripts/security/`)**
+  - [Linux/macOS](scripts/security/linux/)  
+    - `firewall_audit_macOS_2025-09-20.txt`  
+    - `firewall_audit_Kali_Linux_2025-09-20.txt`  
+    - `av_status_macOS_2025-09-21.txt`  
+    - `av_status_Kali_Linux_2025-09-21.txt`  
+    - `account_audit_macOS_2025-09-22.txt`  
+    - `account_audit_Kali_Linux_2025-09-22.txt`  
+    - `patch_audit_macOS_2025-09-27.txt`  
+    - `patch_audit_Kali_Linux_2025-09-27.txt`  
+  - [Windows](scripts/security/windows/)  
+    - `firewall_audit_windows_2025-09-20.txt`  
+    - `av_status_windows_2025-09-21.txt`  
+    - `account_audit_windows_2025-09-22.txt`  
+    - `patch_audit_windows_2025-09-27.txt`
 
-These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, log collection, firewall auditing, antivirus/endpoint protection status, and account audits**.  
+These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, log collection, firewall auditing, antivirus/endpoint protection status, account audits, and patch/update compliance**.  
 
-Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring and compliance auditing**.
-
+Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring, compliance auditing, and vulnerability management**.
 
 ## 🎯 Why This Matters
 
 These labs demonstrate:
-- Cross-platform scripting (Bash & PowerShell)
-- System, network, disk, and log diagnostics
-- Security readiness foundations (auditing & monitoring building blocks)
+- Cross-platform scripting (Bash & PowerShell) for Linux, macOS, and Windows
+- Automated system, network, disk, and log diagnostics
+- Security readiness checks: firewall, antivirus/endpoint protection, user/group audits, and patch compliance
+- Building blocks for **vulnerability management** and compliance verification
+- Foundations for SOC analyst workflows: collecting, analyzing, and reporting host-level security signals
 
-This portfolio supports my pivot into cybersecurity by proving I can gather, interpret, and act on host-level signals across multiple operating systems.
+This portfolio supports my pivot into cybersecurity by proving I can gather, interpret, and act on system and security data across multiple environments. It highlights not just troubleshooting ability, but also the **security mindset** required for monitoring, auditing, and hardening endpoints in real-world environments.
 
 ## 🔮 Next Steps
 
-This portfolio will expand alongside my cybersecurity training. Planned projects include:
+This portfolio will continue to expand alongside my cybersecurity training, progressing from **foundational diagnostics** into **security operations and incident response**.
 
 - **System Health & Diagnostics**
   - Extend disk health checks with encryption status (BitLocker/FileVault)
-  - Automate performance monitoring (CPU/memory snapshots)
+  - Automate performance monitoring (CPU/memory snapshots over time)
 
 - **Network Diagnostics**
-  - Add packet capture (tcpdump, Wireshark) labs
-  - Implement port scanning and service enumeration scripts
-  - Compare normal vs. abnormal traffic baselines
+  - Add packet capture and analysis labs (tcpdump, Wireshark)
+  - Implement port scanning and service enumeration (nmap, PowerShell equivalents)
+  - Compare normal vs abnormal traffic baselines to simulate threat detection
 
 - **Log & Event Monitoring**
-  - Automate filtering of security-related logs (auth failures, privilege escalation attempts)
-  - Build a SIEM-style correlation script to detect anomalies across logs
-  - Create case studies based on simulated incident logs
+  - Automate filtering of security-related logs (authentication failures, privilege escalation attempts)
+  - Build a lightweight SIEM-style correlation script to detect anomalies across logs
+  - Create case studies based on simulated incident logs to mimic SOC workflows
 
 - **Security & Compliance**
-  - Firewall configuration audit scripts
-  - Antivirus/Defender status checks
-  - User/group account and permission audits
-  - Vulnerability scan integrations (planned for CEH/CSA modules)
+  - Expand patch audit to include vulnerability scoring (e.g., CVE lookups)
+  - Add user/group permission hardening checks
+  - Integrate antivirus/Defender results with alerting scripts
+  - Simulate endpoint hardening playbooks (firewall + AV + patch + accounts)
 
 - **Hardware Playbooks**
   - SSD upgrade and cloning procedure
   - Secure data wipe and disposal workflow
-  - Battery and peripheral health checks
+  - Battery and peripheral health diagnostics
 
-- **Case Studies**
+- **Troubleshooting Case Studies**
   - A+ level: Endpoint troubleshooting scenarios (slow Wi-Fi, low disk, printer errors)
   - Network+ level: VLAN/DNS misconfigurations, packet loss investigations
-  - Security+ / CEH level: Malware infection response, unauthorized access, firewall misconfigurations
-  - CSA level: SOC analyst workflows — triage, correlation, incident reporting
-
+  - Security+ / CEH level: Malware infection response, unauthorized access detection, firewall misconfigurations
+  - CSA level: SOC analyst workflows — triage, log correlation, escalation, and incident reporting
 
 ## Repository Structure
 
@@ -299,28 +316,41 @@ comptia-a-plus-labs/
 │  │
 │  ├─ security/
 │  │  ├─ linux/
-│  │  │  ├─ account_audit.sh
-│  │  │  ├─ account_audit_macOS_2025-09-21.txt
-│  │  │  └─ account_audit_Kali_Linux_2025-09-21.txt
-│  │  │  ├─ av_status.sh
-│  │  │  ├─ av_status_macOS_2025-09-21.txt
-│  │  │  └─ av_status_Kali_Linux_2025-09-21.txt
 │  │  │  ├─ firewall_audit.sh
 │  │  │  ├─ firewall_audit_macOS_2025-09-20.txt
-│  │  │  └─ firewall_audit_Kali_Linux_2025-09-20.txt
+│  │  │  ├─ firewall_audit_Kali_Linux_2025-09-20.txt
+│  │  │  ├─ av_status.sh
+│  │  │  ├─ av_status_macOS_2025-09-21.txt
+│  │  │  ├─ av_status_Kali_Linux_2025-09-21.txt
+│  │  │  ├─ account_audit.sh
+│  │  │  ├─ account_audit_macOS_2025-09-21.txt
+│  │  │  ├─ account_audit_Kali_Linux_2025-09-21.txt
+│  │  │  ├─ patch_audit.sh
+│  │  │  ├─ patch_audit_macOS_2025-09-27.txt
+│  │  │  └─ patch_audit_Kali_Linux_2025-09-27.txt
 │  │  └─ windows/
-│  │     ├─ account_audit.ps1
-│  │     └─ account_audit_windows_2025-09-21.txt
-│  │     ├─ av_status.ps1
-│  │     └─ av_status_windows_2025-09-21.txt
 │  │     ├─ firewall_audit.ps1
-│  │     └─ firewall_audit_windows_2025-09-20.txt
+│  │     ├─ firewall_audit_windows_2025-09-20.txt
+│  │     ├─ av_status.ps1
+│  │     ├─ av_status_windows_2025-09-21.txt
+│  │     ├─ account_audit.ps1
+│  │     ├─ account_audit_windows_2025-09-21.txt
+│  │     ├─ patch_audit.ps1
+│  │     └─ patch_audit_windows_2025-09-27.txt
 │  │
-│  ├─ hardware-playbooks/      # 🖥️ (future: battery_check.sh, ssd_upgrade.md, etc.)
+│  ├─ advanced-networking/          # 🌐 (future labs: Wireshark/tcpdump captures, nmap scans)
 │  │  ├─ linux/
 │  │  └─ windows/
 │  │
-│  └─ case-studies/            # 📝 (future: troubleshooting writeups in markdown)
+│  ├─ siem-labs/                    # 📊 (future: log correlation, anomaly detection, mini-SIEM scripts)
+│  │  ├─ linux/
+│  │  └─ windows/
+│  │
+│  ├─ hardware-playbooks/           # 🖥️ (future: SSD upgrade, secure wipe, battery diagnostics)
+│  │  ├─ linux/
+│  │  └─ windows/
+│  │
+│  └─ case-studies/                 # 📝 (markdown writeups: troubleshooting & incident response)
 │
 └─ docs/
    └─ CHANGELOG.md
