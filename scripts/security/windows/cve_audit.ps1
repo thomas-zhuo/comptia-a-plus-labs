@@ -9,11 +9,11 @@ param([switch]$VerboseMode)
 if ($VerboseMode) { $VerbosePreference='Continue'; $DebugPreference='Continue' }
 $ErrorActionPreference = 'Continue'
 
-function Write-Bold($Text){ Write-Host $Text -ForegroundColor White }
+function Write-Bold($Text){ Write-Local $Text -ForegroundColor White }
 function Write-HR{
   try { $w = (Get-Host).UI.RawUI.WindowSize.Width } catch { $w = 80 }
   if (-not $w -or $w -lt 20){ $w = 80 }
-  Write-Host ('-' * $w)
+  Write-Local ('-' * $w)
 }
 
 # ---------- Header ----------
@@ -22,9 +22,9 @@ $osObj = Get-CimInstance Win32_OperatingSystem -ErrorAction SilentlyContinue
 $osCaption = if ($osObj -and $osObj.Caption) { $osObj.Caption } else { 'Windows' }
 
 Write-Bold "CVE Risk Audit (Local DB)"
-Write-Host ("  Host: {0}" -f $computer)
-Write-Host ("  OS  : {0}" -f $osCaption)
-Write-Host ("  Date: {0}" -f (Get-Date))
+Write-Local ("  Host: {0}" -f $computer)
+Write-Local ("  OS  : {0}" -f $osCaption)
+Write-Local ("  Date: {0}" -f (Get-Date))
 Write-HR
 
 # ---------- Inventory (non-blocking) ----------
@@ -100,11 +100,11 @@ if (Get-Command winget.exe -ErrorAction SilentlyContinue){
 
 # Print inventory (never blocks)
 if ($inventory.Count -eq 0){
-  Write-Host "(no packages detected or insufficient privileges)"
+  Write-Local "(no packages detected or insufficient privileges)"
 }else{
   $first20 = $inventory | Select-Object Name,Version,Source | Sort-Object Name | Select-Object -First 20
   $tableText = $first20 | Format-Table -AutoSize | Out-String
-  Write-Host $tableText
+  Write-Local $tableText
 }
 Write-HR
 
@@ -147,7 +147,7 @@ function Convert-ToVersion {
 # ---------- Findings ----------
 Write-Bold "Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)"
 $fmt = "{0,-30} {1,-15} {2,-15} {3,-12} {4,-8} {5}"
-Write-Host ($fmt -f 'PACKAGE','INSTALLED','FIXED','STATUS','SEVERITY','CVE_IDS')
+Write-Local ($fmt -f 'PACKAGE','INSTALLED','FIXED','STATUS','SEVERITY','CVE_IDS')
 Write-HR
 
 $matched = $false; $totalChecked = 0; $vulnCount = 0
@@ -181,13 +181,13 @@ foreach ($item in $inventory){
     if ($installed -and ($installed -lt $fixedStr)){ $status='VULNERABLE?'; $vulnCount++ } else { $status='ok' }
   }
 
-  Write-Host ($fmt -f $name, ($installed -or '-'), $fixedStr, $status, $sev, $cves)
+  Write-Local ($fmt -f $name, ($installed -or '-'), $fixedStr, $status, $sev, $cves)
 }
 
 Write-HR
 if (-not $matched){
-  Write-Host "No matching packages from the local CVE DB were found in this inventory."
+  Write-Local "No matching packages from the local CVE DB were found in this inventory."
 }else{
-  Write-Host ("Checked: {0}  Potentially vulnerable: {1}" -f $totalChecked, $vulnCount)
+  Write-Local ("Checked: {0}  Potentially vulnerable: {1}" -f $totalChecked, $vulnCount)
 }
-Write-Host "Legend: 'VULNERABLE?' means installed_version < fixed_version in local DB."
+Write-Local "Legend: 'VULNERABLE?' means installed_version < fixed_version in local DB."
