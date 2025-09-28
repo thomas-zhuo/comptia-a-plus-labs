@@ -1,0 +1,180 @@
+User & Permission Hardening Audit
+  Host : WORKSTATION-MBP
+  OS   : Darwin
+  Date : Sun Sep 28 15:36:49 +08 2025
+--------------------------------------------------------------------------------
+Local users with interactive shells
+  _mbsetupuser         uid=248    gid=248    shell=/bin/bash
+  root                 uid=0      gid=0      shell=/bin/sh
+  analyst              uid=501    gid=20     shell=/bin/zsh
+--------------------------------------------------------------------------------
+UID 0 (root-equivalent) accounts
+   root                 shell=/bin/sh
+--------------------------------------------------------------------------------
+Admin/sudo group membership
+  admin -> GroupMembership: root analyst
+  wheel -> GroupMembership: root
+--------------------------------------------------------------------------------
+Passwordless / locked accounts (best-effort)
+  (macOS hides password hashes; showing shells as proxy)
+  nobody               (non-login shell: /usr/bin/false)
+  daemon               (non-login shell: /usr/bin/false)
+  _taskgated           (non-login shell: /usr/bin/false)
+  _networkd            (non-login shell: /usr/bin/false)
+  _installassistant    (non-login shell: /usr/bin/false)
+  _lp                  (non-login shell: /usr/bin/false)
+  _postfix             (non-login shell: /usr/bin/false)
+  _scsd                (non-login shell: /usr/bin/false)
+  _ces                 (non-login shell: /usr/bin/false)
+  _appstore            (non-login shell: /usr/bin/false)
+  _mcxalr              (non-login shell: /usr/bin/false)
+  _appleevents         (non-login shell: /usr/bin/false)
+  _geod                (non-login shell: /usr/bin/false)
+  _devdocs             (non-login shell: /usr/bin/false)
+  _sandbox             (non-login shell: /usr/bin/false)
+  _mdnsresponder       (non-login shell: /usr/bin/false)
+  _ard                 (non-login shell: /usr/bin/false)
+  _www                 (non-login shell: /usr/bin/false)
+  _eppc                (non-login shell: /usr/bin/false)
+  _cvs                 (non-login shell: /usr/bin/false)
+  _svn                 (non-login shell: /usr/bin/false)
+  _mysql               (non-login shell: /usr/bin/false)
+  _sshd                (non-login shell: /usr/bin/false)
+  _qtss                (non-login shell: /usr/bin/false)
+  _cyrus               (non-login shell: /usr/bin/false)
+  _mailman             (non-login shell: /usr/bin/false)
+  _appserver           (non-login shell: /usr/bin/false)
+  _clamav              (non-login shell: /usr/bin/false)
+  _amavisd             (non-login shell: /usr/bin/false)
+  _jabber              (non-login shell: /usr/bin/false)
+  _appowner            (non-login shell: /usr/bin/false)
+  _windowserver        (non-login shell: /usr/bin/false)
+  _spotlight           (non-login shell: /usr/bin/false)
+  _tokend              (non-login shell: /usr/bin/false)
+  _securityagent       (non-login shell: /usr/bin/false)
+  _calendar            (non-login shell: /usr/bin/false)
+  _teamsserver         (non-login shell: /usr/bin/false)
+  _update_sharing      (non-login shell: /usr/bin/false)
+  _installer           (non-login shell: /usr/bin/false)
+  _atsserver           (non-login shell: /usr/bin/false)
+  _ftp                 (non-login shell: /usr/bin/false)
+  _unknown             (non-login shell: /usr/bin/false)
+  _softwareupdate      (non-login shell: /usr/bin/false)
+  _coreaudiod          (non-login shell: /usr/bin/false)
+  _screensaver         (non-login shell: /usr/bin/false)
+  _locationd           (non-login shell: /usr/bin/false)
+  _trustevaluationagent (non-login shell: /usr/bin/false)
+  _timezone            (non-login shell: /usr/bin/false)
+  _lda                 (non-login shell: /usr/bin/false)
+  _cvmsroot            (non-login shell: /usr/bin/false)
+  _usbmuxd             (non-login shell: /usr/bin/false)
+  _dovecot             (non-login shell: /usr/bin/false)
+  _dpaudio             (non-login shell: /usr/bin/false)
+  _postgres            (non-login shell: /usr/bin/false)
+  _krbtgt              (non-login shell: /usr/bin/false)
+  _kadmin_admin        (non-login shell: /usr/bin/false)
+  _kadmin_changepw     (non-login shell: /usr/bin/false)
+  _devicemgr           (non-login shell: /usr/bin/false)
+  _webauthserver       (non-login shell: /usr/bin/false)
+  _netbios             (non-login shell: /usr/bin/false)
+  _warmd               (non-login shell: /usr/bin/false)
+  _dovenull            (non-login shell: /usr/bin/false)
+  _netstatistics       (non-login shell: /usr/bin/false)
+  _avbdeviced          (non-login shell: /usr/bin/false)
+  _krb_krbtgt          (non-login shell: /usr/bin/false)
+  _krb_kadmin          (non-login shell: /usr/bin/false)
+  _krb_changepw        (non-login shell: /usr/bin/false)
+  _krb_kerberos        (non-login shell: /usr/bin/false)
+  _krb_anonymous       (non-login shell: /usr/bin/false)
+  _assetcache          (non-login shell: /usr/bin/false)
+  _coremediaiod        (non-login shell: /usr/bin/false)
+  _launchservicesd     (non-login shell: /usr/bin/false)
+  _iconservices        (non-login shell: /usr/bin/false)
+  _distnote            (non-login shell: /usr/bin/false)
+  _nsurlsessiond       (non-login shell: /usr/bin/false)
+  _displaypolicyd      (non-login shell: /usr/bin/false)
+  _astris              (non-login shell: /usr/bin/false)
+  _krbfast             (non-login shell: /usr/bin/false)
+  _gamecontrollerd     (non-login shell: /usr/bin/false)
+  _ondemand            (non-login shell: /usr/bin/false)
+  _xserverdocs         (non-login shell: /usr/bin/false)
+  _wwwproxy            (non-login shell: /usr/bin/false)
+  _mobileasset         (non-login shell: /usr/bin/false)
+  _findmydevice        (non-login shell: /usr/bin/false)
+  _datadetectors       (non-login shell: /usr/bin/false)
+  _captiveagent        (non-login shell: /usr/bin/false)
+  _ctkd                (non-login shell: /usr/bin/false)
+  _applepay            (non-login shell: /usr/bin/false)
+  _hidd                (non-login shell: /usr/bin/false)
+  _cmiodalassistants   (non-login shell: /usr/bin/false)
+  _analyticsd          (non-login shell: /usr/bin/false)
+  _fpsd                (non-login shell: /usr/bin/false)
+  _timed               (non-login shell: /usr/bin/false)
+  _nearbyd             (non-login shell: /usr/bin/false)
+  _reportmemoryexception (non-login shell: /usr/bin/false)
+  _driverkit           (non-login shell: /usr/bin/false)
+  _diskimagesiod       (non-login shell: /usr/bin/false)
+  _logd                (non-login shell: /usr/bin/false)
+  _appinstalld         (non-login shell: /usr/bin/false)
+  _installcoordinationd (non-login shell: /usr/bin/false)
+  _demod               (non-login shell: /usr/bin/false)
+  _rmd                 (non-login shell: /usr/bin/false)
+  _accessoryupdater    (non-login shell: /usr/bin/false)
+  _knowledgegraphd     (non-login shell: /usr/bin/false)
+  _coreml              (non-login shell: /usr/bin/false)
+  _sntpd               (non-login shell: /usr/bin/false)
+  _trustd              (non-login shell: /usr/bin/false)
+  _mmaintenanced       (non-login shell: /usr/bin/false)
+  _darwindaemon        (non-login shell: /usr/bin/false)
+  _notification_proxy  (non-login shell: /usr/bin/false)
+  _avphidbridge        (non-login shell: /usr/bin/false)
+  _biome               (non-login shell: /usr/bin/false)
+  _backgroundassets    (non-login shell: /usr/bin/false)
+  _mobilegestalthelper (non-login shell: /usr/bin/false)
+  _audiomxd            (non-login shell: /usr/bin/false)
+  _terminusd           (non-login shell: /usr/bin/false)
+  _neuralengine        (non-login shell: /usr/bin/false)
+  _eligibilityd        (non-login shell: /usr/bin/false)
+  _oahd                (non-login shell: /usr/bin/false)
+--------------------------------------------------------------------------------
+Sudoers validation & non-commented rules
+  (sudo not available or no cached credentials; skipping validation)
+--------------------------------------------------------------------------------
+$PATH directories that are world-writable (risk)
+  /opt/homebrew/bin                  perms=drwxrwxr-x owner=analyst group=admin
+  /opt/homebrew/sbin                 perms=drwxrwxr-x owner=analyst group=admin
+  /Users/analyst/opt/anaconda3/bin  perms=drwxr-xr-x owner=analyst group=staff
+  /Users/analyst/opt/anaconda3/condabin  perms=drwxr-xr-x owner=analyst group=staff
+--------------------------------------------------------------------------------
+Sample world-writable files in system paths (bounded)
+  /usr/local/vendor/ExampleIDFile.txt
+  /usr/local/vendor/PrevFWStatus
+  /usr/local/vendor/Logs/SyncModule.log
+  /usr/local/share/misc/magic.mgc
+  /usr/local/vendor/ExampleIDFile.txt
+  /usr/local/vendor/PrevFWStatus
+  /usr/local/vendor/Logs/SyncModule.log
+  /usr/local/vendor/var/.lockExampleDb
+  /usr/local/share/misc/magic.mgc
+Sample SUID/SGID files (bounded)
+  /usr/bin/write
+  /usr/bin/top
+  /usr/bin/atq
+  /usr/bin/crontab
+  /usr/bin/atrm
+  /usr/bin/newgrp
+  /usr/bin/su
+  /usr/bin/batch
+  /usr/bin/at
+  /usr/bin/quota
+  /usr/bin/sudo
+  /usr/bin/login
+  /usr/libexec/security_authtrampoline
+  /usr/libexec/authopen
+  /usr/sbin/traceroute6
+--------------------------------------------------------------------------------
+Summary
+  - Review UID 0 accounts and admin/wheel/sudo membership.
+  - Fix world-writable PATH dirs (chown root:wheel; chmod 755).
+  - Validate sudoers with visudo; remove broad ALL=(ALL) NOPASSWD unless needed.
+  - Audit SUID/SGID and world-writable files; restrict or remove.
