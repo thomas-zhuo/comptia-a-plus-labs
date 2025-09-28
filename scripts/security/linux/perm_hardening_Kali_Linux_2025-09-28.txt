@@ -1,0 +1,49 @@
+[1mUser & Permission Hardening Audit[0m
+  Host : kali
+  OS   : Linux
+  Date : Sun Sep 28 16:07:01 +08 2025
+-----------------------------------------------------------------------------------------------------------
+[1mLocal users with interactive shells[0m
+   root                 uid=0      gid=0      shell=/usr/bin/zsh
+   sync                 uid=4      gid=65534  shell=/bin/sync
+   postgres             uid=118    gid=119    shell=/bin/bash
+   kali                 uid=1000   gid=1000   shell=/usr/bin/zsh
+-----------------------------------------------------------------------------------------------------------
+[1mUID 0 (root-equivalent) accounts[0m
+   root                 shell=/usr/bin/zsh
+-----------------------------------------------------------------------------------------------------------
+[1mAdmin/sudo group membership[0m
+  sudo     -> kali
+  adm      -> kali
+-----------------------------------------------------------------------------------------------------------
+[1mPasswordless / locked accounts (best-effort)[0m
+  (/etc/shadow not readable; run with sudo for full check)
+-----------------------------------------------------------------------------------------------------------
+[1mSudoers validation & non-commented rules[0m
+  (sudo not available or no cached credentials; skipping validation)
+-----------------------------------------------------------------------------------------------------------
+[1m$PATH directories that are world-writable (risk)[0m
+-----------------------------------------------------------------------------------------------------------
+[1mSample world-writable files in system paths (bounded)[0m
+[1mSample SUID/SGID files (bounded)[0m
+  /usr/sbin/unix_chkpwd
+  /usr/sbin/pppd
+  /usr/sbin/mount.cifs
+  /usr/sbin/mount.nfs
+  /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+  /usr/lib/chromium/chrome-sandbox
+  /usr/lib/openssh/ssh-keysign
+  /usr/lib/polkit-1/polkit-agent-helper-1
+  /usr/lib/xorg/Xorg.wrap
+  /usr/bin/pkexec
+  /usr/bin/crontab
+  /usr/bin/fusermount3
+  /usr/bin/su
+  /usr/bin/rsh-redone-rsh
+  /usr/bin/kismet_cap_nxp_kw41z
+-----------------------------------------------------------------------------------------------------------
+[1mSummary[0m
+  - Review UID 0 accounts and admin/wheel/sudo membership.
+  - Fix world-writable PATH dirs (chown root:root; chmod 755).
+  - Validate sudoers with visudo; remove broad ALL=(ALL) NOPASSWD unless needed.
+  - Audit SUID/SGID and world-writable files; restrict or remove.
