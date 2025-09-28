@@ -1,216 +1,205 @@
-<#
-.SYNOPSIS
-  Local CVE audit (PowerShell). Compares installed packages to a small embedded CVE DB.
-
-.DESCRIPTION
-  - Collects inventory from Get-Package, winget list (if available), then registry uninstall keys.
-  - Uses a local, editable CVE DB (package|fixedVersion|severity|CVEIDs|notes).
-  - Flags when installedVersion < fixedVersion (with [Version] compare where possible).
-  - Display-only. Pipe to Tee-Object / Out-File if you want to save.
-
-USAGE
-  # run
-  pwsh .\scripts\security\windows\cve_audit.ps1
-
-  # run & save
-  pwsh .\scripts\security\windows\cve_audit.ps1 |
-    Tee-Object -FilePath .\scripts\security\windows\cve_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+<# 
+CVE Audit (Local DB) — Windows PowerShell 5.1 compatible
+- Gathers inventory via Get-Package, winget (if present), and registry
+- Compares against a small local CVE DB (edit inside script)
+- Always prints findings header & summary (even with zero matches)
+- Display-only; to save, pipe to Out-File or Tee-Object
 #>
 
-# Make non-terminating errors visible but don’t crash the script
+param(
+  [switch]$VerboseMode
+)
+if ($VerboseMode) { $VerbosePreference='Continue'; $DebugPreference='Continue' }
+
 $ErrorActionPreference = 'Continue'
-$VerbosePreference = 'SilentlyContinue'
-$DebugPreference   = 'SilentlyContinue'
 
-function Hr {
-    $w = (Get-Host).UI.RawUI.WindowSize.Width
-    if (-not $w -or $w -lt 40) { $w = 110 }
-    Write-Host ('-' * $w)
+function Write-Bold($Text) { Write-Host $Text -ForegroundColor White }
+function Write-HR {
+  try { $w = (Get-Host).UI.RawUI.WindowSize.Width } catch { $w = 80 }
+  if (-not $w -or $w -lt 20) { $w = 80 }
+  Write-Host ('-' * $w)
 }
 
-function Section($title) {
-    Write-Host $title -ForegroundColor White
-}
+# --- Header ---
+$computer = $env:COMPUTERNAME
+$osObj = Get-CimInstance Win32_OperatingSystem -ErrorAction SilentlyContinue
+$osCaption = $null
+if ($osObj -and $osObj.Caption) { $osCaption = $osObj.Caption } else { $osCaption = 'Windows' }
 
-function Parse-VersionObject {
-    param([string]$vstr)
-    if (-not $vstr) { return $null }
-    # Normalize: strip non-numeric/separator chars, collapse dots, trim edges
-    $clean = $vstr -replace '[^0-9\.]','.' -replace '\.{2,}', '.' -replace '^\.+|\.+$',''
-    $parts = $clean -split '\.' | Where-Object { $_ -ne '' }
-    if ($parts.Count -gt 4) { $parts = $parts[0..3] }
-    $norm = ($parts -join '.')
-    try { return [Version]$norm } catch { return $null }
-}
-
-# --------------------------------- Header ---------------------------------
-Section "CVE Risk Audit (Local DB)"
-Write-Host ("  Host: {0}" -f $env:COMPUTERNAME)
-$osCaption = (Get-CimInstance Win32_OperatingSystem -ErrorAction SilentlyContinue).Caption
-Write-Host ("  OS  : {0}" -f ($osCaption ?? 'Windows'))
+Write-Bold "CVE Risk Audit (Local DB)"
+Write-Host ("  Host: {0}" -f $computer)
+Write-Host ("  OS  : {0}" -f $osCaption)
 Write-Host ("  Date: {0}" -f (Get-Date))
-Hr
+Write-HR
 
-# --------------------------- Package Inventory ----------------------------
-Section "Package Inventory (first 20 shown)"
-
+# --- Inventory ---
+Write-Bold "Package Inventory (first 20 shown)"
 $inventory = New-Object System.Collections.Generic.List[object]
 
 # 1) Get-Package
 try {
-    $gp = Get-Package -ErrorAction SilentlyContinue
-    if ($gp) {
-        foreach ($p in $gp) {
-            $name = $p.Name
-            $ver  = if ($p.Version) { $p.Version.ToString() } else { '' }
-            if ($name) {
-                $inventory.Add([PSCustomObject]@{
-                    Name = $name; Version = $ver; Source = 'Get-Package'
-                })
-            }
-        }
+  $gp = Get-Package -ErrorAction SilentlyContinue
+  if ($gp) {
+    foreach ($p in $gp) {
+      $name = $p.Name
+      $ver  = if ($p.Version) { $p.Version.ToString() } else { '' }
+      if ($name) {
+        $inventory.Add([pscustomobject]@{ Name=$name; Version=$ver; Source='Get-Package' }) | Out-Null
+      }
     }
-} catch { }
+  }
+} catch {}
 
-# 2) winget list (if available)
-if (Get-Command winget.exe -ErrorAction SilentlyContinue) {
-    try {
-        # Avoid UI paging; parse simply: last token is version, rest is name
-        $wingetOut = & winget list --accept-source-agreements 2>$null
-        if ($wingetOut) {
-            $lines = $wingetOut | Select-Object -Skip 1
-            foreach ($ln in $lines) {
-                $s = $ln.Trim()
-                if (-not $s) { continue }
-                # Split on 2+ spaces to approximate columns
-                $cols = ($s -split '\s{2,}').Trim() | Where-Object { $_ -ne '' }
-                if ($cols.Count -ge 2) {
-                    $version = $cols[-1]
-                    $name    = ($cols[0..($cols.Count-2)] -join ' ')
-                    if ($name -and -not ($inventory.Name -contains $name)) {
-                        $inventory.Add([PSCustomObject]@{
-                            Name = $name; Version = $version; Source = 'winget'
-                        })
-                    }
-                }
-            }
+# 2) winget (optional)
+$hasWinget = Get-Command winget.exe -ErrorAction SilentlyContinue
+if ($hasWinget) {
+  try {
+    $wingetLines = & winget list 2>$null
+    if ($wingetLines) {
+      # crude parse: table-ish; take last token as Version, the rest as Name (skip header separators)
+      foreach ($line in $wingetLines) {
+        $L = $line.Trim()
+        if ([string]::IsNullOrWhiteSpace($L)) { continue }
+        if ($L -match '^-+$') { continue }
+        if ($L -like '*Name*Id*Version*') { continue }
+        $cols = $L -split '\s{2,}'
+        if ($cols.Count -ge 2) {
+          $ver = $cols[-1]
+          $name = ($cols[0..($cols.Count-2)] -join ' ')
+          if ($name -and -not ($inventory | Where-Object { $_.Name -eq $name })) {
+            $inventory.Add([pscustomobject]@{ Name=$name; Version=$ver; Source='winget' }) | Out-Null
+          }
         }
-    } catch { }
+      }
+    }
+  } catch {}
 }
 
-# 3) Registry uninstall keys (fill gaps)
-try {
-    $regPaths = @(
-        'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
-        'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*',
-        'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*'
-    )
-    foreach ($p in $regPaths) {
-        try {
-            Get-ItemProperty -Path $p -ErrorAction SilentlyContinue | ForEach-Object {
-                $dn = $_.DisplayName
-                $dv = $_.DisplayVersion
-                if ($dn -and -not ($inventory.Name -contains $dn)) {
-                    $inventory.Add([PSCustomObject]@{
-                        Name = $dn; Version = ($dv -as [string]); Source = 'Registry'
-                    })
-                }
-            }
-        } catch { }
-    }
-} catch { }
-
-# Print first 20 safely (force enumeration & string conversion so it never “hangs”)
-if ($inventory.Count -eq 0) {
-    Write-Host "(no packages detected or insufficient privileges)"
-} else {
-    $inventory
-      | Sort-Object Name
-      | Select-Object Name, Version, Source -First 20
-      | Format-Table -AutoSize
-      | Out-String
-      | Write-Output
-}
-Hr
-
-# ------------------------------ Local CVE DB -------------------------------
-# Format per line: package|fixedVersion|severity|CVEIDs|notes
-# NOTE: match names exactly as they appear in your inventory where possible.
-$cveDbLines = @(
-"OpenSSL|3.0.14|HIGH|CVE-2023-5678,CVE-2024-1111|Fixed in 3.0.14",
-"curl|8.5.0|HIGH|CVE-2023-38545|HTTP/3 heap overflow",
-"sudo|1.9.15|CRITICAL|CVE-2021-3156|Example mapping",
-"git|2.46.0|HIGH|CVE-2024-32002|Path handling",
-"apache2|2.4.62|CRITICAL|CVE-2023-25690|Apache example"
+# 3) Registry fallback
+$regPaths = @(
+  'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+  'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*',
+  'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*'
 )
+foreach ($path in $regPaths) {
+  try {
+    Get-ItemProperty -Path $path -ErrorAction SilentlyContinue | ForEach-Object {
+      $dn = $_.DisplayName
+      if ($dn -and -not ($inventory | Where-Object { $_.Name -eq $dn })) {
+        $inventory.Add([pscustomobject]@{
+          Name=$dn
+          Version=($_.DisplayVersion -as [string])
+          Source='Registry'
+        }) | Out-Null
+      }
+    }
+  } catch {}
+}
 
-# Build DB (case-insensitive lookup)
+if ($inventory.Count -eq 0) {
+  Write-Host "(no packages detected or insufficient privileges)"
+} else {
+  $first20 = $inventory | Select-Object Name,Version,Source | Sort-Object Name | Select-Object -First 20
+  # Show as a table without leading pipe continuations
+  $tableText = $first20 | Format-Table -AutoSize | Out-String
+  Write-Host $tableText
+}
+Write-HR
+
+# --- Local CVE DB (edit/extend freely) ---
+# Format: package|fixedVersion|severity|CVEIDs|notes
+$cveDbLines = @(
+  'OpenSSL|3.0.14|HIGH|CVE-2023-5678,CVE-2024-1111|Fixed in 3.0.14',
+  'curl|8.5.0|HIGH|CVE-2023-38545|HTTP/3 heap overflow',
+  'sudo|1.9.15|CRITICAL|CVE-2021-3156|Example mapping',
+  'git|2.46.0|HIGH|CVE-2024-32002|Path handling',
+  'apache2|2.4.62|CRITICAL|CVE-2023-25690|Apache example'
+)
 $cveDB = @{}
 foreach ($line in $cveDbLines) {
-    $parts = $line -split '\|'
-    if ($parts.Length -ge 5) {
-        $key = $parts[0].Trim()
-        $cveDB[$key.ToLowerInvariant()] = [PSCustomObject]@{
-            FixedVersion = $parts[1].Trim()
-            Severity     = $parts[2].Trim()
-            CVEs         = $parts[3].Trim()
-            Notes        = $parts[4].Trim()
-        }
+  $parts = $line -split '\|'
+  if ($parts.Count -ge 5) {
+    $pkg = $parts[0].Trim()
+    $cveDB[$pkg] = [pscustomobject]@{
+      FixedVersion = $parts[1].Trim()
+      Severity     = $parts[2].Trim()
+      CVEs         = $parts[3].Trim()
+      Notes        = $parts[4].Trim()
     }
+  }
 }
 
-# --------------------------- Findings (always prints) -----------------------
-Section "Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)"
-"{0,-30} {1,-15} {2,-15} {3,-12} {4,-9} {5}" -f "PACKAGE","INSTALLED","FIXED","STATUS","SEVERITY","CVE_IDS"
-Hr
+# --- Helpers ---
+function Convert-ToVersion {
+  param([string]$v)
+  if (-not $v) { return $null }
+  # keep digits and dots; collapse repeats; trim ends
+  $clean = ($v -replace '[^0-9\.]','.') -replace '\.{2,}','.' 
+  $clean = $clean.Trim('.')
+  if (-not $clean) { return $null }
+  $parts = $clean -split '\.'
+  if ($parts.Count -gt 4) { $parts = $parts[0..3] }
+  $norm = ($parts | Where-Object { $_ -ne '' }) -join '.'
+  try { return [Version]$norm } catch { return $null }
+}
 
-$matched      = $false
+# --- Findings (always print header) ---
+Write-Bold "Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)"
+$fmtHeader = "{0,-30} {1,-15} {2,-15} {3,-12} {4,-8} {5}"
+$fmtRow    = "{0,-30} {1,-15} {2,-15} {3,-12} {4,-8} {5}"
+$header    = $fmtHeader -f 'PACKAGE','INSTALLED','FIXED','STATUS','SEVERITY','CVE_IDS'
+Write-Host $header
+Write-HR
+
+$matched = $false
 $totalChecked = 0
-$vulnCount    = 0
+$vulnCount = 0
 
 foreach ($item in $inventory) {
-    $name = $item.Name
-    $inst = ($item.Version -as [string]) -replace ',',''
-    if (-not $name) { continue }
-    $totalChecked++
+  $name = $item.Name
+  $installed = ($item.Version -as [string])
+  if (-not $name) { continue }
+  $totalChecked++
 
-    # Try exact (case-insensitive) match
-    $dbEntry = $null
-    $key = $name.ToLowerInvariant()
-    if ($cveDB.ContainsKey($key)) {
-        $dbEntry = $cveDB[$key]
-    } else {
-        # Simple fallback: substring match in either direction
-        foreach ($k in $cveDB.Keys) {
-            if ($key.Contains($k) -or $k.Contains($key)) { $dbEntry = $cveDB[$k]; break }
-        }
+  # case-insensitive key lookup
+  $entry = $null
+  foreach ($k in $cveDB.Keys) {
+    if ($k.Equals($name, [System.StringComparison]::InvariantCultureIgnoreCase)) {
+      $entry = $cveDB[$k]; break
     }
-
-    if ($dbEntry) {
-        $matched = $true
-        $fixedStr = $dbEntry.FixedVersion
-        $sev      = $dbEntry.Severity
-        $cves     = $dbEntry.CVEs
-        $status   = "ok"
-
-        $instObj  = Parse-VersionObject $inst
-        $fixedObj = Parse-VersionObject $fixedStr
-
-        if ($instObj -and $fixedObj) {
-            if ($instObj -lt $fixedObj) { $status = "VULNERABLE?"; $vulnCount++ }
-        } else {
-            # lexical fallback if version parsing fails
-            if ($inst -and ($inst -lt $fixedStr)) { $status = "VULNERABLE?"; $vulnCount++ }
-        }
-
-        "{0,-30} {1,-15} {2,-15} {3,-12} {4,-9} {5}" -f $name, ($inst -or '-'), $fixedStr, $status, $sev, $cves
+  }
+  if (-not $entry) {
+    # loose contains match (best-effort)
+    foreach ($k in $cveDB.Keys) {
+      if ($name -like "*$k*" -or $k -like "*$name*") { $entry = $cveDB[$k]; break }
     }
+  }
+  if (-not $entry) { continue }
+
+  $matched = $true
+  $fixedStr = $entry.FixedVersion
+  $sev = $entry.Severity
+  $cves = $entry.CVEs
+
+  $instV = Convert-ToVersion $installed
+  $fixV  = Convert-ToVersion $fixedStr
+
+  $status = 'unknown'
+  if ($instV -and $fixV) {
+    if ($instV -lt $fixV) { $status = 'VULNERABLE?'; $vulnCount++ } else { $status = 'ok' }
+  } else {
+    # fallback lexical
+    if ($installed -and ($installed -lt $fixedStr)) { $status = 'VULNERABLE?'; $vulnCount++ } else { $status = 'ok' }
+  }
+
+  $line = $fmtRow -f $name, ($installed -or '-'), $fixedStr, $status, $sev, $cves
+  Write-Host $line
 }
 
-Hr
+Write-HR
 if (-not $matched) {
-    Write-Host "No matching packages from the local CVE DB were found in this inventory."
+  Write-Host "No matching packages from the local CVE DB were found in this inventory."
 } else {
-    Write-Host ("Checked: {0}   Potentially vulnerable: {1}" -f $totalChecked, $vulnCount)
+  Write-Host ("Checked: {0}  Potentially vulnerable: {1}" -f $totalChecked, $vulnCount)
 }
 Write-Host "Legend: 'VULNERABLE?' means installed_version < fixed_version in local DB."
