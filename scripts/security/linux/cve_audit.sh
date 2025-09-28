@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # cve_audit.sh — Bash 3.2–compatible CVE risk audit (Linux/macOS)
-# Scans installed packages (apt or Homebrew) and compares against a small local CVE DB.
 # Displays results; to save, pipe to tee:
-#   ./scripts/security/linux/cve_audit.sh | tee scripts/security/linux/cve_audit_${OS}_$(date +%F).txt
+#   OS="macOS"; ./scripts/security/linux/cve_audit.sh | tee scripts/security/linux/cve_audit_${OS}_$(date +%F).txt
 
 set -euo pipefail
 
@@ -56,14 +55,11 @@ EOF
 
 # ------------------------- Version comparison (Bash 3.2 safe) -----------------
 # Compares dotted numeric versions: "1.2.3" < "1.3", etc.
-# Falls back to plain string compare if it can't parse numbers.
 ver_lt() {
   a="$1"; b="$2"
-  # strip any epoch/revision bits (very rough): "1:2.3-1" -> "2.3"
-  a="${a#*:}"; a="${a%%-*}"
+  a="${a#*:}"; a="${a%%-*}"  # drop epoch/revision if present
   b="${b#*:}"; b="${b%%-*}"
 
-  # split on dots into arrays (emulate by reading one token at a time)
   IFS='.' read -r a1 a2 a3 a4 a5 a6 a7 a8 <<EOF
 $a
 EOF
@@ -71,30 +67,26 @@ EOF
 $b
 EOF
 
-  # default missing fields to 0
   for i in 1 2 3 4 5 6 7 8; do
     eval "va=\${a$i:-0}"; eval "vb=\${b$i:-0}"
-    # if non-numeric, fall back to string compare
-    case "$va" in ''|*[!0-9]*) [ "$a" \< "$b" ] && return 0 || { [ "$a" = "$b" ] || return 1; return 1; } ;; esac
-    case "$vb" in ''|*[!0-9]*) [ "$a" \< "$b" ] && return 0 || { [ "$a" = "$b" ] || return 1; return 1; } ;; esac
+    case "$va" in ''|*[!0-9]*) [ "$a" \< "$b" ] && return 0 || { [ "$a" = "$b" ] && return 1 || return 1; } ;; esac
+    case "$vb" in ''|*[!0-9]*) [ "$a" \< "$b" ] && return 0 || { [ "$a" = "$b" ] && return 1 || return 1; } ;; esac
     if [ "$va" -lt "$vb" ]; then return 0; fi
     if [ "$va" -gt "$vb" ]; then return 1; fi
   done
-  # equal
-  return 1
+  return 1  # equal
 }
 
 # ------------------------- Package inventory ----------------------------------
 bold "Package Inventory (first 20 shown)"
 PKGS=""
 if [ $HAS_APT -eq 1 ]; then
-  # dpkg-query prints "name version"
   PKGS="$(dpkg-query -W -f='${binary:Package} ${Version}\n' 2>/dev/null || true)"
 fi
 if [ -z "$PKGS" ] && [ $HAS_BREW -eq 1 ]; then
-  # brew list --versions prints "name version1 version2 ...", we take last
-  # We'll normalize openssl@3 -> openssl, keep python@3.11 as-is
+  # brew list --versions prints "name v1 v2 ... vN" -> take last
   PKGS="$(brew list --versions 2>/dev/null | awk '{print $1, $NF}' || true)"
+  # normalize openssl@3 -> openssl (so it matches DB key)
   PKGS="$(printf "%s\n" "$PKGS" | sed -E 's/^openssl@3 /openssl /')"
 fi
 
@@ -106,7 +98,7 @@ fi
 printf "%s\n" "$PKGS" | head -20
 echo
 
-# ------------------------- Scan against CVE DB --------------------
+# ------------------------- Scan against CVE DB (robust) -----------------------
 bold "Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)"
 printf "%-22s %-14s %-14s %-10s %-9s %s\n" "PACKAGE" "INSTALLED" "FIXED" "STATUS" "SEVERITY" "CVE_IDS"
 hr
@@ -115,30 +107,35 @@ vuln_count=0
 matches_found=0
 total_checked=0
 
-while read -r name ver _; do
+# Avoid subshells: iterate using a for-loop over lines
+OLD_IFS="$IFS"
+IFS=$'\n'
+for line in $PKGS; do
+  name="${line%% *}"
+  ver="${line#* }"
   [ -z "$name" ] && continue
   [ -z "$ver" ] && continue
   total_checked=$((total_checked+1))
 
+  # find matching DB line (exact package name)
   db_line="$(printf "%s\n" "$CVE_DB" | awk -F'|' -v p="$name" '$1==p {print; exit}')"
+
   if [ -n "$db_line" ]; then
     matches_found=1
     fixed="$(printf "%s" "$db_line" | cut -d'|' -f2)"
     sev="$(printf "%s" "$db_line"   | cut -d'|' -f3)"
     cves="$(printf "%s" "$db_line"  | cut -d'|' -f4)"
 
+    status="ok"
     if ver_lt "$ver" "$fixed"; then
       status="VULNERABLE?"
       vuln_count=$((vuln_count+1))
-    else
-      status="ok"
     fi
 
     printf "%-22s %-14s %-14s %-10s %-9s %s\n" "$name" "$ver" "$fixed" "$status" "$sev" "$cves"
   fi
-done <<EOF
-$PKGS
-EOF
+done
+IFS="$OLD_IFS"
 
 hr
 if [ $matches_found -eq 0 ]; then
