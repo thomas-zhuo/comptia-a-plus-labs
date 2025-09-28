@@ -5,36 +5,57 @@ set -euo pipefail
 trap 'echo "[ERROR] line $LINENO: $BASH_COMMAND (exit=$?)" >&2' ERR
 
 bold() { echo -e "\033[1m$*\033[0m"; }
-hr() { printf '%*s\n' "$(tput cols || echo 80)" '' | tr ' ' '-'; }
+hr() { printf '%*s\n' "$(tput cols 2>/dev/null || echo 80)" '' | tr ' ' '-'; }
 
 # ------------------------- OS Detection -------------------------
 OS_NAME="$(uname -s)"
-HOST="$(hostname)"
+HOST="$(hostname -s 2>/dev/null || hostname 2>/dev/null || echo Unknown-Host)"
 DATE="$(date)"
 
-# ------------------------- Package Inventory -------------------------
 bold "CVE Risk Audit (Local DB)"
 echo "  Host: $HOST"
 echo "  OS  : $OS_NAME"
 echo "  Date: $DATE"
 hr
 
+# ------------------------- Package Inventory (no SIGPIPE) ---------------------
 bold "Package Inventory (first 20 shown)"
-PKGS=""
+PKGS=""      # full inventory
 HAS_APT=0
 HAS_BREW=0
 
+# Make Homebrew discoverable on macOS
+if [ "$OS_NAME" = "Darwin" ]; then
+  if [ -x /opt/homebrew/bin/brew ] && ! command -v brew >/dev/null 2>&1; then
+    PATH="/opt/homebrew/bin:$PATH"
+  fi
+  if [ -x /usr/local/bin/brew ] && ! command -v brew >/dev/null 2>&1; then
+    PATH="/usr/local/bin:$PATH"
+  fi
+fi
+
 if command -v apt >/dev/null 2>&1; then
   HAS_APT=1
-  PKGS="$(dpkg-query -W -f='${Package} ${Version}\n' | head -20)"
+  # Collect FULL list; do NOT pipe to head here (avoids SIGPIPE/exit 141)
+  PKGS="$(dpkg-query -W -f='${Package} ${Version}\n' 2>/dev/null || true)"
 elif command -v brew >/dev/null 2>&1; then
   HAS_BREW=1
-  PKGS="$(brew list --versions | head -20)"
+  # Collect FULL list; normalize openssl@3 -> openssl; take last version per line later
+  # brew prints: "name v1 v2 ... vN"
+  PKGS_RAW="$(brew list --versions 2>/dev/null || true)"
+  # Convert to "name version" (last field)
+  PKGS="$(printf '%s\n' "$PKGS_RAW" | awk '{print $1, $NF}')"
+  PKGS="$(printf '%s\n' "$PKGS" | sed -E 's/^openssl@3 /openssl /')"
 else
   echo "No supported package manager found (apt/brew)."
 fi
 
-echo "$PKGS"
+# Display only first 20 lines for readability
+if [ -n "$PKGS" ]; then
+  printf '%s\n' "$PKGS" | head -20
+else
+  echo "(no packages detected)"
+fi
 hr
 
 # ------------------------- Local CVE DB -------------------------
@@ -43,24 +64,36 @@ CVE_DB=$(cat <<'EOF'
 openssl|1.1.1w-1|HIGH|CVE-2023-2650,CVE-2023-0464
 bash|5.1-2|MEDIUM|CVE-2019-18276
 apache2|2.4.62-1|CRITICAL|CVE-2023-25690,CVE-2023-27522
+curl|8.5.0|HIGH|CVE-2023-38545
 EOF
 )
 
-# ------------------------- Version Comparison -------------------------
-# Simple fallback for Bash 3.2: use sort -V instead of associative arrays
+# ------------------------- Version Comparison (Bash 3.2 safe) -----------------
+# Uses sort -V (available on GNU coreutils; present on most Linux. On macOS,
+# coreutils 'gsort' may be needed; fallback to string compare if sort -V missing)
+have_sort_v=0
+if sort -V </dev/null >/dev/null 2>&1; then have_sort_v=1; fi
+
 ver_lt() {
-  [ "$1" = "$2" ] && return 1
-  local smaller
-  smaller=$(printf "%s\n%s" "$1" "$2" | sort -V | head -n1)
-  [ "$smaller" = "$1" ]
+  a="$1"; b="$2"
+  [ "$a" = "$b" ] && return 1
+  if [ $have_sort_v -eq 1 ]; then
+    local smallest
+    smallest=$(printf "%s\n%s\n" "$a" "$b" | sort -V | head -n1)
+    [ "$smallest" = "$a" ]
+  else
+    # Very rough fallback: plain lexical compare
+    [ "$a" \< "$b" ]
+  fi
 }
 
-# ------------------------- Vulnerability Findings -------------------------
+# ------------------------- Vulnerability Findings -----------------------------
 bold "Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)"
 printf "%-22s %-14s %-14s %-10s %-9s %s\n" "PACKAGE" "INSTALLED" "FIXED" "STATUS" "SEVERITY" "CVE_IDS"
 hr
 
-set +e  # don’t exit early if no matches
+# Don’t let harmless non-zero statuses inside loop kill the script
+set +e
 vuln_count=0
 matches_found=0
 total_checked=0
@@ -74,13 +107,12 @@ for line in $PKGS; do
   [ -z "$ver" ] && continue
   total_checked=$((total_checked+1))
 
-  db_line="$(printf "%s\n" "$CVE_DB" | awk -F'|' -v p="$name" '$1==p {print; exit}')"
-
+  db_line="$(printf '%s\n' "$CVE_DB" | awk -F'|' -v p="$name" '$1==p {print; exit}')"
   if [ -n "$db_line" ]; then
     matches_found=1
-    fixed="$(printf "%s" "$db_line" | cut -d'|' -f2)"
-    sev="$(printf "%s" "$db_line"   | cut -d'|' -f3)"
-    cves="$(printf "%s" "$db_line"  | cut -d'|' -f4)"
+    fixed="$(printf '%s' "$db_line" | cut -d'|' -f2)"
+    sev="$(printf   '%s' "$db_line" | cut -d'|' -f3)"
+    cves="$(printf  '%s' "$db_line" | cut -d'|' -f4)"
 
     status="ok"
     if ver_lt "$ver" "$fixed"; then
@@ -92,6 +124,7 @@ for line in $PKGS; do
   fi
 done
 IFS="$OLD_IFS"
+set -e
 
 hr
 if [ $matches_found -eq 0 ]; then
@@ -100,4 +133,3 @@ else
   echo "Checked: $total_checked   Potentially vulnerable: $vuln_count"
 fi
 echo "Legend: 'VULNERABLE?' means installed_version < fixed_version in local DB."
-set -e
