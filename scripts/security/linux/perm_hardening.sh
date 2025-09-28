@@ -67,7 +67,9 @@ hr
 bold "Admin/sudo group membership"
 if is_linux; then
   for g in sudo wheel adm admin; do
-    getent group "$g" 2>/dev/null | awk -F: -v G="$g" 'NF{printf "  %-8s -> %s\n", G, $4}'
+    if getent group "$g" >/dev/null 2>&1; then
+      getent group "$g" | awk -F: -v G="$g" 'NF{printf "  %-8s -> %s\n", G, $4}'
+    fi
   done
 else
   for g in admin wheel; do
@@ -75,6 +77,7 @@ else
   done
 fi
 hr
+
 
 # ---------- passwordless accounts (best-effort) ----------
 bold "Passwordless / locked accounts (best-effort)"
