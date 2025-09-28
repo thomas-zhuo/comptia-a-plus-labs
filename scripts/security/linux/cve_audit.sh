@@ -106,34 +106,26 @@ fi
 printf "%s\n" "$PKGS" | head -20
 echo
 
-# ------------------------- Scan against CVE DB (improved) --------------------
+# ------------------------- Scan against CVE DB --------------------
 bold "Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)"
 printf "%-22s %-14s %-14s %-10s %-9s %s\n" "PACKAGE" "INSTALLED" "FIXED" "STATUS" "SEVERITY" "CVE_IDS"
 hr
 
 vuln_count=0
-total_checked=0
 matches_found=0
+total_checked=0
 
-# use here-doc so the while runs in the current shell (not a pipeline subshell)
 while read -r name ver _; do
   [ -z "$name" ] && continue
   [ -z "$ver" ] && continue
   total_checked=$((total_checked+1))
 
-  status="unknown"
-  fixed="-"
-  sev="-"
-  cves="-"
-
-  # find matching DB line (exact package name)
-  db_line="$(printf "%s\n" "$CVE_DB" | awk -F'|' -v p="$name" '$1==p {print $0; exit}')"
-
+  db_line="$(printf "%s\n" "$CVE_DB" | awk -F'|' -v p="$name" '$1==p {print; exit}')"
   if [ -n "$db_line" ]; then
     matches_found=1
-    fixed="$(printf "%s" "$db_line" | awk -F'|' '{print $2}')"
-    sev="$(printf "%s" "$db_line"   | awk -F'|' '{print $3}')"
-    cves="$(printf "%s" "$db_line"  | awk -F'|' '{print $4}')"
+    fixed="$(printf "%s" "$db_line" | cut -d'|' -f2)"
+    sev="$(printf "%s" "$db_line"   | cut -d'|' -f3)"
+    cves="$(printf "%s" "$db_line"  | cut -d'|' -f4)"
 
     if ver_lt "$ver" "$fixed"; then
       status="VULNERABLE?"
@@ -150,8 +142,7 @@ EOF
 
 hr
 if [ $matches_found -eq 0 ]; then
-  echo "No packages from the mini CVE DB were found in the inventory."
-  echo "Hint: expand the CVE_DB block in the script with package names you want to track."
+  echo "No matching packages from the CVE_DB were found in this inventory."
 else
   echo "Checked: $total_checked   Potentially vulnerable: $vuln_count"
 fi
