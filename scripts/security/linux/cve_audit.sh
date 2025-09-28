@@ -1,5 +1,6 @@
 #!/bin/bash
 # CVE Audit Script (macOS/Linux) — Compatible with Bash 3.2+
+# Fixed: avoid SIGPIPE (exit 141) when printing first N lines.
 
 set -euo pipefail
 trap 'echo "[ERROR] line $LINENO: $BASH_COMMAND (exit=$?)" >&2' ERR
@@ -24,7 +25,7 @@ PKGS=""      # full inventory
 HAS_APT=0
 HAS_BREW=0
 
-# Make Homebrew discoverable on macOS
+# Make Homebrew discoverable on macOS (best-effort)
 if [ "$OS_NAME" = "Darwin" ]; then
   if [ -x /opt/homebrew/bin/brew ] && ! command -v brew >/dev/null 2>&1; then
     PATH="/opt/homebrew/bin:$PATH"
@@ -34,32 +35,32 @@ if [ "$OS_NAME" = "Darwin" ]; then
   fi
 fi
 
-if command -v apt >/dev/null 2>&1; then
+# Collect full package inventory (do not pipe the producer into head)
+if command -v dpkg-query >/dev/null 2>&1; then
   HAS_APT=1
-  # Collect FULL list; do NOT pipe to head here (avoids SIGPIPE/exit 141)
   PKGS="$(dpkg-query -W -f='${Package} ${Version}\n' 2>/dev/null || true)"
 elif command -v brew >/dev/null 2>&1; then
   HAS_BREW=1
-  # Collect FULL list; normalize openssl@3 -> openssl; take last version per line later
-  # brew prints: "name v1 v2 ... vN"
   PKGS_RAW="$(brew list --versions 2>/dev/null || true)"
-  # Convert to "name version" (last field)
   PKGS="$(printf '%s\n' "$PKGS_RAW" | awk '{print $1, $NF}')"
   PKGS="$(printf '%s\n' "$PKGS" | sed -E 's/^openssl@3 /openssl /')"
 else
   echo "No supported package manager found (apt/brew)."
 fi
 
-# Display only first 20 lines for readability
+# Print only first 20 lines safely (disable -e temporarily to avoid SIGPIPE killing us)
 if [ -n "$PKGS" ]; then
+  set +e
   printf '%s\n' "$PKGS" | head -20
+  # restore -e for the rest of the script
+  set -e
 else
   echo "(no packages detected)"
 fi
 hr
 
 # ------------------------- Local CVE DB -------------------------
-# Example DB: package|fixed_version|severity|cve_ids
+# Example DB lines: package|fixed_version|severity|cve_ids
 CVE_DB=$(cat <<'EOF'
 openssl|1.1.1w-1|HIGH|CVE-2023-2650,CVE-2023-0464
 bash|5.1-2|MEDIUM|CVE-2019-18276
@@ -68,9 +69,8 @@ curl|8.5.0|HIGH|CVE-2023-38545
 EOF
 )
 
-# ------------------------- Version Comparison (Bash 3.2 safe) -----------------
-# Uses sort -V (available on GNU coreutils; present on most Linux. On macOS,
-# coreutils 'gsort' may be needed; fallback to string compare if sort -V missing)
+# ------------------------- Version Comparison -------------------------
+# Uses sort -V when available, fallback to lexical compare.
 have_sort_v=0
 if sort -V </dev/null >/dev/null 2>&1; then have_sort_v=1; fi
 
@@ -82,7 +82,6 @@ ver_lt() {
     smallest=$(printf "%s\n%s\n" "$a" "$b" | sort -V | head -n1)
     [ "$smallest" = "$a" ]
   else
-    # Very rough fallback: plain lexical compare
     [ "$a" \< "$b" ]
   fi
 }
@@ -92,7 +91,7 @@ bold "Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)"
 printf "%-22s %-14s %-14s %-10s %-9s %s\n" "PACKAGE" "INSTALLED" "FIXED" "STATUS" "SEVERITY" "CVE_IDS"
 hr
 
-# Don’t let harmless non-zero statuses inside loop kill the script
+# Allow harmless non-zero exit codes during scan (so the report prints)
 set +e
 vuln_count=0
 matches_found=0
