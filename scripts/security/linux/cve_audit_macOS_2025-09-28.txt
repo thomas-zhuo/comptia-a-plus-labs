@@ -1,0 +1,17 @@
+CVE Risk Audit (Local DB)
+  Host: Lab-MBP
+  OS  : Darwin
+  Date: Sun Sep 28 09:50:26 +08 2025
+------------------------------------------------------------
+Package Inventory (first 20 shown)
+gh 2.78.0
+powershell 7.5.3
+
+Vulnerability Findings (local DB; installed < fixed_version ⇒ at risk)
+PACKAGE                INSTALLED      FIXED          STATUS     SEVERITY  CVE_IDS
+------------------------------------------------------------
+gh                     2.78.0         -              unknown    -         -
+powershell             7.5.3          -              unknown    -         -
+------------------------------------------------------------
+Legend: 'VULNERABLE?' means installed_version < fixed_version in local DB.
+Tip: extend the CVE_DB block with more packages you care about.
