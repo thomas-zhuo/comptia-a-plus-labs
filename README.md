@@ -44,21 +44,27 @@ Scripts:
     - `scripts/security/linux/av_status.sh`
     - `scripts/security/linux/account_audit.sh`
     - `scripts/security/linux/patch_audit.sh`
+    - `scripts/security/linux/perm_hardening.sh`
   - Windows → 
     - `scripts/security/windows/firewall_audit.ps1`
     - `scripts/security/windows/av_status.ps1`
     - `scripts/security/windows/account_audit.ps1`
     - `scripts/security/windows/patch_audit.ps1`
+    - `scripts/security/windows/perm_hardening.ps1`
 
-- **Planned:**
-  - Extended compliance checks (encryption, advanced configuration hardening)
+- **Planned (next phase):**
+  - Correlate account audits with login/logon events (Windows Event Log + syslog)
+  - File integrity monitoring (hash baselines, detect drift)
+  - Lightweight SIEM-style alert correlation
 
 **Skills demonstrated:**
-- Auditing firewall status (enabled/disabled profiles, inbound rules, listening ports)
-- Validating antivirus/endpoint protection status (real-time protection, signatures, scan history)
-- Enumerating local users and groups, flagging privileged accounts and risky settings
-- Checking patch/update compliance (installed hotfixes, pending updates, reboot state)
-- Building toward full host-based security posture assessments across platforms
+- Enumerating firewall status, rules, and listening ports  
+- Checking antivirus/endpoint protection presence and status  
+- Auditing user/group accounts and privileged memberships  
+- Assessing patch compliance and pending updates  
+- Mapping installed packages against CVE identifiers  
+- Detecting risky directory/file permissions (PATH, Program Files, etc.)  
+- Building toward full **security posture assessments** and **compliance auditing** across platforms
 
 ### 🔹 Hardware Playbooks *(Planned)*
 - SSD upgrade and disk cloning  
@@ -104,6 +110,14 @@ chmod +x scripts/security/linux/account_audit.sh
 # Patch audit
 chmod +x scripts/security/linux/patch_audit.sh
 ./scripts/security/linux/patch_audit.sh
+
+# CVE Risk Audit (local database, package inventory + CVE mapping)  
+chmod +x scripts/security/linux/cve_audit.sh
+./scripts/security/linux/cve_audit.sh
+    
+# User / Permission Hardening Checks    
+chmod +x scripts/security/linux/perm_hardening.sh
+./scripts/security/linux/perm_hardening.sh
 ```
 
 ### Windows (PowerShell)
@@ -135,6 +149,13 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 # Patch audit
 .\scripts\security\windows\patch_audit.ps1
+
+# CVE Risk Audit (local database, package inventory + CVE mapping)  
+./scripts/security/linux/cve_audit.sh
+    
+# User / Permission Hardening Checks    
+./scripts/security/linux/perm_hardening.ps1
+
 ```
 
 ## 💾 How to Save Output to File (Optional)
@@ -156,9 +177,13 @@ OS="macOS"    # or Kali_Linux, Ubuntu, etc.
 
 ./scripts/security/linux/av_status.sh | tee scripts/security/linux/av_status${OS}_$(date +%F).txt
 
-./scripts/security/linux/account_audit.sh | tee scripts/security/linux/account_audit${OS}_$(date +%F).txt
+./scripts/security/linux/account_audit.sh | tee scripts/security/linux/account_audit_${OS}_$(date +%F).txt
 
-./scripts/security/linux/patch_audit.sh | tee scripts/security/linux/patch_audit${OS}_$(date +%F).txt
+./scripts/security/linux/patch_audit.sh | tee scripts/security/linux/patch_audit_${OS}_$(date +%F).txt
+
+./scripts/security/linux/cve_audit.sh | tee scripts/security/linux/cve_audit_${OS}_$(date +%F).txt
+
+./scripts/security/linux/perm_hardening.sh | tee scripts/security/linux/perm_hardening_${OS}_$(date +%F).txt
 ```
 
 ### Windows (PowerShell)
@@ -178,6 +203,10 @@ OS="macOS"    # or Kali_Linux, Ubuntu, etc.
 .\scripts\security\windows\account_audit.ps1 | Out-File scripts\security\windows\account_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 
 .\scripts\security\windows\patch_audit.ps1 | Out-File scripts\security\windows\patch_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\security\windows\cve_audit.ps1 | Out-File scripts\security\windows\cve_audit_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
+
+.\scripts\security\windows\perm_hardening.ps1 | Out-File scripts\security\windows\perm_hardening_windows_$(Get-Date -Format 'yyyy-MM-dd').txt
 ```
 
 ## 📑 Sample Output
@@ -219,16 +248,22 @@ Each category has separate **`linux/`** and **`windows/`** subfolders for script
     - `account_audit_macOS_2025-09-22.txt`  
     - `account_audit_Kali_Linux_2025-09-22.txt`  
     - `patch_audit_macOS_2025-09-27.txt`  
-    - `patch_audit_Kali_Linux_2025-09-27.txt`  
+    - `patch_audit_Kali_Linux_2025-09-27.txt`
+    - `cve_audit_macOS_2025-09-28.txt`  
+    - `cve_audit_Kali_Linux_2025-09-28.txt`
+    - `perm_hardening_macOS_2025-09-28.txt`  
+    - `perm_hardening_Kali_Linux_2025-09-28.txt`   
   - [Windows](scripts/security/windows/)  
     - `firewall_audit_windows_2025-09-20.txt`  
     - `av_status_windows_2025-09-21.txt`  
     - `account_audit_windows_2025-09-22.txt`  
     - `patch_audit_windows_2025-09-27.txt`
+    - `cve_audit_windows_2025-09-28.txt`  
+    - `perm_hardening_windows_2025-10-04.txt`
 
-These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, log collection, firewall auditing, antivirus/endpoint protection status, account audits, and patch/update compliance**.  
+These files demonstrate the expected outputs for **system health, network connectivity, disk monitoring, log collection, firewall auditing, antivirus/endpoint protection status, account audits, patch compliance, CVE lookups, and permission hardening**.
 
-Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring, compliance auditing, and vulnerability management**.
+Having Linux, macOS, and Windows runs highlights **cross-platform troubleshooting** and builds a strong foundation for **security monitoring and compliance auditing**.
 
 ## 🎯 Why This Matters
 
@@ -328,7 +363,13 @@ comptia-a-plus-labs/
 │  │  │  ├─ account_audit_Kali_Linux_2025-09-21.txt
 │  │  │  ├─ patch_audit.sh
 │  │  │  ├─ patch_audit_macOS_2025-09-27.txt
-│  │  │  └─ patch_audit_Kali_Linux_2025-09-27.txt
+│  │  │  ├─ patch_audit_Kali_Linux_2025-09-27.txt
+│  │  │  ├─ cve_audit.sh
+│  │  │  ├─ cve_audit_macOS_2025-09-28.txt
+│  │  │  ├─ cve_audit_Kali_Linux_2025-09-28.txt
+│  │  │  ├─ perm_hardening.sh
+│  │  │  ├─ perm_hardening_macOS_2025-09-28.txt
+│  │  │  └─ perm_hardening_Kali_Linux_2025-09-28.txt
 │  │  └─ windows/
 │  │     ├─ firewall_audit.ps1
 │  │     ├─ firewall_audit_windows_2025-09-20.txt
@@ -337,7 +378,11 @@ comptia-a-plus-labs/
 │  │     ├─ account_audit.ps1
 │  │     ├─ account_audit_windows_2025-09-21.txt
 │  │     ├─ patch_audit.ps1
-│  │     └─ patch_audit_windows_2025-09-27.txt
+│  │     ├─ patch_audit_windows_2025-09-27.txt
+│  │     ├─ cve_audit.ps1
+│  │     ├─ cve_audit_windows_2025-09-28.txt
+│  │     ├─ perm_hardening.ps1
+│  │     └─ perm_hardening_windows_2025-10-04.txt
 │  │
 │  ├─ advanced-networking/          # 🌐 (future labs: Wireshark/tcpdump captures, nmap scans)
 │  │  ├─ linux/
