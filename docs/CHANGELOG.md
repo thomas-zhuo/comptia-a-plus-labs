@@ -3,6 +3,24 @@
 All notable changes to this project will be documented here.  
 Dates follow `YYYY-MM-DD` format.
 
+## 2025-10-04
+- Added Windows User/Permission Hardening script:
+  - `scripts/security/windows/perm_hardening.ps1`
+- Sample output saved as:
+  - `scripts/security/windows/perm_hardening_windows_2025-10-04.txt`
+- Updated README with User/Permission Hardening project details (Windows + Linux/macOS)
+
+## 2025-09-28
+- Added Linux/macOS permission hardening script:
+  - `scripts/security/linux/perm_hardening.sh`
+- Added Windows CVE audit script:
+  - `scripts/security/windows/cve_audit.ps1`
+- Added sample output files:
+  - `scripts/security/linux/perm_hardening_macOS_2025-09-28.txt`
+  - `scripts/security/linux/perm_hardening_Kali_Linux_2025-09-28.txt`
+  - `scripts/security/windows/cve_audit_windows_2025-09-28.txt`
+- Updated README with new "Permission Hardening" (Linux/macOS) and "CVE Audit" (Windows) details
+
 ## 2025-09-27
 - Added Patch & Update Compliance Audit scripts:
   - `scripts/security/linux/patch_audit.sh`
